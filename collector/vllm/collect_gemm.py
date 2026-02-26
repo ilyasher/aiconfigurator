@@ -131,6 +131,11 @@ def run_gemm(exit_stack, gemm_type, m, n, k, perf_filename, device="cuda:0"):
                 except TypeError:
                     maybe_post_process_fp8_weight_block(gemm, cutlass_block_fp8_supported=True)
 
+                # vLLM 0.15+ block quant uses dynamic activation, so input_scale
+                # must be None. Normally set by process_weights_after_loading(),
+                # but we bypass that path here.
+                gemm.input_scale = None
+
         gemm.forward(x)  # dry run to init
 
         return gemm

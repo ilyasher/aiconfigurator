@@ -66,6 +66,37 @@ def run_attention_torch(
         # set a reasonable minimum
         8192,
     )
+
+    if is_context_phase:
+        batch_spec = BatchSpec(
+            seq_lens=[input_len] * batch_size,
+            query_lens=[input_len] * batch_size,
+        )
+    else:
+        batch_spec = BatchSpec(
+            seq_lens=[input_len] * batch_size,
+            query_lens=[1] * batch_size,
+        )
+
+    try:
+        vllm.utils.torch_utils.set_random_seed(42)
+    except AttributeError:
+        current_platform.seed_everything(42)
+
+    vllm_config = create_vllm_config(
+        model_name=model,
+        max_model_len=max(batch_spec.seq_lens),
+        block_size=block_size,
+        num_gpu_blocks=num_kv_cache_blocks,
+        max_num_seqs=batch_size,
+        use_fp8_kv_cache=use_fp8_kv_cache,
+    )
+    assert convert_dtype_to_torch(vllm_config.model_config.dtype) == torch.bfloat16
+
+    # In vllm 0.15+, get_attn_backend_cls may query the current vllm config
+    # (e.g. via supports_combination), so we must set it before backend selection.
+    exit_stack.enter_context(set_current_vllm_config(vllm_config))
+
     try:
         # Let vllm choose the backend.
         # defautl for vllm 0.11.0
@@ -94,7 +125,7 @@ def run_attention_torch(
                 use_sparse=False,
             )
         except TypeError:
-            # vllm 0.14.0
+            # vllm 0.14.0+
             from vllm.v1.attention.selector import AttentionSelectorConfig
 
             attn_selector_config = AttentionSelectorConfig(
@@ -118,32 +149,6 @@ def run_attention_torch(
         print(f"VLLM chose MLA backend: {backend_name}")
         builder_cls = backend_cls.get_builder_cls()
         impl_cls = backend_cls.get_impl_cls()
-
-    if is_context_phase:
-        batch_spec = BatchSpec(
-            seq_lens=[input_len] * batch_size,
-            query_lens=[input_len] * batch_size,
-        )
-    else:
-        batch_spec = BatchSpec(
-            seq_lens=[input_len] * batch_size,
-            query_lens=[1] * batch_size,
-        )
-
-    try:
-        vllm.utils.torch_utils.set_random_seed(42)
-    except AttributeError:
-        current_platform.seed_everything(42)
-
-    vllm_config = create_vllm_config(
-        model_name=model,
-        max_model_len=max(batch_spec.seq_lens),
-        block_size=block_size,
-        num_gpu_blocks=num_kv_cache_blocks,
-        max_num_seqs=batch_size,
-        use_fp8_kv_cache=use_fp8_kv_cache,
-    )
-    assert convert_dtype_to_torch(vllm_config.model_config.dtype) == torch.bfloat16
 
     kv_cache_spec = create_standard_kv_cache_spec(vllm_config, use_fp8_kv_cache)
 
@@ -198,7 +203,6 @@ def run_attention_torch(
 
     # Build metadata
     layer_names = ["placeholder"]
-    exit_stack.enter_context(set_current_vllm_config(vllm_config))
 
     builder = builder_cls(kv_cache_spec, layer_names, vllm_config, device)
     attn_metadata = builder.build(

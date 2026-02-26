@@ -21,3 +21,7 @@ env/
 *.pyc
 *.pyo
 *.pyd
+
+# Collector output files
+*_perf.txt
+*_20*[0-9]/

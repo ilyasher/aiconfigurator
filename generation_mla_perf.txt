@@ -1,0 +1,2 @@
+framework,version,device,op_name,kernel_source,mla_dtype,kv_cache_dtype,num_heads,batch_size,isl,tp_size,step,latency
+VLLM,0.15.1,NVIDIA RTX PRO 6000 Blackwell Server Edition,generation_mla,vllm_triton_mla,float16,float16,128,1,1,1,1,0.11852799852689107

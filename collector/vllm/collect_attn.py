@@ -310,7 +310,9 @@ def run_attention_torch(
     test_ite = 6
     warm_up = 3
 
-    if use_fp8_kv_cache and backend_name_str in ("FLASH_ATTN", "FLASHINFER"):
+    # Only FLASH_ATTN requires FP8 queries with FP8 KV cache.
+    # FlashInfer supports FP8 KV cache but expects FP16 queries.
+    if use_fp8_kv_cache and backend_name_str == "FLASH_ATTN":
         query_vllm = query_vllm.to(current_platform.fp8_dtype())
         output = output.to(torch.bfloat16)
 
