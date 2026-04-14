@@ -7,14 +7,14 @@
   "created_at": "2026-04-14T14:35:34.995459",
   "systems": {
     "a100_sxm": {
-      "status": "pending",
+      "status": "running",
       "round": null,
       "pipeline_id": null,
       "pipeline_url": null,
       "current_job": null,
       "ops": {
         "gemm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -27,7 +27,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -40,7 +40,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -53,7 +53,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -66,7 +66,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -79,7 +79,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -92,7 +92,7 @@
           "needs_rerun": false
         },
         "comm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -108,14 +108,14 @@
       "reason": null
     },
     "l40s": {
-      "status": "pending",
+      "status": "running",
       "round": null,
       "pipeline_id": null,
       "pipeline_url": null,
       "current_job": null,
       "ops": {
         "gemm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -128,7 +128,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -141,7 +141,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -154,7 +154,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -167,7 +167,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -180,7 +180,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -193,7 +193,7 @@
           "needs_rerun": false
         },
         "comm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -209,14 +209,14 @@
       "reason": null
     },
     "h100_sxm": {
-      "status": "pending",
+      "status": "running",
       "round": null,
       "pipeline_id": null,
       "pipeline_url": null,
       "current_job": null,
       "ops": {
         "gemm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -229,7 +229,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -242,7 +242,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -255,7 +255,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -268,7 +268,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -281,7 +281,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -294,7 +294,7 @@
           "needs_rerun": false
         },
         "comm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -310,14 +310,14 @@
       "reason": null
     },
     "h200_sxm": {
-      "status": "pending",
+      "status": "running",
       "round": null,
       "pipeline_id": null,
       "pipeline_url": null,
       "current_job": null,
       "ops": {
         "gemm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -330,7 +330,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -343,7 +343,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -356,7 +356,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -369,7 +369,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -382,7 +382,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -395,7 +395,7 @@
           "needs_rerun": false
         },
         "comm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -411,14 +411,14 @@
       "reason": null
     },
     "b200_sxm": {
-      "status": "pending",
+      "status": "running",
       "round": null,
       "pipeline_id": null,
       "pipeline_url": null,
       "current_job": null,
       "ops": {
         "gemm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -431,7 +431,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -444,7 +444,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -457,7 +457,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -470,7 +470,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -483,7 +483,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -496,7 +496,7 @@
           "needs_rerun": false
         },
         "comm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -512,14 +512,14 @@
       "reason": null
     },
     "b300_sxm": {
-      "status": "pending",
+      "status": "running",
       "round": null,
       "pipeline_id": null,
       "pipeline_url": null,
       "current_job": null,
       "ops": {
         "gemm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -532,7 +532,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -545,7 +545,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -558,7 +558,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -571,7 +571,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -584,7 +584,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -597,7 +597,7 @@
           "needs_rerun": false
         },
         "comm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -613,14 +613,14 @@
       "reason": null
     },
     "gb200": {
-      "status": "pending",
+      "status": "running",
       "round": null,
       "pipeline_id": null,
       "pipeline_url": null,
       "current_job": null,
       "ops": {
         "gemm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -633,7 +633,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -646,7 +646,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -659,7 +659,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -672,7 +672,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -685,7 +685,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -698,7 +698,7 @@
           "needs_rerun": false
         },
         "comm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -714,14 +714,14 @@
       "reason": null
     },
     "gb300": {
-      "status": "pending",
+      "status": "running",
       "round": null,
       "pipeline_id": null,
       "pipeline_url": null,
       "current_job": null,
       "ops": {
         "gemm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -734,7 +734,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -747,7 +747,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -760,7 +760,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -773,7 +773,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -786,7 +786,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -799,7 +799,7 @@
           "needs_rerun": false
         },
         "comm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -815,14 +815,14 @@
       "reason": null
     },
     "rtxpro6000_blackwell_server": {
-      "status": "pending",
+      "status": "running",
       "round": null,
       "pipeline_id": null,
       "pipeline_url": null,
       "current_job": null,
       "ops": {
         "gemm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -835,7 +835,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -848,7 +848,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -861,7 +861,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -874,7 +874,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -887,7 +887,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -900,7 +900,7 @@
           "needs_rerun": false
         },
         "comm": {
-          "status": "pending",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
