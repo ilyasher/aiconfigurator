@@ -15,10 +15,10 @@
     "ops": {
       "attention_context": {
         "local_status": "running",
-        "import_status": "running",
+        "import_status": "failed",
         "smoke_status": "pending",
         "sample_status": "pending",
-        "error_summary": "docker: Error response from daemon: could not select device driver \"\" with capabilities: [[gpu]]\n\nRun 'docker run --help' for more information",
+        "error_summary": "Traceback (most recent call last):\n  File \"/mnt/aiconfigurator/_import_test.py\", line 5, in <module>\n    colls = build_collections(REGISTRY, 'sglang')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: build_collections() missing 1 required positional argument: 'runtime_version'",
         "attempts": 1,
         "skipped_reason": null
       },
