@@ -6,10 +6,10 @@
   "fork": "ilyasher/aiconfigurator",
   "created_at": "2026-04-17T14:34:37.412649",
   "local_dev": {
-    "status": "running",
+    "status": "stopped",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
-    "current_op": "attention_context",
-    "current_phase": "fixing",
+    "current_op": null,
+    "current_phase": null,
     "current_attempt": 3,
     "max_attempts": 5,
     "ops": {
