@@ -15,10 +15,10 @@
     "ops": {
       "attention_context": {
         "local_status": "running",
-        "import_status": "running",
+        "import_status": "failed",
         "smoke_status": "pending",
         "sample_status": "pending",
-        "error_summary": "Traceback (most recent call last):\n  File \"/mnt/aiconfigurator/_import_test.py\", line 5, in <module>\n    colls = build_collections(REGISTRY, 'sglang')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: build_collections() missing 1 required positional argument: 'runtime_version'",
+        "error_summary": "Traceback (most recent call last):\n  File \"/mnt/aiconfigurator/_import_test.py\", line 6, in <module>\n    matching = [c for c in colls if 'attention_context' in c.name.lower()]\n                                                           ^^^^^^\nAttributeError: 'dict' object has no attribute 'name'",
         "attempts": 2,
         "skipped_reason": null
       },
