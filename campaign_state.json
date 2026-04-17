@@ -9,17 +9,17 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "attention_context",
-    "current_phase": "fixing",
-    "current_attempt": 1,
+    "current_phase": "import",
+    "current_attempt": 2,
     "max_attempts": 5,
     "ops": {
       "attention_context": {
         "local_status": "running",
-        "import_status": "failed",
+        "import_status": "running",
         "smoke_status": "pending",
         "sample_status": "pending",
         "error_summary": "Traceback (most recent call last):\n  File \"/mnt/aiconfigurator/_import_test.py\", line 5, in <module>\n    colls = build_collections(REGISTRY, 'sglang')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: build_collections() missing 1 required positional argument: 'runtime_version'",
-        "attempts": 1,
+        "attempts": 2,
         "skipped_reason": null
       },
       "attention_generation": {
