@@ -15,10 +15,10 @@
     "ops": {
       "attention_context": {
         "local_status": "running",
-        "import_status": "running",
+        "import_status": "failed",
         "smoke_status": "pending",
         "sample_status": "pending",
-        "error_summary": "Resolved 0 collection(s) for attention_context\n\nTraceback (most recent call last):\n  File \"/mnt/aiconfigurator/_import_test.py\", line 10, in <module>\n    assert len(matching) > 0, 'No collections found for attention_context'\n           ^^^^^^^^^^^^^^^^^\nAssertionError: No collections found for attention_context",
+        "error_summary": "Importing collector.sglang.collect_attn...\n\nTraceback (most recent call last):\n  File \"/mnt/aiconfigurator/_import_test.py\", line 7, in <module>\n    mod = importlib.import_module('collector.sglang.collect_attn')\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen",
         "attempts": 1,
         "skipped_reason": null
       },
