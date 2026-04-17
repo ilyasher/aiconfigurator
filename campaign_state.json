@@ -15,10 +15,10 @@
     "ops": {
       "attention_context": {
         "local_status": "running",
-        "import_status": "running",
+        "import_status": "failed",
         "smoke_status": "pending",
         "sample_status": "pending",
-        "error_summary": "Traceback (most recent call last):\n  File \"/mnt/aiconfigurator/_import_test.py\", line 6, in <module>\n    matching = [c for c in colls if 'attention_context' in c.name.lower()]\n                                                           ^^^^^^\nAttributeError: 'dict' object has no attribute 'name'",
+        "error_summary": "Resolved 0 collection(s) for attention_context\n\nTraceback (most recent call last):\n  File \"/mnt/aiconfigurator/_import_test.py\", line 10, in <module>\n    assert len(matching) > 0, 'No collections found for attention_context'\n           ^^^^^^^^^^^^^^^^^\nAssertionError: No collections found for attention_context",
         "attempts": 3,
         "skipped_reason": null
       },
