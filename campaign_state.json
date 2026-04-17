@@ -15,10 +15,10 @@
     "ops": {
       "attention_context": {
         "local_status": "running",
-        "import_status": "running",
+        "import_status": "failed",
         "smoke_status": "pending",
         "sample_status": "pending",
-        "error_summary": null,
+        "error_summary": "/bin/sh: 1: Syntax error: word unexpected (expecting \")\")",
         "attempts": 1,
         "skipped_reason": null
       },
