@@ -33,13 +33,28 @@
       }
     }
   },
-  "pipeline_runs": [],
+  "pipeline_runs": [
+    {
+      "pipeline_id": 48831675,
+      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/48831675",
+      "round_type": "sample",
+      "started_at": "2026-04-17T17:43:11.551028",
+      "completed_at": null,
+      "status": "running",
+      "systems": {
+        "gb300": {
+          "status": "running",
+          "ops": {}
+        }
+      }
+    }
+  ],
   "systems": {
     "gb300": {
       "status": "running",
       "round": null,
-      "pipeline_id": null,
-      "pipeline_url": null,
+      "pipeline_id": 48831675,
+      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/48831675",
       "current_job": null,
       "ops": {
         "attention_context": {
