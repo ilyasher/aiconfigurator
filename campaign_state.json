@@ -39,11 +39,11 @@
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49023272",
       "round_type": "sample",
       "started_at": "2026-04-20T12:56:21.178223",
-      "completed_at": null,
-      "status": "running",
+      "completed_at": "2026-04-20T13:01:57.212890",
+      "status": "failed",
       "systems": {
         "gb300": {
-          "status": "running",
+          "status": "failed",
           "ops": {}
         }
       }
@@ -65,7 +65,7 @@
   ],
   "systems": {
     "gb300": {
-      "status": "running",
+      "status": "failed",
       "round": null,
       "pipeline_id": 49023272,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49023272",
