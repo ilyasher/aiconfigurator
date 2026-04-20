@@ -24,7 +24,7 @@
       },
       "attention_generation": {
         "local_status": "running",
-        "import_status": "running",
+        "import_status": "passed",
         "smoke_status": "passed",
         "sample_status": "passed",
         "error_summary": null,
