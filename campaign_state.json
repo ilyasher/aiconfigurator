@@ -1,0 +1,48 @@
+{
+  "campaign_id": "sglang-0.5.10-attention-2",
+  "task_description": "Upgrade sglang context and generation attention collectors to 0.5.10 and collect data on gb300",
+  "framework": "sglang",
+  "version": "0.5.10",
+  "fork": "ilyasher/aiconfigurator",
+  "created_at": "2026-04-20T14:41:37.594813",
+  "local_dev": null,
+  "pipeline_runs": [],
+  "systems": {
+    "gb300": {
+      "status": "pending",
+      "round": null,
+      "pipeline_id": null,
+      "pipeline_url": null,
+      "current_job": null,
+      "ops": {
+        "attention_context": {
+          "status": "pending",
+          "total": null,
+          "passed": null,
+          "failed": null,
+          "ignored": null,
+          "classification": null,
+          "error_summary": null,
+          "agent_analysis": null,
+          "ignored_reason": null,
+          "fix_commit": null,
+          "needs_rerun": false
+        },
+        "attention_generation": {
+          "status": "pending",
+          "total": null,
+          "passed": null,
+          "failed": null,
+          "ignored": null,
+          "classification": null,
+          "error_summary": null,
+          "agent_analysis": null,
+          "ignored_reason": null,
+          "fix_commit": null,
+          "needs_rerun": false
+        }
+      },
+      "reason": null
+    }
+  }
+}
