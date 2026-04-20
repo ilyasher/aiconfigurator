@@ -35,6 +35,20 @@
   },
   "pipeline_runs": [
     {
+      "pipeline_id": 49023272,
+      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49023272",
+      "round_type": "sample",
+      "started_at": "2026-04-20T12:56:21.178223",
+      "completed_at": null,
+      "status": "running",
+      "systems": {
+        "gb300": {
+          "status": "running",
+          "ops": {}
+        }
+      }
+    },
+    {
       "pipeline_id": 48831675,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/48831675",
       "round_type": "sample",
@@ -53,8 +67,8 @@
     "gb300": {
       "status": "running",
       "round": null,
-      "pipeline_id": 48831675,
-      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/48831675",
+      "pipeline_id": 49023272,
+      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49023272",
       "current_job": {
         "pipeline_id": 48831675,
         "job_id": 300621395,
