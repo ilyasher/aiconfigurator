@@ -84,7 +84,7 @@ class MockServerArgs:
         self.multi_item_scoring_delimiter = None
         self.dllm_algorithm = None
         self.dllm_algorithm_config = None
-        self.enable_piecewise_cuda_graph = False
+        self.disable_piecewise_cuda_graph = False
         self.model_path = None
         self.revision = None
         # Required by TritonAttnBackend
