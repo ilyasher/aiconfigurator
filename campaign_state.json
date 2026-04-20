@@ -43,8 +43,23 @@
       "status": "running",
       "systems": {
         "gb300": {
-          "status": "running",
-          "ops": {}
+          "status": "passed",
+          "ops": {
+            "attention_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            }
+          }
         }
       }
     },
@@ -127,16 +142,16 @@
       "pipeline_id": 49036860,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49036860",
       "current_job": {
-        "pipeline_id": 49033121,
-        "job_id": 301843262,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/301843262",
+        "pipeline_id": 49036860,
+        "job_id": 301872534,
+        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/301872534",
         "started_at": null,
-        "completed_at": "2026-04-20T15:32:27.051496",
-        "code_version": "0ad27b4"
+        "completed_at": "2026-04-20T15:42:30.202377",
+        "code_version": "b4b7654"
       },
       "ops": {
         "attention_context": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 200,
@@ -149,7 +164,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 200,
