@@ -14,7 +14,7 @@
     "max_attempts": 5,
     "ops": {
       "attention_context": {
-        "local_status": "running",
+        "local_status": "failed",
         "import_status": "passed",
         "smoke_status": "passed",
         "sample_status": "pending",
