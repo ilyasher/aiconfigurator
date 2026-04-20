@@ -138,7 +138,7 @@
   "systems": {
     "gb300": {
       "status": "passed",
-      "round": null,
+      "round": "sample",
       "pipeline_id": 49036860,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49036860",
       "current_job": {
