@@ -1246,9 +1246,9 @@
           "passed": null,
           "failed": 64,
           "ignored": null,
-          "classification": null,
+          "classification": "unclassified",
           "error_summary": "64 errors: 64 AttributeError\nFirst error: 'MockModelRunner' object has no attribute 'attn_cp_size'",
-          "agent_analysis": null,
+          "agent_analysis": "",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
