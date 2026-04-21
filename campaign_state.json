@@ -9,7 +9,7 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "wideep_mlp_context",
-    "current_phase": "import",
+    "current_phase": "fixing",
     "current_attempt": 3,
     "max_attempts": 5,
     "ops": {
