@@ -87,7 +87,7 @@
       },
       "wideep_moe": {
         "local_status": "running",
-        "import_status": "running",
+        "import_status": "passed",
         "smoke_status": "pending",
         "sample_status": "pending",
         "error_summary": null,
