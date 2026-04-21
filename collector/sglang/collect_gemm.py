@@ -9,7 +9,12 @@ import random
 import pkg_resources
 import torch
 import torch.nn.functional as F
-from common_test_cases import get_gemm_common_test_cases
+try:
+    from common_test_cases import get_gemm_common_test_cases
+except ImportError:
+    import sys
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from common_test_cases import get_gemm_common_test_cases
 from sgl_kernel import (
     fp8_scaled_mm,
     sgl_per_token_quant_fp8,
