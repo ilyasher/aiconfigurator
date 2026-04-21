@@ -906,8 +906,8 @@
                   "count": 18,
                   "message": "MLP generation subprocess failed (exit code 1)",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_mlp.py\", line 519, in run_wideep_mlp\n    _run_mlp_subprocess(\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_mlp.py\", line 491, in _run_mlp_subprocess\n    raise RuntimeError(f\"MLP {phase} subprocess failed (exit code {proc.returncode})\")\nRuntimeError: MLP generation subprocess failed (exit code 1)\n",
-                  "classification": null,
-                  "agent_analysis": null,
+                  "classification": "unclassified",
+                  "agent_analysis": "",
                   "task_ids": [
                     "sglang.wideep_mlp_generation:run_wideep_mlp:[8192, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
                     "sglang.wideep_mlp_generation:run_wideep_mlp:[4096, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
@@ -1835,9 +1835,9 @@
           "passed": null,
           "failed": 18,
           "ignored": null,
-          "classification": null,
+          "classification": "unclassified",
           "error_summary": "18 errors: 18 RuntimeError\nFirst error: MLP generation subprocess failed (exit code 1)",
-          "agent_analysis": null,
+          "agent_analysis": "",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
