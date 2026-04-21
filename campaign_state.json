@@ -9,15 +9,15 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "gemm",
-    "current_phase": "smoke",
+    "current_phase": "sample",
     "current_attempt": 1,
-    "max_attempts": 5,
+    "max_attempts": 3,
     "ops": {
       "gemm": {
         "local_status": "running",
         "import_status": "passed",
         "smoke_status": "passed",
-        "sample_status": "pending",
+        "sample_status": "running",
         "error_summary": null,
         "attempts": 1,
         "skipped_reason": null
