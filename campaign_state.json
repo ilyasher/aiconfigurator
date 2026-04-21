@@ -9,17 +9,17 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "gemm",
-    "current_phase": "fixing",
-    "current_attempt": 1,
+    "current_phase": "import",
+    "current_attempt": 2,
     "max_attempts": 5,
     "ops": {
       "gemm": {
         "local_status": "running",
-        "import_status": "failed",
+        "import_status": "running",
         "smoke_status": "pending",
         "sample_status": "pending",
         "error_summary": "Importing collector.sglang.collect_gemm...\n\nTraceback (most recent call last):\n  File \"/mnt/aiconfigurator/_import_test.py\", line 7, in <module>\n    mod = importlib.import_module('collector.sglang.collect_gemm')\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen",
-        "attempts": 1,
+        "attempts": 2,
         "skipped_reason": null
       },
       "attention_context": {
