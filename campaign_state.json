@@ -9,8 +9,8 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "wideep_moe",
-    "current_phase": "fixing",
-    "current_attempt": 1,
+    "current_phase": "sample",
+    "current_attempt": 2,
     "max_attempts": 3,
     "ops": {
       "gemm": {
@@ -89,9 +89,9 @@
         "local_status": "running",
         "import_status": "passed",
         "smoke_status": "passed",
-        "sample_status": "failed",
+        "sample_status": "running",
         "error_summary": "[2026-04-21 00:37:12,468] [INFO] [root] Starting collection with 1 GPU processes\n[2026-04-21 00:37:12,469] [INFO] [root] Starting collection with 1 GPU processes\n[2026-04-21 00:37:12,486] [INFO] [root] SGLang version: 0.5.10\n[2026-04-21 00:37:19,468] [WARNING] [huggingface_hub.utils._http] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\nUsing DeepSeek-V3 config from HuggingFace cache: /root/.cache/huggingfa",
-        "attempts": 1,
+        "attempts": 2,
         "skipped_reason": null
       },
       "wideep_mla_generation": {
