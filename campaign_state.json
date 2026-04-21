@@ -105,7 +105,7 @@
       },
       "wideep_mlp_generation": {
         "local_status": "running",
-        "import_status": "running",
+        "import_status": "failed",
         "smoke_status": "pending",
         "sample_status": "pending",
         "error_summary": "Op 'wideep_mlp_generation' not found in collector/sglang/registry.py",
