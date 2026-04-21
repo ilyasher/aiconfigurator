@@ -968,7 +968,7 @@
                   "count": 118,
                   "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 356, in run_attention_torch\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.attention_context:run_attention_torch:[4, 1024, 8, 4, 128, False, False, True, 'context_attention_perf.txt']",
@@ -996,7 +996,7 @@
                   "count": 109,
                   "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 356, in run_attention_torch\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.attention_generation:run_attention_torch:[4, 1, 16, 1, 128, False, False, False, 'generation_attention_perf.txt']",
@@ -1038,7 +1038,7 @@
                   "count": 38,
                   "message": "CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 522, in run_moe_torch\n    latency, power_stats = benchmark(\n                           ^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 395, in benchmark\n    kernel_time, power_stats = benchmark_config(\n                               ^^^^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 318, in benchmark_config\n    with benchmark_with_power(\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/helper.py\", line 239, in benchmark_with_power\n    get_device_module().synchronize()\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py\", line 1083, in synchronize\n    return torch._C._cuda_synchronize()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntorch.AcceleratorError: CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n\n",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.moe:run_moe_torch:['float16', 1536, 4096, 2688, 22, 512, 4, 2, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.01]",
@@ -1058,7 +1058,7 @@
                   "count": 3,
                   "message": "Triton Error [CUDA]: an illegal memory access was encountered",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 522, in run_moe_torch\n    latency, power_stats = benchmark(\n                           ^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 395, in benchmark\n    kernel_time, power_stats = benchmark_config(\n                               ^^^^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 318, in benchmark_config\n    with benchmark_with_power(\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/helper.py\", line 238, in benchmark_with_power\n    kernel_func()\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 316, in kernel_func\n    run_op(i)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 296, in run_op\n    fused_moe(\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 785, in fused_moe\n    return fused_experts(\n           ^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 232, in fused_experts\n    inplace_fused_experts(\n  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1255, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/utils/_device.py\", line 103, in __torch_function__\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1255, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 110, in inplace_fused_experts\n ",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.moe:run_moe_torch:['float16', 16384, 6144, 2048, 8, 256, 1, 16, 'zai-org/GLM-5', 'moe_perf.txt', 'power_law', 1.2]",
@@ -1071,7 +1071,7 @@
                   "count": 2,
                   "message": "terminated by signal 11 (SIGSEGV)",
                   "traceback": "",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "process_exit",
@@ -1083,7 +1083,7 @@
                   "count": 1,
                   "message": "exited with status 1",
                   "traceback": "",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "process_exit"
@@ -1102,7 +1102,7 @@
                   "count": 1,
                   "message": "MLA module context subprocess failed (exit code 1)",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_module.py\", line 1169, in run_mla_module_worker\n    _run_mla_subprocess(\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_module.py\", line 1124, in _run_mla_subprocess\n    raise RuntimeError(f\"{attn_type.upper()} module {phase} subprocess failed (exit code {proc.returncode})\")\nRuntimeError: MLA module context subprocess failed (exit code 1)\n",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 128, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_context_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']"
@@ -1121,7 +1121,7 @@
                   "count": 18,
                   "message": "MLP context subprocess failed (exit code 1)",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_mlp.py\", line 519, in run_wideep_mlp\n    _run_mlp_subprocess(\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_mlp.py\", line 491, in _run_mlp_subprocess\n    raise RuntimeError(f\"MLP {phase} subprocess failed (exit code {proc.returncode})\")\nRuntimeError: MLP context subprocess failed (exit code 1)\n",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.wideep_mlp_context:run_wideep_mlp:[8192, 7168, 2048, 'wideep_context_mlp_perf.txt']",
@@ -1163,7 +1163,7 @@
                   "count": 18,
                   "message": "MLP generation subprocess failed (exit code 1)",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_mlp.py\", line 519, in run_wideep_mlp\n    _run_mlp_subprocess(\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_mlp.py\", line 491, in _run_mlp_subprocess\n    raise RuntimeError(f\"MLP {phase} subprocess failed (exit code {proc.returncode})\")\nRuntimeError: MLP generation subprocess failed (exit code 1)\n",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.wideep_mlp_generation:run_wideep_mlp:[128, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
