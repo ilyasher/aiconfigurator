@@ -16,7 +16,7 @@
       "gemm": {
         "local_status": "running",
         "import_status": "passed",
-        "smoke_status": "running",
+        "smoke_status": "passed",
         "sample_status": "pending",
         "error_summary": null,
         "attempts": 1,
