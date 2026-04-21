@@ -8,7 +8,7 @@
   "local_dev": {
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
-    "current_op": "wideep_mlp_context",
+    "current_op": "wideep_moe",
     "current_phase": "import",
     "current_attempt": 5,
     "max_attempts": 5,
