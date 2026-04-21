@@ -149,8 +149,8 @@
                   "count": 200,
                   "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 356, in run_attention_torch\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
-                  "classification": "unclassified",
-                  "agent_analysis": "",
+                  "classification": "bug",
+                  "agent_analysis": "The fix is already documented in the campaign notes (line 15). This error group is **already resolved** — no further action needed.\n\n**Summary:**\n- **Classification**: Bug (already fixed)\n- **Root cause**: SGLang 0.5.10 added `model_runner.attn_cp_size` access in `FlashAttentionBackend.__init__()` for context parallelism support. The `MockModelRunner` in the collector didn't have this attribute.\n- **Fix status**: Already applied. `MockServerArgs` has `self.attn_cp_size = 1` (line 100) and `MockModelRunner` has `self.attn_cp_size = getattr(self.server_args, \"attn_cp_size\", 1)` (line 138). The 64 errors are from a pipeline run before this fix was committed.",
                   "task_ids": [
                     "sglang.attention_context:run_attention_torch:[4, 1024, 8, 4, 128, False, False, True, 'context_attention_perf.txt']",
                     "sglang.attention_context:run_attention_torch:[32, 2048, 12, 2, 128, False, False, True, 'context_attention_perf.txt']",
@@ -177,8 +177,8 @@
                   "count": 64,
                   "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 356, in run_attention_torch\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
-                  "classification": "unclassified",
-                  "agent_analysis": "",
+                  "classification": "bug",
+                  "agent_analysis": "The fix is already documented in the campaign notes (line 15). This error group is **already resolved** — no further action needed.\n\n**Summary:**\n- **Classification**: Bug (already fixed)\n- **Root cause**: SGLang 0.5.10 added `model_runner.attn_cp_size` access in `FlashAttentionBackend.__init__()` for context parallelism support. The `MockModelRunner` in the collector didn't have this attribute.\n- **Fix status**: Already applied. `MockServerArgs` has `self.attn_cp_size = 1` (line 100) and `MockModelRunner` has `self.attn_cp_size = getattr(self.server_args, \"attn_cp_size\", 1)` (line 138). The 64 errors are from a pipeline run before this fix was committed.",
                   "task_ids": [
                     "sglang.attention_generation:run_attention_torch:[4, 1, 16, 1, 128, False, False, False, 'generation_attention_perf.txt']",
                     "sglang.attention_generation:run_attention_torch:[1, 1023, 8, 8, 128, False, False, False, 'generation_attention_perf.txt']",
@@ -1246,9 +1246,9 @@
           "passed": null,
           "failed": 64,
           "ignored": null,
-          "classification": "unclassified",
+          "classification": "bug",
           "error_summary": "64 errors: 64 AttributeError\nFirst error: 'MockModelRunner' object has no attribute 'attn_cp_size'",
-          "agent_analysis": "",
+          "agent_analysis": "The fix is already documented in the campaign notes (line 15). This error group is **already resolved** — no further action needed.\n\n**Summary:**\n- **Classification**: Bug (already fixed)\n- **Root cause**: SGLang 0.5.10 added `model_runner.attn_cp_size` access in `FlashAttentionBackend.__init__()` for context parallelism support. The `MockModelRunner` in the collector didn't have this attribute.\n- **Fix status**: Already applied. `MockServerArgs` has `self.attn_cp_size = 1` (line 100) and `MockM",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
