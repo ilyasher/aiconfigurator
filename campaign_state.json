@@ -9,8 +9,8 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "attention_context",
-    "current_phase": "import",
-    "current_attempt": 2,
+    "current_phase": "smoke",
+    "current_attempt": 1,
     "max_attempts": 5,
     "ops": {
       "gemm": {
@@ -25,10 +25,10 @@
       "attention_context": {
         "local_status": "running",
         "import_status": "passed",
-        "smoke_status": "pending",
+        "smoke_status": "running",
         "sample_status": "pending",
         "error_summary": null,
-        "attempts": 2,
+        "attempts": 1,
         "skipped_reason": null
       },
       "attention_generation": {
