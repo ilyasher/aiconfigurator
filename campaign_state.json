@@ -9,8 +9,8 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "wideep_mlp_generation",
-    "current_phase": "fixing",
-    "current_attempt": 4,
+    "current_phase": "import",
+    "current_attempt": 5,
     "max_attempts": 5,
     "ops": {
       "gemm": {
@@ -105,11 +105,11 @@
       },
       "wideep_mlp_generation": {
         "local_status": "running",
-        "import_status": "failed",
+        "import_status": "running",
         "smoke_status": "pending",
         "sample_status": "pending",
         "error_summary": "Op 'wideep_mlp_generation' not found in collector/sglang/registry.py",
-        "attempts": 4,
+        "attempts": 5,
         "skipped_reason": null
       },
       "mla_bmm_gen_pre": {
