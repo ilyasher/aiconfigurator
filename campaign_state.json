@@ -149,8 +149,8 @@
                   "count": 200,
                   "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 356, in run_attention_torch\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
-                  "classification": "triaging",
-                  "agent_analysis": null,
+                  "classification": "unclassified",
+                  "agent_analysis": "",
                   "task_ids": [
                     "sglang.attention_context:run_attention_torch:[4, 1024, 8, 4, 128, False, False, True, 'context_attention_perf.txt']",
                     "sglang.attention_context:run_attention_torch:[32, 2048, 12, 2, 128, False, False, True, 'context_attention_perf.txt']",
@@ -177,8 +177,8 @@
                   "count": 64,
                   "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 356, in run_attention_torch\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
-                  "classification": "triaging",
-                  "agent_analysis": null,
+                  "classification": "unclassified",
+                  "agent_analysis": "",
                   "task_ids": [
                     "sglang.attention_generation:run_attention_torch:[4, 1, 16, 1, 128, False, False, False, 'generation_attention_perf.txt']",
                     "sglang.attention_generation:run_attention_torch:[1, 1023, 8, 8, 128, False, False, False, 'generation_attention_perf.txt']",
@@ -1233,9 +1233,9 @@
           "passed": null,
           "failed": 200,
           "ignored": null,
-          "classification": null,
+          "classification": "unclassified",
           "error_summary": "200 errors: 200 AttributeError\nFirst error: 'MockModelRunner' object has no attribute 'attn_cp_size'",
-          "agent_analysis": null,
+          "agent_analysis": "",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
