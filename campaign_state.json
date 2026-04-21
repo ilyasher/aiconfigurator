@@ -77,7 +77,7 @@
         "skipped_reason": null
       },
       "wideep_mlp_context": {
-        "local_status": "running",
+        "local_status": "failed",
         "import_status": "failed",
         "smoke_status": "pending",
         "sample_status": "pending",
