@@ -1233,9 +1233,9 @@
           "passed": null,
           "failed": 200,
           "ignored": null,
-          "classification": "bug",
+          "classification": "unclassified",
           "error_summary": "200 errors: 200 AttributeError\nFirst error: 'MockModelRunner' object has no attribute 'attn_cp_size'",
-          "agent_analysis": "## Summary\n\n**Classification: Bug** — collector fix needed.\n\n**Root cause:** SGLang 0.5.10 added context parallelism support. The `FlashAttentionBackend.__init__` now reads `model_runner.attn_cp_size` (line 128 of `flashattention_backend.py`), but the `MockModelRunner` in `collect_attn.py` didn't have this attribute.\n\n**Fix applied** (2 changes in `collector/sglang/collect_attn.py`):\n1. Added `self.attn_cp_size = 1` to `MockServerArgs` (for consistency with real `ServerArgs`)\n2. Added `self.attn",
+          "agent_analysis": "",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
