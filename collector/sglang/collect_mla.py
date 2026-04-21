@@ -19,7 +19,12 @@ from sglang.srt.mem_cache.memory_pool import MLATokenToKVPool, ReqToTokenPool
 from sglang.srt.model_executor.forward_batch_info import ForwardBatch, ForwardMode
 from sglang.srt.utils import is_blackwell
 
-from helper import benchmark_with_power, get_sm_version, log_perf
+try:
+    from helper import benchmark_with_power, get_sm_version, log_perf
+except ImportError:
+    import sys
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from helper import benchmark_with_power, get_sm_version, log_perf
 
 # Mocking for standalone collector script
 sglang.srt.layers.dp_attention._ATTN_TP_SIZE = 1
