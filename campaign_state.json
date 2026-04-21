@@ -98,7 +98,7 @@
         "local_status": "running",
         "import_status": "passed",
         "smoke_status": "passed",
-        "sample_status": "running",
+        "sample_status": "passed",
         "error_summary": null,
         "attempts": 1,
         "skipped_reason": null
