@@ -122,7 +122,7 @@
         "skipped_reason": null
       },
       "mla_bmm_gen_post": {
-        "local_status": "running",
+        "local_status": "passed",
         "import_status": "passed",
         "smoke_status": "passed",
         "sample_status": "passed",
