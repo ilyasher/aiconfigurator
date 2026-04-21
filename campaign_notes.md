@@ -10,5 +10,7 @@
 
 - `wideep_mlp_context` and `wideep_mlp_generation` ops: Re-added to `collector/sglang/registry.py` (attempt 4). The module `collect_wideep_mlp.py` already existed with `get_wideep_mlp_context_test_cases`, `get_wideep_mlp_generation_test_cases`, and `run_wideep_mlp` functions. The registry just needed OpEntry entries pointing to them.
 
+- `collector/sglang/collect_mla_bmm.py`: `from helper import ...` fails with `ModuleNotFoundError: No module named 'helper'` when imported as `collector.sglang.collect_mla_bmm`. Fixed with the standard try/except + sys.path.append pattern.
+
 ## User preferences
 

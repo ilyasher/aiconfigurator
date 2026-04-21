@@ -7,7 +7,12 @@ from sglang.srt.layers.quantization.fp8_kernel import (
     per_tensor_quant_mla_fp8,
 )
 
-from helper import benchmark_with_power, log_perf
+try:
+    from helper import benchmark_with_power, log_perf
+except ImportError:
+    import sys, os
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from helper import benchmark_with_power, log_perf
 
 
 def get_mla_gen_pre_test_cases():
