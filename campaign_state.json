@@ -59,7 +59,7 @@
         "skipped_reason": null
       },
       "moe": {
-        "local_status": "running",
+        "local_status": "passed",
         "import_status": "passed",
         "smoke_status": "passed",
         "sample_status": "passed",
