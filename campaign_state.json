@@ -78,10 +78,10 @@
       },
       "wideep_mlp_context": {
         "local_status": "running",
-        "import_status": "running",
+        "import_status": "failed",
         "smoke_status": "pending",
         "sample_status": "pending",
-        "error_summary": null,
+        "error_summary": "Op 'wideep_mlp_context' not found in collector/sglang/registry.py",
         "attempts": 1,
         "skipped_reason": null
       },
