@@ -1058,8 +1058,8 @@
                   "count": 3,
                   "message": "Triton Error [CUDA]: an illegal memory access was encountered",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 522, in run_moe_torch\n    latency, power_stats = benchmark(\n                           ^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 395, in benchmark\n    kernel_time, power_stats = benchmark_config(\n                               ^^^^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 318, in benchmark_config\n    with benchmark_with_power(\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/helper.py\", line 238, in benchmark_with_power\n    kernel_func()\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 316, in kernel_func\n    run_op(i)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 296, in run_op\n    fused_moe(\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 785, in fused_moe\n    return fused_experts(\n           ^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 232, in fused_experts\n    inplace_fused_experts(\n  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1255, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/utils/_device.py\", line 103, in __torch_function__\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1255, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 110, in inplace_fused_experts\n ",
-                  "classification": "triaging",
-                  "agent_analysis": null,
+                  "classification": "unclassified",
+                  "agent_analysis": "",
                   "task_ids": [
                     "sglang.moe:run_moe_torch:['float16', 16384, 6144, 2048, 8, 256, 1, 16, 'zai-org/GLM-5', 'moe_perf.txt', 'power_law', 1.2]",
                     "sglang.moe:run_moe_torch:['float16', 6144, 7168, 2048, 8, 384, 1, 16, 'moonshotai/Kimi-K2-Instruct', 'moe_perf.txt', 'power_law', 1.01]",
@@ -2559,9 +2559,9 @@
           "passed": null,
           "failed": 44,
           "ignored": null,
-          "classification": "ignorable",
+          "classification": "unclassified",
           "error_summary": "44 errors: 38 AcceleratorError, 3 RuntimeError, 2 WorkerSignalCrash, 1 WorkerAbnormalExit\nFirst error: CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be inco",
-          "agent_analysis": "## Triage Summary\n\n**Classification: Ignorable** — framework kernel bug, not a collector issue.\n\n**Details:**\n- The 38 `cudaErrorIllegalAddress` errors occur inside SGLang 0.5.10's `fused_moe` Triton kernel on L40S (SM89)\n- The `torch.cuda.synchronize()` at `helper.py:239` merely surfaces an asynchronous error from a previously-launched kernel — the actual crash is in SGLang's Triton-generated CUDA code\n- The collector code is correct: tensor shapes are properly derived (`2 * inter_size // moe_t",
+          "agent_analysis": "",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
