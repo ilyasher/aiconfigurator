@@ -84,6 +84,18 @@ REGISTRY: list[OpEntry] = [
         run_func="run_mla_module_worker",
     ),
     OpEntry(
+        op="wideep_mlp_context",
+        module="collector.sglang.collect_wideep_mlp",
+        get_func="get_wideep_mlp_context_test_cases",
+        run_func="run_wideep_mlp",
+    ),
+    OpEntry(
+        op="wideep_mlp_generation",
+        module="collector.sglang.collect_wideep_mlp",
+        get_func="get_wideep_mlp_generation_test_cases",
+        run_func="run_wideep_mlp",
+    ),
+    OpEntry(
         op="wideep_moe",
         module="collector.sglang.collect_wideep_deepep_moe",
         get_func="get_wideep_moe_test_cases",

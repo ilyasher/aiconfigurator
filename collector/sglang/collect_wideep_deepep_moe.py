@@ -870,18 +870,52 @@ def get_wideep_moe_test_cases(total_experts=256):
     return test_cases
 
 
-def run_moe_benchmark(num_experts, gpu_id, output_path=None):
-    """Run MOE benchmark - called in subprocess with CUDA_VISIBLE_DEVICES set.
+def cleanup_distributed():
+    """Clean up SGLang distributed environment to prevent hangs between runs."""
+    import gc
 
-    This function contains all the initialization logic that must happen
-    after CUDA_VISIBLE_DEVICES is set.
+    try:
+        import sglang.srt.distributed.parallel_state as parallel_state
 
-    Supports both DeepSeek-V3 and Qwen3 MoE models.
+        for var_name in ["_TP", "_PP", "_MOE_EP", "_MOE_TP", "_WORLD", "_PDMUX_PREFILL_TP_GROUP"]:
+            if hasattr(parallel_state, var_name):
+                setattr(parallel_state, var_name, None)
+    except Exception:
+        pass
+
+    try:
+        import sglang.srt.eplb.expert_location as expert_location
+
+        if hasattr(expert_location, "_global_expert_location_metadata"):
+            expert_location._global_expert_location_metadata = None
+    except Exception:
+        pass
+
+    if dist.is_initialized():
+        try:
+            dist.destroy_process_group()
+        except Exception:
+            pass
+
+    gc.collect()
+    torch.cuda.empty_cache()
+
+
+def run_all_moe_benchmarks(expert_configs, gpu_id, output_path=None):
+    """Run MOE benchmarks for ALL expert configs in a single process.
+
+    This avoids repeated subprocess spawning and model reloading, which
+    causes hangs due to leftover distributed/GPU state between subprocesses.
+
+    Args:
+        expert_configs: list of num_experts values to benchmark
+        gpu_id: GPU device ID
+        output_path: optional output directory
     """
-    # In subprocess, always use cuda:0 since CUDA_VISIBLE_DEVICES isolates the GPU
+    import random
+
     torch.cuda.set_device("cuda:0")
 
-    server_port = 30000 + gpu_id * 100
     server_args = ServerArgs(
         model_path=MOE_MODEL_PATH,
         dtype="auto",
@@ -896,7 +930,7 @@ def run_moe_benchmark(num_experts, gpu_id, output_path=None):
         ep_size=1,
         node_rank=0,
         host="localhost",
-        port=server_port,
+        port=30000 + gpu_id * 100,
         cuda_graph_max_bs=4,
         disable_cuda_graph=True,
     )
@@ -904,31 +938,72 @@ def run_moe_benchmark(num_experts, gpu_id, output_path=None):
     logging.basicConfig(level=getattr(logging, server_args.log_level.upper()), format="%(message)s")
     _set_envs_and_config(server_args)
 
-    # PortArgs.init_new() must be called in subprocess for proper isolation
-    port_args = PortArgs.init_new(server_args)
-
-    # Get total experts from model config to calculate simulated EP size
+    # Get total experts from model config
     model_config = ModelConfig.from_server_args(server_args)
     hf_config = model_config.hf_config
     total_experts = getattr(hf_config, "n_routed_experts", None) or getattr(hf_config, "num_experts", 256)
 
-    simulated_ep_size = total_experts // num_experts * server_args.ep_size
-    print(f"\n{'=' * 60}")
-    print(
-        f"MOE Benchmark: num_experts={num_experts}, EP_size={simulated_ep_size}, "
-        f"total_experts={total_experts}, GPU={gpu_id}"
-    )
-    print(f"{'=' * 60}")
+    for num_experts in expert_configs:
+        simulated_ep_size = total_experts // num_experts * server_args.ep_size
+        print(f"\n{'=' * 60}")
+        print(
+            f"MOE Benchmark: num_experts={num_experts}, EP_size={simulated_ep_size}, "
+            f"total_experts={total_experts}, GPU={gpu_id}"
+        )
+        print(f"{'=' * 60}")
 
-    # Run the actual benchmark
-    run_moe(server_args, port_args, 3, 10, 3, num_experts, 0, output_path)
+        # Clean up distributed state from previous iteration
+        cleanup_distributed()
 
-    torch.cuda.empty_cache()
-    print(f"Completed num_experts={num_experts} (EP size {simulated_ep_size})")
+        # Use a random nccl_port for each iteration to avoid TIME_WAIT conflicts
+        nccl_port = 29500 + random.randint(0, 10000) + gpu_id * 100
+
+        try:
+            # Create a minimal PortArgs-like object with just nccl_port
+            port_args = PortArgs.init_new(server_args)
+            # Override nccl_port with a fresh random one
+            port_args = PortArgs(
+                nccl_port=nccl_port,
+                tokenizer_ipc_name=port_args.tokenizer_ipc_name if hasattr(port_args, 'tokenizer_ipc_name') else "",
+            )
+        except Exception:
+            # Fallback: create a simple namespace with nccl_port
+            class _PortArgs:
+                pass
+            port_args = _PortArgs()
+            port_args.nccl_port = nccl_port
+
+        try:
+            run_moe(server_args, port_args, 3, 10, 3, num_experts, 0, output_path)
+        except Exception as e:
+            print(f"Error benchmarking num_experts={num_experts}: {e}")
+            import traceback
+            traceback.print_exc()
+        finally:
+            cleanup_distributed()
+
+        print(f"Completed num_experts={num_experts} (EP size {simulated_ep_size})")
+
+    print("\nAll expert configurations completed.")
 
 
-def _run_moe_subprocess(num_experts, gpu_id, output_path=None):
-    """Helper to run MOE in subprocess with CUDA_VISIBLE_DEVICES isolation."""
+def run_moe_benchmark(num_experts, gpu_id, output_path=None):
+    """Run MOE benchmark - called in subprocess with CUDA_VISIBLE_DEVICES set.
+
+    This function contains all the initialization logic that must happen
+    after CUDA_VISIBLE_DEVICES is set.
+
+    Supports both DeepSeek-V3 and Qwen3 MoE models.
+    """
+    run_all_moe_benchmarks([num_experts], gpu_id, output_path)
+
+
+def _run_moe_subprocess(expert_configs, gpu_id, output_path=None):
+    """Helper to run MOE in subprocess with CUDA_VISIBLE_DEVICES isolation.
+
+    Runs ALL expert configurations in a single subprocess to avoid repeated
+    model loading and distributed init/cleanup overhead.
+    """
     import subprocess
     import sys
 
@@ -938,8 +1013,8 @@ def _run_moe_subprocess(num_experts, gpu_id, output_path=None):
     code = f'''
 import sys
 sys.path.insert(0, "{os.path.dirname(os.path.abspath(__file__))}")
-from collect_wideep_deepep_moe import run_moe_benchmark
-run_moe_benchmark({num_experts}, {gpu_id}, {output_path!r})
+from collect_wideep_deepep_moe import run_all_moe_benchmarks
+run_all_moe_benchmarks({expert_configs!r}, {gpu_id}, {output_path!r})
 '''
 
     proc = subprocess.Popen(
@@ -951,16 +1026,21 @@ run_moe_benchmark({num_experts}, {gpu_id}, {output_path!r})
     )
 
     try:
-        stdout, _ = proc.communicate(timeout=600)  # 10 min timeout per MOE config
+        # Generous timeout: all expert configs run sequentially in one process
+        stdout, _ = proc.communicate(timeout=3600)  # 60 min timeout for all configs
         if stdout:
             print(stdout.decode("utf-8", errors="replace"))
     except subprocess.TimeoutExpired:
         proc.kill()
         proc.wait()
-        print(f"MOE subprocess timed out for num_experts={num_experts}")
+        print(f"MOE subprocess timed out for expert_configs={expert_configs}")
 
     if proc.returncode != 0:
         raise RuntimeError(f"MOE subprocess failed with exit code {proc.returncode}")
+
+
+# Track whether the batched subprocess has already been launched
+_moe_subprocess_done = False
 
 
 def run_wideep_moe(num_experts, perf_filename, device="cuda:0"):
@@ -968,15 +1048,29 @@ def run_wideep_moe(num_experts, perf_filename, device="cuda:0"):
 
     Compatible with collect.py framework - uses subprocess for GPU isolation.
     Supports both DeepSeek-V3 (256 experts) and Qwen3 (128 experts) models.
+
+    The first call runs ALL expert configurations in a single subprocess.
+    Subsequent calls are no-ops since all work was done in the first call.
     """
+    global _moe_subprocess_done
+
     device_str = str(device) if not isinstance(device, str) else device
     gpu_id = int(device_str.split(":")[-1]) if ":" in device_str else 0
 
+    if _moe_subprocess_done:
+        print(f"MOE: num_experts={num_experts} — already completed in batch run")
+        return
+
     print("\n" + "=" * 60)
-    print(f"MOE: num_experts={num_experts}, GPU={gpu_id}")
+    print(f"MOE: Running ALL expert configurations in a single subprocess, GPU={gpu_id}")
     print("=" * 60)
 
-    _run_moe_subprocess(num_experts, gpu_id, None)
+    # Collect all expert configs from test cases
+    all_test_cases = get_wideep_moe_test_cases()
+    expert_configs = [tc[0] for tc in all_test_cases]
+
+    _run_moe_subprocess(expert_configs, gpu_id, None)
+    _moe_subprocess_done = True
 
 
 if __name__ == "__main__":
