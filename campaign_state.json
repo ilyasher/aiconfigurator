@@ -9,7 +9,7 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "mla_bmm_gen_post",
-    "current_phase": "import",
+    "current_phase": "smoke",
     "current_attempt": 1,
     "max_attempts": 5,
     "ops": {
@@ -124,7 +124,7 @@
       "mla_bmm_gen_post": {
         "local_status": "running",
         "import_status": "passed",
-        "smoke_status": "pending",
+        "smoke_status": "running",
         "sample_status": "pending",
         "error_summary": null,
         "attempts": 1,
