@@ -6,7 +6,7 @@
   "fork": "ilyasher/aiconfigurator",
   "created_at": "2026-04-20T17:10:50.070079",
   "local_dev": {
-    "status": "idle",
+    "status": "running",
     "gpu": null,
     "current_op": null,
     "current_phase": null,
