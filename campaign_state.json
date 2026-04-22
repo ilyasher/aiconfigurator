@@ -295,8 +295,186 @@
           "ops": {}
         },
         "l40s": {
-          "status": "running",
-          "ops": {}
+          "status": "failed",
+          "ops": {
+            "gemm": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 115,
+              "error_groups": [
+                {
+                  "error_type": "OutOfMemoryError",
+                  "count": 83,
+                  "message": "CUDA out of memory. Tried to allocate 3.00 GiB. GPU 5 has a total capacity of 44.53 GiB of which 1.21 GiB is free. Process 3852490 has 43.31 GiB memory in use. Of the allocated memory 40.78 GiB is allocated by PyTorch, with 11.88 MiB allocated in private pools (e.g., CUDA Graphs), and 2.01 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Manage",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_gemm.py\", line 234, in run_gemm\n    op = create_gemm()\n         ^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_gemm.py\", line 210, in create_gemm\n    b_fp32 = (torch.rand(N, K, device=device) - 0.5) * 2 * fp8_info.max\n              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~\ntorch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.00 GiB. GPU 5 has a total capacity of 44.53 GiB of which 1.21 GiB is free. Process 3852490 has 43.31 GiB memory in use. Of the allocated memory 40.78 GiB is allocated by PyTorch, with 11.88 MiB allocated in private pools (e.g., CUDA Graphs), and 2.01 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.gemm:run_gemm:['fp8', 32768, 12288, 65536, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 3840, 51200, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 2049, 51200, 65536, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 224, 51200, 65536, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 3584, 51200, 65536, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 97, 51200, 65536, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 4353, 51200, 65536, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 1792, 65536, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 2817, 65536, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 3328, 51200, 65536, 'gemm_perf.txt']"
+                  ]
+                },
+                {
+                  "error_type": "OutOfMemoryError",
+                  "count": 30,
+                  "message": "CUDA out of memory. Tried to allocate 3.12 GiB. GPU 4 has a total capacity of 44.53 GiB of which 179.25 MiB is free. Process 3852489 has 44.35 GiB memory in use. Of the allocated memory 40.86 GiB is allocated by PyTorch, with 11.88 MiB allocated in private pools (e.g., CUDA Graphs), and 2.97 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Mana",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_gemm.py\", line 234, in run_gemm\n    op = create_gemm()\n         ^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_gemm.py\", line 211, in create_gemm\n    b_fp8 = b_fp32.clamp(min=fp8_info.min, max=fp8_info.max).to(torch.float8_e4m3fn).t()\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntorch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.12 GiB. GPU 4 has a total capacity of 44.53 GiB of which 179.25 MiB is free. Process 3852489 has 44.35 GiB memory in use. Of the allocated memory 40.86 GiB is allocated by PyTorch, with 11.88 MiB allocated in private pools (e.g., CUDA Graphs), and 2.97 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.gemm:run_gemm:['fp8', 256, 65536, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 193, 65536, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 513, 65536, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['float16', 16384, 51200, 65536, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 257, 65536, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 32768, 65536, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 1024, 65536, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 128, 65536, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 112, 51200, 65536, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['fp8', 16384, 51200, 51200, 'gemm_perf.txt']"
+                  ]
+                },
+                {
+                  "error_type": "OutOfMemoryError",
+                  "count": 2,
+                  "message": "CUDA out of memory. Tried to allocate 480.00 MiB. GPU 3 has a total capacity of 44.53 GiB of which 219.25 MiB is free. Process 3852488 has 44.31 GiB memory in use. Of the allocated memory 39.72 GiB is allocated by PyTorch, with 11.88 MiB allocated in private pools (e.g., CUDA Graphs), and 4.07 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Ma",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_gemm.py\", line 250, in run_gemm\n    with benchmark_with_power(\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/helper.py\", line 251, in benchmark_with_power\n    kernel_func()\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_gemm.py\", line 244, in kernel_func\n    op()\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_gemm.py\", line 227, in gemm_op\n    return F.linear(a_fp16, b_fp16, None)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntorch.OutOfMemoryError: CUDA out of memory. Tried to allocate 480.00 MiB. GPU 3 has a total capacity of 44.53 GiB of which 219.25 MiB is free. Process 3852488 has 44.31 GiB memory in use. Of the allocated memory 39.72 GiB is allocated by PyTorch, with 11.88 MiB allocated in private pools (e.g., CUDA Graphs), and 4.07 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.gemm:run_gemm:['float16', 3840, 65536, 51200, 'gemm_perf.txt']",
+                    "sglang.gemm:run_gemm:['float16', 8192, 51200, 65536, 'gemm_perf.txt']"
+                  ]
+                }
+              ]
+            },
+            "attention_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "moe": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 14,
+              "error_groups": [
+                {
+                  "error_type": "OutOfMemoryError",
+                  "count": 8,
+                  "message": "CUDA out of memory. Tried to allocate 512.00 MiB. GPU 7 has a total capacity of 44.53 GiB of which 243.25 MiB is free. Process 3869460 has 44.28 GiB memory in use. Of the allocated memory 33.64 GiB is allocated by PyTorch, with 25.00 MiB allocated in private pools (e.g., CUDA Graphs), and 10.14 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory M",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 540, in run_moe_torch\n    latency, power_stats = benchmark(\n                           ^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 396, in benchmark\n    kernel_time, power_stats = benchmark_config(\n                               ^^^^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 319, in benchmark_config\n    with benchmark_with_power(\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/helper.py\", line 251, in benchmark_with_power\n    kernel_func()\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 317, in kernel_func\n    run_op(i)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 297, in run_op\n    fused_moe(\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 785, in fused_moe\n    return fused_experts(\n           ^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 232, in fused_experts\n    inplace_fused_experts(\n  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1255, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/utils/_device.py\", line 103, in __torch_function__\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1255, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 110, in inplace_fused_experts\n ",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.moe:run_moe_torch:['float16', 16384, 7168, 2048, 8, 384, 1, 1, 'moonshotai/Kimi-K2-Instruct', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['float16', 16384, 7168, 2048, 8, 384, 1, 1, 'moonshotai/Kimi-K2-Instruct', 'moe_perf.txt', 'power_law', 1.2]",
+                    "sglang.moe:run_moe_torch:['float16', 6144, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'balanced', 0.0]",
+                    "sglang.moe:run_moe_torch:['float16', 8192, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'balanced', 0.0]",
+                    "sglang.moe:run_moe_torch:['float16', 6144, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['float16', 8192, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['float16', 6144, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.2]",
+                    "sglang.moe:run_moe_torch:['float16', 8192, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.2]"
+                  ]
+                },
+                {
+                  "error_type": "OutOfMemoryError",
+                  "count": 6,
+                  "message": "CUDA out of memory. Tried to allocate 2.71 GiB. GPU 3 has a total capacity of 44.53 GiB of which 1.97 GiB is free. Process 3869456 has 42.55 GiB memory in use. Of the allocated memory 31.78 GiB is allocated by PyTorch, with 41.94 MiB allocated in private pools (e.g., CUDA Graphs), and 10.27 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Manag",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 540, in run_moe_torch\n    latency, power_stats = benchmark(\n                           ^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 396, in benchmark\n    kernel_time, power_stats = benchmark_config(\n                               ^^^^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 319, in benchmark_config\n    with benchmark_with_power(\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/helper.py\", line 251, in benchmark_with_power\n    kernel_func()\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 317, in kernel_func\n    run_op(i)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 297, in run_op\n    fused_moe(\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 785, in fused_moe\n    return fused_experts(\n           ^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 232, in fused_experts\n    inplace_fused_experts(\n  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1255, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/utils/_device.py\", line 103, in __torch_function__\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1255, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 110, in inplace_fused_experts\n ",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.moe:run_moe_torch:['float16', 12288, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'balanced', 0.0]",
+                    "sglang.moe:run_moe_torch:['float16', 16384, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'balanced', 0.0]",
+                    "sglang.moe:run_moe_torch:['float16', 12288, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['float16', 16384, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['float16', 12288, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.2]",
+                    "sglang.moe:run_moe_torch:['float16', 16384, 4096, 2688, 22, 512, 1, 1, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.2]"
+                  ]
+                }
+              ]
+            },
+            "wideep_mla_context": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 1,
+              "error_groups": [
+                {
+                  "error_type": "RuntimeError",
+                  "count": 1,
+                  "message": "MLA module context subprocess failed (exit code 1)",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_module.py\", line 1169, in run_mla_module_worker\n    _run_mla_subprocess(\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_module.py\", line 1124, in _run_mla_subprocess\n    raise RuntimeError(f\"{attn_type.upper()} module {phase} subprocess failed (exit code {proc.returncode})\")\nRuntimeError: MLA module context subprocess failed (exit code 1)\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 128, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_context_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']"
+                  ]
+                }
+              ]
+            },
+            "wideep_moe": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_mla_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_bmm_gen_pre": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_bmm_gen_post": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            }
+          }
         }
       }
     },
@@ -4209,25 +4387,25 @@
         "job_id": 303489489,
         "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/303489489",
         "started_at": null,
-        "completed_at": null,
-        "code_version": null
+        "completed_at": "2026-04-22T16:12:35.434333",
+        "code_version": "9cd137b"
       },
       "ops": {
         "gemm": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": null,
+          "failed": 115,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "115 errors: 115 OutOfMemoryError\nFirst error: CUDA out of memory. Tried to allocate 3.00 GiB. GPU 5 has a total capacity of 44.53 GiB of which 1.21 GiB is free. Process 3852490 has 43.31 GiB memory in use. Of the allocated memory 40.78 GiB is allocated by PyTorch, with 11.88 MiB allocated in private pools (e.g., CUDA Graphs), and 2.01 GiB is re",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 118,
@@ -4240,7 +4418,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 109,
@@ -4253,7 +4431,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
@@ -4266,7 +4444,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
@@ -4279,20 +4457,20 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": 44,
+          "failed": 14,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "14 errors: 14 OutOfMemoryError\nFirst error: CUDA out of memory. Tried to allocate 512.00 MiB. GPU 7 has a total capacity of 44.53 GiB of which 243.25 MiB is free. Process 3869460 has 44.28 GiB memory in use. Of the allocated memory 33.64 GiB is allocated by PyTorch, with 25.00 MiB allocated in private pools (e.g., CUDA Graphs), and 10.14 GiB ",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": 1,
@@ -4305,7 +4483,7 @@
           "needs_rerun": false
         },
         "wideep_moe": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
@@ -4318,7 +4496,7 @@
           "needs_rerun": false
         },
         "wideep_mla_generation": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
@@ -4331,7 +4509,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_pre": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
@@ -4344,7 +4522,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
