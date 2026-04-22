@@ -2915,18 +2915,11 @@
   ],
   "systems": {
     "a100_sxm": {
-      "status": "passed",
+      "status": "running",
       "round": "sample",
       "pipeline_id": 49236252,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49236252",
-      "current_job": {
-        "pipeline_id": 49236252,
-        "job_id": 303489050,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/303489050",
-        "started_at": null,
-        "completed_at": "2026-04-22T15:28:54.719923",
-        "code_version": "9d703a7"
-      },
+      "current_job": null,
       "ops": {
         "gemm": {
           "status": "passed",
@@ -3007,7 +3000,7 @@
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "failed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 4,
@@ -3046,7 +3039,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_pre": {
-          "status": "failed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 47,
@@ -3059,7 +3052,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "failed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 49,
