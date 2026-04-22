@@ -125,8 +125,8 @@
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49119287",
       "round_type": "sample",
       "started_at": "2026-04-21T11:18:37.859582",
-      "completed_at": null,
-      "status": "running",
+      "completed_at": "2026-04-22T11:35:42.903943",
+      "status": "failed",
       "systems": {
         "a100_sxm": {
           "status": "passed",
