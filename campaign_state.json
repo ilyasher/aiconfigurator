@@ -534,8 +534,8 @@
                   "count": 8,
                   "message": "MOE subprocess failed with exit code -6",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_deepep_moe.py\", line 1072, in run_wideep_moe\n    _run_moe_subprocess(expert_configs, gpu_id, None)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_deepep_moe.py\", line 1039, in _run_moe_subprocess\n    raise RuntimeError(f\"MOE subprocess failed with exit code {proc.returncode}\")\nRuntimeError: MOE subprocess failed with exit code -6\n",
-                  "classification": "triaging",
-                  "agent_analysis": null,
+                  "classification": "ignorable",
+                  "agent_analysis": "## Classification: **ignorable**\n\n**Root cause:** Native code crash (SIGABRT, signal 6) in the DeepEP MOE benchmark subprocess on H200 SXM — a framework/hardware-level issue, not a collector bug.\n\n**Key findings:**\n\n- **Exit code -6 = SIGABRT**: The subprocess is killed by a C/C++ assertion failure in native code (DeepEP, deep_gemm, NCCL, or CUDA runtime). Not a Python exception.\n- **All 8 test cases fail identically**: Crash happens during initialization, not on specific inputs. Every expert configuration (1–128 experts) hits the same abort.\n- **Collector code is correct**: `ServerArgs` uses valid fields (`moe_a2a_backend=\"deepep\"`, `moe_runner_backend=\"deep_gemm\"`, `deepep_mode=\"auto\"` — all valid choices in sglang 0.5.10). `ModelRunner` constructor call provides all required parameters.",
                   "task_ids": [
                     "sglang.wideep_moe:run_wideep_moe:[8, 'wideep_moe_perf.txt']",
                     "sglang.wideep_moe:run_wideep_moe:[4, 'wideep_moe_perf.txt']",
@@ -3686,9 +3686,9 @@
           "passed": null,
           "failed": 8,
           "ignored": null,
-          "classification": null,
+          "classification": "ignorable",
           "error_summary": "8 errors: 8 RuntimeError\nFirst error: MOE subprocess failed with exit code -6",
-          "agent_analysis": null,
+          "agent_analysis": "## Classification: **ignorable**\n\n**Root cause:** Native code crash (SIGABRT, signal 6) in the DeepEP MOE benchmark subprocess on H200 SXM — a framework/hardware-level issue, not a collector bug.\n\n**Key findings:**\n\n- **Exit code -6 = SIGABRT**: The subprocess is killed by a C/C++ assertion failure in native code (DeepEP, deep_gemm, NCCL, or CUDA runtime). Not a Python exception.\n- **All 8 test cases fail identically**: Crash happens during initialization, not on specific inputs. Every expert co",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
