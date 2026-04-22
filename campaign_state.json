@@ -1201,7 +1201,7 @@
                   "count": 200,
                   "message": "'MockServerArgs' object has no attribute 'disable_piecewise_cuda_graph'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 350, in run_attention_torch\n    attn_backend = TRTLLMHAAttnBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/trtllm_mha_backend.py\", line 85, in __init__\n    super().__init__(\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashinfer_backend.py\", line 252, in __init__\n    if not model_runner.server_args.disable_piecewise_cuda_graph:\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockServerArgs' object has no attribute 'disable_piecewise_cuda_graph'. Did you mean: 'enable_piecewise_cuda_graph'?\n",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.attention_context:run_attention_torch:[128, 16, 48, 4, 128, True, False, True, 'context_attention_perf.txt']",
