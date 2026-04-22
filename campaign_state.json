@@ -9,8 +9,8 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "wideep_mlp_context",
-    "current_phase": "fixing",
-    "current_attempt": 1,
+    "current_phase": "sample",
+    "current_attempt": 2,
     "max_attempts": 3,
     "ops": {
       "gemm": {
@@ -72,9 +72,9 @@
       "wideep_mlp_context": {
         "local_status": "running",
         "smoke_status": "passed",
-        "sample_status": "failed",
+        "sample_status": "running",
         "error_summary": "[2026-04-22 20:33:34,421] [INFO] [root] Starting collection with 1 GPU processes\n[2026-04-22 20:33:34,422] [INFO] [root] Starting collection with 1 GPU processes\n[2026-04-22 20:33:34,439] [INFO] [root] SGLang version: 0.5.10\n[2026-04-22 20:33:34,443] [INFO] [root] Starting collection: sglang.wideep_mlp_context\n[2026-04-22 20:33:34,443] [INFO] [root] Generated 18 test cases for sglang.wideep_mlp_context\n\n\rsglang.wideep_mlp_context:   0%|          | 0/18 [00:00<?, ?it/s]\rsglang.wideep_mlp_context:",
-        "attempts": 1,
+        "attempts": 2,
         "skipped_reason": null
       },
       "wideep_moe": {
