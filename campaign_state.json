@@ -55,7 +55,7 @@
       },
       "moe": {
         "local_status": "running",
-        "smoke_status": "running",
+        "smoke_status": "passed",
         "sample_status": "passed",
         "error_summary": null,
         "attempts": 1,
