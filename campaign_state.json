@@ -3047,21 +3047,14 @@
       "reason": null
     },
     "b300_sxm": {
-      "status": "passed",
+      "status": "running",
       "round": "sample",
       "pipeline_id": 49232877,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49232877",
-      "current_job": {
-        "pipeline_id": 49232877,
-        "job_id": 303460201,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/303460201",
-        "started_at": null,
-        "completed_at": "2026-04-22T15:10:23.101506",
-        "code_version": "e90c9d7"
-      },
+      "current_job": null,
       "ops": {
         "gemm": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3074,7 +3067,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 98,
@@ -3087,7 +3080,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 108,
@@ -3100,7 +3093,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3113,7 +3106,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3126,7 +3119,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 4,
@@ -3139,7 +3132,7 @@
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3152,7 +3145,7 @@
           "needs_rerun": false
         },
         "wideep_moe": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3165,7 +3158,7 @@
           "needs_rerun": false
         },
         "wideep_mla_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3178,7 +3171,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_pre": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3191,7 +3184,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3207,21 +3200,14 @@
       "reason": null
     },
     "gb200": {
-      "status": "passed",
+      "status": "running",
       "round": "sample",
       "pipeline_id": 49232877,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49232877",
-      "current_job": {
-        "pipeline_id": 49232877,
-        "job_id": 303460203,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/303460203",
-        "started_at": null,
-        "completed_at": "2026-04-22T14:47:25.036275",
-        "code_version": "a8f70f1"
-      },
+      "current_job": null,
       "ops": {
         "gemm": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3234,7 +3220,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 200,
@@ -3247,7 +3233,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 200,
@@ -3260,7 +3246,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3273,7 +3259,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3286,7 +3272,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 3,
@@ -3299,7 +3285,7 @@
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3312,7 +3298,7 @@
           "needs_rerun": false
         },
         "wideep_moe": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3325,7 +3311,7 @@
           "needs_rerun": false
         },
         "wideep_mla_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3338,7 +3324,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_pre": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3351,7 +3337,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3367,21 +3353,14 @@
       "reason": null
     },
     "gb300": {
-      "status": "passed",
+      "status": "running",
       "round": "sample",
       "pipeline_id": 49232877,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49232877",
-      "current_job": {
-        "pipeline_id": 49232877,
-        "job_id": 303460204,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/303460204",
-        "started_at": null,
-        "completed_at": "2026-04-22T14:45:22.619832",
-        "code_version": "32dae74"
-      },
+      "current_job": null,
       "ops": {
         "gemm": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3394,7 +3373,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 200,
@@ -3407,7 +3386,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 200,
@@ -3420,7 +3399,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3433,7 +3412,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3446,7 +3425,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 3,
@@ -3459,7 +3438,7 @@
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3472,7 +3451,7 @@
           "needs_rerun": false
         },
         "wideep_moe": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3485,7 +3464,7 @@
           "needs_rerun": false
         },
         "wideep_mla_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3498,7 +3477,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_pre": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3511,7 +3490,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3687,21 +3666,14 @@
       "reason": null
     },
     "h200_sxm": {
-      "status": "passed",
+      "status": "running",
       "round": "sample",
       "pipeline_id": 49232877,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49232877",
-      "current_job": {
-        "pipeline_id": 49232877,
-        "job_id": 303460207,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/303460207",
-        "started_at": null,
-        "completed_at": "2026-04-22T14:50:29.842573",
-        "code_version": "abb2bf3"
-      },
+      "current_job": null,
       "ops": {
         "gemm": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3714,7 +3686,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3727,7 +3699,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3740,7 +3712,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3753,7 +3725,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3766,7 +3738,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3779,7 +3751,7 @@
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3792,7 +3764,7 @@
           "needs_rerun": false
         },
         "wideep_moe": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 8,
@@ -3805,7 +3777,7 @@
           "needs_rerun": false
         },
         "wideep_mla_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3818,7 +3790,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_pre": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3831,7 +3803,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3847,21 +3819,14 @@
       "reason": null
     },
     "l40s": {
-      "status": "passed",
+      "status": "running",
       "round": "sample",
       "pipeline_id": 49232877,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49232877",
-      "current_job": {
-        "pipeline_id": 49232877,
-        "job_id": 303460209,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/303460209",
-        "started_at": null,
-        "completed_at": "2026-04-22T14:49:28.314562",
-        "code_version": "01082c1"
-      },
+      "current_job": null,
       "ops": {
         "gemm": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3874,7 +3839,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 118,
@@ -3887,7 +3852,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 109,
@@ -3900,7 +3865,7 @@
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3913,7 +3878,7 @@
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3926,7 +3891,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 44,
@@ -3939,7 +3904,7 @@
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 1,
@@ -3952,7 +3917,7 @@
           "needs_rerun": false
         },
         "wideep_moe": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3965,7 +3930,7 @@
           "needs_rerun": false
         },
         "wideep_mla_generation": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3978,7 +3943,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_pre": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
@@ -3991,7 +3956,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "passed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": null,
