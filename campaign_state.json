@@ -124,6 +124,7 @@
       "pipeline_id": 49119287,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49119287",
       "round_type": "sample",
+      "base_commit": "fb15875",
       "started_at": "2026-04-21T11:18:37.859582",
       "completed_at": "2026-04-22T11:35:42.903943",
       "status": "failed",
@@ -149,7 +150,7 @@
                   "count": 200,
                   "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 356, in run_attention_torch\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.attention_context:run_attention_torch:[4, 1024, 8, 4, 128, False, False, True, 'context_attention_perf.txt']",
@@ -2062,8 +2063,7 @@
             }
           }
         }
-      },
-      "base_commit": "fb15875"
+      }
     }
   ],
   "systems": {
