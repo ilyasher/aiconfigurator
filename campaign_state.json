@@ -944,8 +944,100 @@
           "ops": {}
         },
         "h200_sxm": {
-          "status": "running",
-          "ops": {}
+          "status": "passed",
+          "ops": {
+            "gemm": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "moe": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_mla_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_mlp_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_moe": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_mla_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_mlp_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_bmm_gen_pre": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_bmm_gen_post": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            }
+          }
         },
         "l40s": {
           "status": "passed",
@@ -2300,172 +2392,179 @@
       "round": null,
       "pipeline_id": 49119287,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49119287",
-      "current_job": null,
+      "current_job": {
+        "pipeline_id": 49119287,
+        "job_id": 302507439,
+        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/302507439",
+        "started_at": null,
+        "completed_at": "2026-04-22T11:35:40.569490",
+        "code_version": "c0e9ee1"
+      },
       "ops": {
         "gemm": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "moe": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "wideep_mlp_context": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "wideep_moe": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "wideep_mla_generation": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "wideep_mlp_generation": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "mla_bmm_gen_pre": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": null,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
