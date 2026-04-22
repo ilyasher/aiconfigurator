@@ -9,9 +9,9 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "moe",
-    "current_phase": "sample",
+    "current_phase": "smoke",
     "current_attempt": 1,
-    "max_attempts": 3,
+    "max_attempts": 5,
     "ops": {
       "gemm": {
         "local_status": "passed",
@@ -54,8 +54,8 @@
         "skipped_reason": null
       },
       "moe": {
-        "local_status": "passed",
-        "smoke_status": "passed",
+        "local_status": "running",
+        "smoke_status": "running",
         "sample_status": "passed",
         "error_summary": null,
         "attempts": 1,
