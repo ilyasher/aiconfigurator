@@ -940,8 +940,298 @@
           }
         },
         "h100_sxm": {
-          "status": "running",
-          "ops": {}
+          "status": "failed",
+          "ops": {
+            "gemm": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_context": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 78,
+              "error_groups": [
+                {
+                  "error_type": "AttributeError",
+                  "count": 78,
+                  "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 356, in run_attention_torch\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.attention_context:run_attention_torch:[128, 16, 48, 4, 128, True, False, True, 'context_attention_perf.txt']",
+                    "sglang.attention_context:run_attention_torch:[64, 1536, 32, 4, 128, True, False, True, 'context_attention_perf.txt']",
+                    "sglang.attention_context:run_attention_torch:[64, 32, 64, 4, 128, False, False, True, 'context_attention_perf.txt']",
+                    "sglang.attention_context:run_attention_torch:[8, 64, 16, 16, 128, False, False, True, 'context_attention_perf.txt']",
+                    "sglang.attention_context:run_attention_torch:[128, 256, 4, 4, 128, True, False, True, 'context_attention_perf.txt']",
+                    "sglang.attention_context:run_attention_torch:[2, 1, 96, 8, 128, True, False, True, 'context_attention_perf.txt']",
+                    "sglang.attention_context:run_attention_torch:[2, 16384, 32, 8, 128, False, False, True, 'context_attention_perf.txt']",
+                    "sglang.attention_context:run_attention_torch:[2, 32, 16, 1, 128, True, False, True, 'context_attention_perf.txt']",
+                    "sglang.attention_context:run_attention_torch:[1, 1536, 24, 1, 128, True, False, True, 'context_attention_perf.txt']",
+                    "sglang.attention_context:run_attention_torch:[8, 1, 64, 1, 128, True, True, True, 'context_attention_perf.txt']"
+                  ]
+                }
+              ]
+            },
+            "attention_generation": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 49,
+              "error_groups": [
+                {
+                  "error_type": "AttributeError",
+                  "count": 49,
+                  "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 356, in run_attention_torch\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.attention_generation:run_attention_torch:[128, 4095, 2, 1, 128, True, False, False, 'generation_attention_perf.txt']",
+                    "sglang.attention_generation:run_attention_torch:[1, 255, 1, 1, 128, False, False, False, 'generation_attention_perf.txt']",
+                    "sglang.attention_generation:run_attention_torch:[8, 8191, 32, 8, 128, False, False, False, 'generation_attention_perf.txt']",
+                    "sglang.attention_generation:run_attention_torch:[4, 31, 16, 1, 128, True, False, False, 'generation_attention_perf.txt']",
+                    "sglang.attention_generation:run_attention_torch:[512, 3, 8, 4, 128, True, False, False, 'generation_attention_perf.txt']",
+                    "sglang.attention_generation:run_attention_torch:[1024, 3, 4, 4, 128, True, False, False, 'generation_attention_perf.txt']",
+                    "sglang.attention_generation:run_attention_torch:[16, 7, 64, 1, 128, True, False, False, 'generation_attention_perf.txt']",
+                    "sglang.attention_generation:run_attention_torch:[64, 1, 64, 1, 128, False, False, False, 'generation_attention_perf.txt']",
+                    "sglang.attention_generation:run_attention_torch:[128, 1, 16, 8, 128, False, False, False, 'generation_attention_perf.txt']",
+                    "sglang.attention_generation:run_attention_torch:[32, 1, 48, 48, 128, False, False, False, 'generation_attention_perf.txt']"
+                  ]
+                }
+              ]
+            },
+            "mla_context": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 200,
+              "error_groups": [
+                {
+                  "error_type": "AttributeError",
+                  "count": 200,
+                  "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla.py\", line 377, in run_mla\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.mla_context:run_mla:[12288, 4, 1, torch.float8_e4m3fn, 64, 4, 4, 64, 10, 6, True, 'context_mla_perf.txt']",
+                    "sglang.mla_context:run_mla:[4096, 8, 1, torch.float8_e4m3fn, 128, 2, 2, 64, 10, 6, True, 'context_mla_perf.txt']",
+                    "sglang.mla_context:run_mla:[32, 1, 1, torch.float8_e4m3fn, 64, 2, 2, 64, 10, 6, True, 'context_mla_perf.txt']",
+                    "sglang.mla_context:run_mla:[1, 2, 1, torch.float8_e4m3fn, 128, 64, 64, 64, 10, 6, True, 'context_mla_perf.txt']",
+                    "sglang.mla_context:run_mla:[64, 256, 1, torch.bfloat16, 64, 16, 16, 64, 10, 6, True, 'context_mla_perf.txt']",
+                    "sglang.mla_context:run_mla:[512, 32, 1, torch.bfloat16, 128, 1, 1, 64, 10, 6, True, 'context_mla_perf.txt']",
+                    "sglang.mla_context:run_mla:[8192, 8, 1, torch.bfloat16, 64, 8, 8, 64, 10, 6, True, 'context_mla_perf.txt']",
+                    "sglang.mla_context:run_mla:[1024, 32, 1, torch.bfloat16, 64, 64, 64, 64, 10, 6, True, 'context_mla_perf.txt']",
+                    "sglang.mla_context:run_mla:[8192, 8, 1, torch.float8_e4m3fn, 128, 8, 8, 64, 10, 6, True, 'context_mla_perf.txt']",
+                    "sglang.mla_context:run_mla:[32, 2, 1, torch.bfloat16, 128, 32, 32, 64, 10, 6, True, 'context_mla_perf.txt']"
+                  ]
+                }
+              ]
+            },
+            "mla_generation": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 98,
+              "error_groups": [
+                {
+                  "error_type": "AttributeError",
+                  "count": 98,
+                  "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla.py\", line 377, in run_mla\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.mla_generation:run_mla:[32767, 4, 1, torch.float8_e4m3fn, 128, 64, 64, 64, 10, 6, False, 'generation_mla_perf.txt']",
+                    "sglang.mla_generation:run_mla:[31, 2, 1, torch.bfloat16, 64, 4, 4, 64, 10, 6, False, 'generation_mla_perf.txt']",
+                    "sglang.mla_generation:run_mla:[7, 128, 1, torch.bfloat16, 64, 1, 1, 64, 10, 6, False, 'generation_mla_perf.txt']",
+                    "sglang.mla_generation:run_mla:[65535, 32, 1, torch.float8_e4m3fn, 64, 1, 1, 64, 10, 6, False, 'generation_mla_perf.txt']",
+                    "sglang.mla_generation:run_mla:[31, 128, 1, torch.float8_e4m3fn, 64, 8, 8, 64, 10, 6, False, 'generation_mla_perf.txt']",
+                    "sglang.mla_generation:run_mla:[131071, 8, 1, torch.float8_e4m3fn, 64, 16, 16, 64, 10, 6, False, 'generation_mla_perf.txt']",
+                    "sglang.mla_generation:run_mla:[65535, 16, 1, torch.bfloat16, 128, 8, 8, 64, 10, 6, False, 'generation_mla_perf.txt']",
+                    "sglang.mla_generation:run_mla:[511, 256, 1, torch.bfloat16, 128, 8, 8, 64, 10, 6, False, 'generation_mla_perf.txt']",
+                    "sglang.mla_generation:run_mla:[32767, 16, 1, torch.float8_e4m3fn, 128, 2, 2, 64, 10, 6, False, 'generation_mla_perf.txt']",
+                    "sglang.mla_generation:run_mla:[1023, 64, 1, torch.bfloat16, 64, 2, 2, 64, 10, 6, False, 'generation_mla_perf.txt']"
+                  ]
+                }
+              ]
+            },
+            "moe": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 60,
+              "error_groups": [
+                {
+                  "error_type": "AcceleratorError",
+                  "count": 45,
+                  "message": "CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 522, in run_moe_torch\n    latency, power_stats = benchmark(\n                           ^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 395, in benchmark\n    kernel_time, power_stats = benchmark_config(\n                               ^^^^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 318, in benchmark_config\n    with benchmark_with_power(\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/helper.py\", line 239, in benchmark_with_power\n    get_device_module().synchronize()\n  File \"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py\", line 1083, in synchronize\n    return torch._C._cuda_synchronize()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntorch.AcceleratorError: CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\n\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.moe:run_moe_torch:['fp8_block', 16384, 7168, 2048, 8, 384, 1, 2, 'moonshotai/Kimi-K2-Instruct', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 160, 6144, 2048, 8, 256, 4, 32, 'zai-org/GLM-5', 'moe_perf.txt', 'balanced', 0.0]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 512, 4096, 14336, 2, 8, 16, 4, 'mistralai/Mixtral-8x7B-v0.1', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 16384, 6144, 2560, 8, 160, 1, 2, 'Qwen/Qwen3-Coder-480B-A35B-Instruct', 'moe_perf.txt', 'power_law', 1.2]",
+                    "sglang.moe:run_moe_torch:['float16', 96, 6144, 2560, 8, 160, 1, 1, 'Qwen/Qwen3-Coder-480B-A35B-Instruct', 'moe_perf.txt', 'balanced', 0.0]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 16384, 7168, 2048, 8, 384, 16, 2, 'moonshotai/Kimi-K2-Instruct', 'moe_perf.txt', 'balanced', 0.0]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 2048, 6144, 2560, 8, 160, 16, 16, 'Qwen/Qwen3-Coder-480B-A35B-Instruct', 'moe_perf.txt', 'power_law', 1.2]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 48, 4096, 1536, 8, 128, 8, 8, 'Qwen/Qwen3-235B-A22B', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 48, 6144, 2048, 8, 256, 8, 2, 'zai-org/GLM-5', 'moe_perf.txt', 'balanced', 0.0]",
+                    "sglang.moe:run_moe_torch:['float16', 6144, 4096, 1536, 8, 128, 2, 16, 'Qwen/Qwen3-235B-A22B', 'moe_perf.txt', 'power_law', 1.2]"
+                  ]
+                },
+                {
+                  "error_type": "RuntimeError",
+                  "count": 12,
+                  "message": "Triton Error [CUDA]: an illegal memory access was encountered",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 522, in run_moe_torch\n    latency, power_stats = benchmark(\n                           ^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 395, in benchmark\n    kernel_time, power_stats = benchmark_config(\n                               ^^^^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 318, in benchmark_config\n    with benchmark_with_power(\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/helper.py\", line 238, in benchmark_with_power\n    kernel_func()\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 316, in kernel_func\n    run_op(i)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 296, in run_op\n    fused_moe(\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 785, in fused_moe\n    return fused_experts(\n           ^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 232, in fused_experts\n    inplace_fused_experts(\n  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1255, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/utils/_device.py\", line 103, in __torch_function__\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1255, in __call__\n    return self._op(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/fused_moe_triton/fused_moe.py\", line 110, in inplace_fused_experts\n ",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.moe:run_moe_torch:['fp8_block', 16384, 4096, 2688, 22, 512, 1, 128, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.2]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 3072, 6144, 2560, 8, 160, 1, 4, 'Qwen/Qwen3-Coder-480B-A35B-Instruct', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 160, 4096, 1536, 8, 128, 2, 64, 'Qwen/Qwen3-235B-A22B', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['float16', 6144, 7168, 2048, 8, 256, 2, 64, 'deepseek-ai/DeepSeek-V3', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 384, 3072, 1536, 8, 256, 1, 32, 'MiniMaxAI/MiniMax-M2.5', 'moe_perf.txt', 'power_law', 1.2]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 16384, 6144, 2048, 8, 256, 32, 8, 'zai-org/GLM-5', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 3072, 3072, 1536, 8, 256, 2, 2, 'MiniMaxAI/MiniMax-M2.5', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['float16', 384, 7168, 2048, 8, 384, 16, 8, 'moonshotai/Kimi-K2-Instruct', 'moe_perf.txt', 'power_law', 1.2]",
+                    "sglang.moe:run_moe_torch:['float16', 8192, 7168, 2048, 8, 384, 1, 128, 'moonshotai/Kimi-K2-Instruct', 'moe_perf.txt', 'power_law', 1.01]",
+                    "sglang.moe:run_moe_torch:['fp8_block', 16384, 2048, 768, 8, 128, 1, 32, 'Qwen/Qwen3-30B-A3B', 'moe_perf.txt', 'power_law', 1.01]"
+                  ]
+                },
+                {
+                  "error_type": "WorkerSignalCrash",
+                  "count": 3,
+                  "message": "terminated by signal 11 (SIGSEGV)",
+                  "traceback": "",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "process_exit",
+                    "process_exit",
+                    "process_exit"
+                  ]
+                }
+              ]
+            },
+            "wideep_mla_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_mlp_context": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 18,
+              "error_groups": [
+                {
+                  "error_type": "RuntimeError",
+                  "count": 18,
+                  "message": "MLP context subprocess failed (exit code 1)",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_mlp.py\", line 519, in run_wideep_mlp\n    _run_mlp_subprocess(\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_mlp.py\", line 491, in _run_mlp_subprocess\n    raise RuntimeError(f\"MLP {phase} subprocess failed (exit code {proc.returncode})\")\nRuntimeError: MLP context subprocess failed (exit code 1)\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.wideep_mlp_context:run_wideep_mlp:[8192, 7168, 2048, 'wideep_context_mlp_perf.txt']",
+                    "sglang.wideep_mlp_context:run_wideep_mlp:[4096, 7168, 2048, 'wideep_context_mlp_perf.txt']",
+                    "sglang.wideep_mlp_context:run_wideep_mlp:[16, 7168, 2048, 'wideep_context_mlp_perf.txt']",
+                    "sglang.wideep_mlp_context:run_wideep_mlp:[64, 7168, 2048, 'wideep_context_mlp_perf.txt']",
+                    "sglang.wideep_mlp_context:run_wideep_mlp:[32, 7168, 2048, 'wideep_context_mlp_perf.txt']",
+                    "sglang.wideep_mlp_context:run_wideep_mlp:[128, 7168, 2048, 'wideep_context_mlp_perf.txt']",
+                    "sglang.wideep_mlp_context:run_wideep_mlp:[65536, 7168, 2048, 'wideep_context_mlp_perf.txt']",
+                    "sglang.wideep_mlp_context:run_wideep_mlp:[512, 7168, 2048, 'wideep_context_mlp_perf.txt']",
+                    "sglang.wideep_mlp_context:run_wideep_mlp:[32768, 7168, 2048, 'wideep_context_mlp_perf.txt']",
+                    "sglang.wideep_mlp_context:run_wideep_mlp:[1024, 7168, 2048, 'wideep_context_mlp_perf.txt']"
+                  ]
+                }
+              ]
+            },
+            "wideep_moe": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 7,
+              "error_groups": [
+                {
+                  "error_type": "RuntimeError",
+                  "count": 7,
+                  "message": "MOE subprocess failed with exit code -6",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_deepep_moe.py\", line 1072, in run_wideep_moe\n    _run_moe_subprocess(expert_configs, gpu_id, None)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_deepep_moe.py\", line 1039, in _run_moe_subprocess\n    raise RuntimeError(f\"MOE subprocess failed with exit code {proc.returncode}\")\nRuntimeError: MOE subprocess failed with exit code -6\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.wideep_moe:run_wideep_moe:[32, 'wideep_moe_perf.txt']",
+                    "sglang.wideep_moe:run_wideep_moe:[1, 'wideep_moe_perf.txt']",
+                    "sglang.wideep_moe:run_wideep_moe:[64, 'wideep_moe_perf.txt']",
+                    "sglang.wideep_moe:run_wideep_moe:[128, 'wideep_moe_perf.txt']",
+                    "sglang.wideep_moe:run_wideep_moe:[2, 'wideep_moe_perf.txt']",
+                    "sglang.wideep_moe:run_wideep_moe:[8, 'wideep_moe_perf.txt']",
+                    "sglang.wideep_moe:run_wideep_moe:[4, 'wideep_moe_perf.txt']"
+                  ]
+                }
+              ]
+            },
+            "wideep_mla_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_mlp_generation": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 18,
+              "error_groups": [
+                {
+                  "error_type": "RuntimeError",
+                  "count": 18,
+                  "message": "MLP generation subprocess failed (exit code 1)",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_mlp.py\", line 519, in run_wideep_mlp\n    _run_mlp_subprocess(\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_wideep_mlp.py\", line 491, in _run_mlp_subprocess\n    raise RuntimeError(f\"MLP {phase} subprocess failed (exit code {proc.returncode})\")\nRuntimeError: MLP generation subprocess failed (exit code 1)\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.wideep_mlp_generation:run_wideep_mlp:[8192, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
+                    "sglang.wideep_mlp_generation:run_wideep_mlp:[4096, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
+                    "sglang.wideep_mlp_generation:run_wideep_mlp:[64, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
+                    "sglang.wideep_mlp_generation:run_wideep_mlp:[65536, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
+                    "sglang.wideep_mlp_generation:run_wideep_mlp:[512, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
+                    "sglang.wideep_mlp_generation:run_wideep_mlp:[32, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
+                    "sglang.wideep_mlp_generation:run_wideep_mlp:[128, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
+                    "sglang.wideep_mlp_generation:run_wideep_mlp:[16, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
+                    "sglang.wideep_mlp_generation:run_wideep_mlp:[1024, 7168, 2048, 'wideep_generation_mlp_perf.txt']",
+                    "sglang.wideep_mlp_generation:run_wideep_mlp:[32768, 7168, 2048, 'wideep_generation_mlp_perf.txt']"
+                  ]
+                }
+              ]
+            },
+            "mla_bmm_gen_pre": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_bmm_gen_post": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            }
+          }
         },
         "h200_sxm": {
           "status": "failed",
@@ -2213,10 +2503,17 @@
       "round": null,
       "pipeline_id": 49119287,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49119287",
-      "current_job": null,
+      "current_job": {
+        "pipeline_id": 49119287,
+        "job_id": 302507438,
+        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/302507438",
+        "started_at": null,
+        "completed_at": "2026-04-22T11:35:40.973708",
+        "code_version": "5988191"
+      },
       "ops": {
         "gemm": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
@@ -2229,72 +2526,72 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": null,
+          "failed": 78,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "78 errors: 78 AttributeError\nFirst error: 'MockModelRunner' object has no attribute 'attn_cp_size'",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": null,
+          "failed": 49,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "49 errors: 49 AttributeError\nFirst error: 'MockModelRunner' object has no attribute 'attn_cp_size'",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "mla_context": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": null,
+          "failed": 200,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "200 errors: 200 AttributeError\nFirst error: 'MockModelRunner' object has no attribute 'attn_cp_size'",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "mla_generation": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": null,
+          "failed": 98,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "98 errors: 98 AttributeError\nFirst error: 'MockModelRunner' object has no attribute 'attn_cp_size'",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "moe": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": null,
+          "failed": 60,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "60 errors: 45 AcceleratorError, 12 RuntimeError, 3 WorkerSignalCrash\nFirst error: CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be inco",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
@@ -2307,33 +2604,33 @@
           "needs_rerun": false
         },
         "wideep_mlp_context": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": null,
+          "failed": 18,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "18 errors: 18 RuntimeError\nFirst error: MLP context subprocess failed (exit code 1)",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "wideep_moe": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": null,
+          "failed": 7,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "7 errors: 7 RuntimeError\nFirst error: MOE subprocess failed with exit code -6",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "wideep_mla_generation": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
@@ -2346,20 +2643,20 @@
           "needs_rerun": false
         },
         "wideep_mlp_generation": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": null,
+          "failed": 18,
           "ignored": null,
           "classification": null,
-          "error_summary": null,
+          "error_summary": "18 errors: 18 RuntimeError\nFirst error: MLP generation subprocess failed (exit code 1)",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "mla_bmm_gen_pre": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
@@ -2372,7 +2669,7 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": null,
