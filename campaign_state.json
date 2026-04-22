@@ -8,7 +8,7 @@
   "local_dev": {
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
-    "current_op": "mla_bmm_gen_pre",
+    "current_op": "mla_bmm_gen_post",
     "current_phase": "sample",
     "current_attempt": 1,
     "max_attempts": 3,
