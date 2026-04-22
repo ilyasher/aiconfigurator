@@ -423,7 +423,7 @@
           "ops": {}
         },
         "b300_sxm": {
-          "status": "failed",
+          "status": "passed",
           "ops": {
             "gemm": {
               "status": "passed",
@@ -2192,8 +2192,8 @@
       "reason": null
     },
     "b300_sxm": {
-      "status": "running",
-      "round": null,
+      "status": "passed",
+      "round": "sample",
       "pipeline_id": 49119287,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49119287",
       "current_job": {
