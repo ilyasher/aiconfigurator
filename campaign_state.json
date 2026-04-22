@@ -2734,7 +2734,7 @@
           "needs_rerun": false
         },
         "wideep_mla_generation": {
-          "status": "failed",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 4,
@@ -3175,7 +3175,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "failed",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 3,
@@ -3335,7 +3335,7 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "failed",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 3,
@@ -3681,7 +3681,7 @@
           "needs_rerun": false
         },
         "wideep_moe": {
-          "status": "failed",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 8,
@@ -3828,7 +3828,7 @@
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "failed",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 1,
