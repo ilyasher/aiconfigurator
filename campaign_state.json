@@ -229,7 +229,7 @@
                   "count": 4,
                   "message": "MLA module generation subprocess failed (exit code 1)",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_module.py\", line 1169, in run_mla_module_worker\n    _run_mla_subprocess(\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_module.py\", line 1124, in _run_mla_subprocess\n    raise RuntimeError(f\"{attn_type.upper()} module {phase} subprocess failed (exit code {proc.returncode})\")\nRuntimeError: MLA module generation subprocess failed (exit code 1)\n",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.wideep_mla_generation:run_mla_module_worker:[0, 0, 64, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_generation_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']",
