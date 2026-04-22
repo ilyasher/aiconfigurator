@@ -89,7 +89,7 @@ class MockServerArgs:
         self.multi_item_scoring_delimiter = None
         self.dllm_algorithm = None
         self.dllm_algorithm_config = None
-        self.enable_piecewise_cuda_graph = False
+        self.disable_piecewise_cuda_graph = False
         self.model_path = None
         self.revision = None
         # Required by TritonAttnBackend
@@ -133,6 +133,8 @@ class MockModelRunner:
         self.gpu_id = 0
         self.hybrid_gdn_config = None
         self.kimi_linear_config = None
+        # Required by FlashAttentionBackend (reads model_runner.attn_cp_size)
+        self.attn_cp_size = 1
 
 
 def create_req_to_token_pool(batch_size, total_len, page_size, torch_device, device_str):

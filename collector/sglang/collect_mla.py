@@ -137,6 +137,7 @@ class MockModelRunner:
         self.is_hybrid_swa = self.model_config.is_hybrid_swa
         self.server_args = MockServerArgs(kv_cache_dtype, page_size)
         self.use_mla_backend = True
+        self.attn_cp_size = 1
 
 
 def create_req_to_token_pool(

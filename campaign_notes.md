@@ -12,5 +12,15 @@
 
 - `collector/sglang/collect_mla_bmm.py`: `from helper import ...` fails with `ModuleNotFoundError: No module named 'helper'` when imported as `collector.sglang.collect_mla_bmm`. Fixed with the standard try/except + sys.path.append pattern.
 
+- `collector/sglang/collect_attn.py`: `MockModelRunner` missing `attn_cp_size` attribute. SGLang 0.5.10's `FlashAttentionBackend.__init__` reads `model_runner.attn_cp_size` (context parallelism size). The real `ModelRunner` sets it from `server_args.attn_cp_size` (default 1). Fixed by adding `self.attn_cp_size = 1` to `MockModelRunner.__init__`.
+
+- `collector/sglang/collect_moe.py`: "CUDA error: an illegal memory access" in fused_moe for float16 MoE with EP > 1 (42 cases). Root cause: the MagicMock `ServerArgs` didn't set `enable_fused_moe_sum_all_reduce = False`. The MagicMock returns truthy MagicMock objects for unset attributes, so `get_global_server_args().enable_fused_moe_sum_all_reduce` was truthy, enabling the fused sum+all_reduce path in the triton kernel. In this path, the second kernel call uses `tl.atomic_add` to write directly to the output tensor (`out_slice` with shape `(num_tokens, hidden_size)`), indexing by `offs_token // ROUTER_TOPK`. But the `write_zeros_to_output` function (called for filtered/EP expert blocks with expert_id == -1) uses `offs_token` directly (not divided by ROUTER_TOPK), writing out-of-bounds. Only EP > 1 cases are affected because only they have filtered experts (-1 topk_ids). Fix: added `_mock_server_args.enable_fused_moe_sum_all_reduce = False` to the mock setup. Lesson: when mocking ServerArgs with MagicMock, ALL boolean attributes accessed during execution must be explicitly set to their real defaults, since MagicMock returns truthy objects for unset attributes.
+
+- `collector/sglang/collect_attn.py`: `MockServerArgs` had `enable_piecewise_cuda_graph` but SGLang 0.5.10's `flashinfer_backend.py` (line 252) reads `model_runner.server_args.disable_piecewise_cuda_graph`. The real `ServerArgs` uses `disable_piecewise_cuda_graph: bool = False`. Python's "Did you mean" suggestion pointed to the mock's wrong attribute name, not the correct one. Fixed by renaming `enable_piecewise_cuda_graph` to `disable_piecewise_cuda_graph` in `MockServerArgs.__init__`.
+
+- `collector/sglang/collect_moe.py`: NVFP4 MoE TypeError "MaskedBatchedMatmulCuteDSL: Unsupported" — this is a flashinfer kernel limitation, NOT a collector bug. The flashinfer CuteDSL masked GEMM kernels don't have compiled variants for certain (N, K) dimension combinations with NVFP4 (Float4E2M1FN). Only 5 cases affected, all with unusual shard sizes (K=464, 336, 48) from specific model/TP combos (Nemotron-Nano-30B TP=4, Nemotron-Super-120B TP=8, Qwen3-235B TP=32). Classified as ignorable.
+
+- `collector/sglang/collect_mla.py`: `MockModelRunner` missing `attn_cp_size` attribute. Same issue as collect_attn.py (campaign notes line 15). SGLang 0.5.10's `FlashAttentionBackend.__init__` reads `model_runner.attn_cp_size`. Fixed by adding `self.attn_cp_size = 1` to `MockModelRunner.__init__`.
+
 ## User preferences
 
