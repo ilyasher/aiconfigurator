@@ -9,9 +9,9 @@
     "status": "running",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell",
     "current_op": "wideep_mlp_context",
-    "current_phase": "sample",
+    "current_phase": "smoke",
     "current_attempt": 1,
-    "max_attempts": 3,
+    "max_attempts": 5,
     "ops": {
       "gemm": {
         "local_status": "passed",
@@ -70,11 +70,11 @@
         "skipped_reason": null
       },
       "wideep_mlp_context": {
-        "local_status": "failed",
-        "smoke_status": "pending",
+        "local_status": "running",
+        "smoke_status": "running",
         "sample_status": "pending",
         "error_summary": "Op 'wideep_mlp_context' not found in collector/sglang/registry.py",
-        "attempts": 5,
+        "attempts": 1,
         "skipped_reason": null
       },
       "wideep_moe": {
