@@ -145,8 +145,158 @@
       "status": "running",
       "systems": {
         "a100_sxm": {
-          "status": "running",
-          "ops": {}
+          "status": "failed",
+          "ops": {
+            "gemm": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "moe": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_mla_context": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 4,
+              "error_groups": [
+                {
+                  "error_type": "RuntimeError",
+                  "count": 4,
+                  "message": "MLA module context subprocess failed (exit code 1)",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_module.py\", line 1169, in run_mla_module_worker\n    _run_mla_subprocess(\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_module.py\", line 1124, in _run_mla_subprocess\n    raise RuntimeError(f\"{attn_type.upper()} module {phase} subprocess failed (exit code {proc.returncode})\")\nRuntimeError: MLA module context subprocess failed (exit code 1)\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 16, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_context_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']",
+                    "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 32, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_context_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']",
+                    "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 128, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_context_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']",
+                    "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 64, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_context_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']"
+                  ]
+                }
+              ]
+            },
+            "wideep_moe": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_mla_generation": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 4,
+              "error_groups": [
+                {
+                  "error_type": "RuntimeError",
+                  "count": 4,
+                  "message": "MLA module generation subprocess failed (exit code 1)",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_module.py\", line 1169, in run_mla_module_worker\n    _run_mla_subprocess(\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_module.py\", line 1124, in _run_mla_subprocess\n    raise RuntimeError(f\"{attn_type.upper()} module {phase} subprocess failed (exit code {proc.returncode})\")\nRuntimeError: MLA module generation subprocess failed (exit code 1)\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.wideep_mla_generation:run_mla_module_worker:[0, 0, 64, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_generation_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']",
+                    "sglang.wideep_mla_generation:run_mla_module_worker:[0, 0, 32, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_generation_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']",
+                    "sglang.wideep_mla_generation:run_mla_module_worker:[0, 0, 16, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_generation_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']",
+                    "sglang.wideep_mla_generation:run_mla_module_worker:[0, 0, 128, 'bfloat16', 'bfloat16', 'bfloat16', 'wideep_generation_mla_perf.txt', 'deepseek-ai/DeepSeek-V3', 'mla', 'flashinfer']"
+                  ]
+                }
+              ]
+            },
+            "mla_bmm_gen_pre": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 47,
+              "error_groups": [
+                {
+                  "error_type": "CompilationError",
+                  "count": 47,
+                  "message": "at 1:0:\ndef _per_tensor_quant_mla_fp8_stage2(\n^\nValueError(\"type fp8e4nv not supported in this architecture. The supported fp8 dtypes are ('fp8e4b15', 'fp8e5')\")",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_bmm.py\", line 110, in run_mla_gen_pre\n    q_nope_val, q_nope_scale = per_tensor_quant_mla_fp8(q_nope.transpose(0, 1), zeroscale)\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/quantization/fp8_kernel.py\", line 1437, in per_tensor_quant_mla_fp8\n    _per_tensor_quant_mla_fp8_stage2[grid](\n  File \"/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py\", line 419, in <lambda>\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py\", line 733, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py\", line 861, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py\", line 300, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py\", line 80, in make_ir\n    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 1:0:\ndef _per_tensor_quant_mla_fp8_stage2(\n^\nValu",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.mla_bmm_gen_pre:run_mla_gen_pre:[384, 8, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_pre:run_mla_gen_pre:[3072, 4, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_pre:run_mla_gen_pre:[4, 4, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_pre:run_mla_gen_pre:[256, 8, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_pre:run_mla_gen_pre:[48, 64, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_pre:run_mla_gen_pre:[8, 32, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_pre:run_mla_gen_pre:[512, 1, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_pre:run_mla_gen_pre:[128, 8, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_pre:run_mla_gen_pre:[384, 4, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_pre:run_mla_gen_pre:[16, 2, 'fp8', 2, 10, 'mla_bmm_perf.txt']"
+                  ]
+                }
+              ]
+            },
+            "mla_bmm_gen_post": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 49,
+              "error_groups": [
+                {
+                  "error_type": "CompilationError",
+                  "count": 49,
+                  "message": "at 1:0:\ndef _per_tensor_quant_mla_fp8_stage2(\n^\nValueError(\"type fp8e4nv not supported in this architecture. The supported fp8 dtypes are ('fp8e4b15', 'fp8e5')\")",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_bmm.py\", line 215, in run_mla_gen_post\n    with benchmark_with_power(\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/helper.py\", line 238, in benchmark_with_power\n    kernel_func()\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla_bmm.py\", line 203, in kernel_func\n    attn_output_val, attn_output_scale = per_tensor_quant_mla_fp8(\n                                         ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/quantization/fp8_kernel.py\", line 1437, in per_tensor_quant_mla_fp8\n    _per_tensor_quant_mla_fp8_stage2[grid](\n  File \"/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py\", line 419, in <lambda>\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py\", line 733, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/triton/runtime/jit.py\", line 861, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py\", line 300, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.mla_bmm_gen_post:run_mla_gen_post:[4, 32, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_post:run_mla_gen_post:[4, 8, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_post:run_mla_gen_post:[160, 64, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_post:run_mla_gen_post:[128, 8, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_post:run_mla_gen_post:[128, 2, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_post:run_mla_gen_post:[384, 128, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_post:run_mla_gen_post:[1024, 1, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_post:run_mla_gen_post:[80, 1, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_post:run_mla_gen_post:[96, 1, 'fp8', 2, 10, 'mla_bmm_perf.txt']",
+                    "sglang.mla_bmm_gen_post:run_mla_gen_post:[1, 4, 'fp8', 2, 10, 'mla_bmm_perf.txt']"
+                  ]
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -2774,8 +2924,8 @@
         "job_id": 303489050,
         "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/303489050",
         "started_at": null,
-        "completed_at": null,
-        "code_version": null
+        "completed_at": "2026-04-22T15:28:54.719923",
+        "code_version": "9d703a7"
       },
       "ops": {
         "gemm": {
@@ -2857,7 +3007,7 @@
           "needs_rerun": false
         },
         "wideep_mla_context": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
           "failed": 4,
@@ -2896,26 +3046,26 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_pre": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": 50,
+          "failed": 47,
           "ignored": null,
           "classification": "bug",
-          "error_summary": "50 errors: 50 CompilationError\nFirst error: at 1:0:\ndef _per_tensor_quant_mla_fp8_stage2(\n^\nValueError(\"type fp8e4nv not supported in this architecture. The supported fp8 dtypes are ('fp8e4b15', 'fp8e5')\")",
+          "error_summary": "47 errors: 47 CompilationError\nFirst error: at 1:0:\ndef _per_tensor_quant_mla_fp8_stage2(\n^\nValueError(\"type fp8e4nv not supported in this architecture. The supported fp8 dtypes are ('fp8e4b15', 'fp8e5')\")",
           "agent_analysis": "## Classification: **bug**\n\n**Root cause:** `collect_mla_bmm.py` generates FP8 test cases unconditionally, but FP8 (`fp8e4nv`) requires Hopper (SM90+) or later GPUs. On A100 (SM80/Ampere), the Triton compiler correctly rejects the `fp8e4nv` type since A100 doesn't have native FP8 hardware support.\n\n**Fix applied:** Added `get_sm_version()` checks to both `get_mla_gen_pre_test_cases()` and `get_mla_gen_post_test_cases()` so that `\"fp8\"` is only included in the dtype list when `sm_version >= 90`. ",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": 48,
+          "failed": 49,
           "ignored": null,
           "classification": "likely_fixed",
-          "error_summary": "48 errors: 48 CompilationError\nFirst error: at 1:0:\ndef _per_tensor_quant_mla_fp8_stage2(\n^\nValueError(\"type fp8e4nv not supported in this architecture. The supported fp8 dtypes are ('fp8e4b15', 'fp8e5')\")",
+          "error_summary": "49 errors: 49 CompilationError\nFirst error: at 1:0:\ndef _per_tensor_quant_mla_fp8_stage2(\n^\nValueError(\"type fp8e4nv not supported in this architecture. The supported fp8 dtypes are ('fp8e4b15', 'fp8e5')\")",
           "agent_analysis": "## Classification: **likely_fixed**\n\nThis error is already documented in `campaign_notes.md` (line 25) and the fix is already applied in the code.\n\n**Root cause:** The `per_tensor_quant_mla_fp8` Triton kernel uses `fp8e4nv` type, which requires Hopper (SM90+) GPUs. A100 is SM80 (Ampere) and does not support this FP8 dtype. The test case generators were unconditionally including `\"fp8\"` test cases.\n\n**Fix already applied:** Both `get_mla_gen_pre_test_cases()` (line 48-49) and `get_mla_gen_post_te",
           "ignored_reason": null,
           "fix_commit": null,
