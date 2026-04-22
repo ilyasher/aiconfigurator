@@ -83,7 +83,7 @@ REGISTRY: list[OpEntry] = [
         get_func="get_dsa_generation_module_test_cases",
         run_func="run_mla_module_worker",
     ),
-OpEntry(
+    OpEntry(
         op="wideep_moe",
         module="collector.sglang.collect_wideep_deepep_moe",
         get_func="get_wideep_moe_test_cases",

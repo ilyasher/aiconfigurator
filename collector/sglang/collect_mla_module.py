@@ -155,6 +155,7 @@ def _get_backends(attn_type: str):
     For DSA: returns "nsa" — SGLang auto-detects nsa_prefill_backend /
     nsa_decode_backend based on SM + kv_cache_dtype.
     For MLA: returns the best available backend based on SM version.
+    Matches SGLang's own _get_default_attn_backend() MLA selection.
     """
     sm = get_sm_version()
     if attn_type == "dsa":
@@ -165,7 +166,9 @@ def _get_backends(attn_type: str):
         elif sm >= 90:
             return "fa3"
         else:
-            return "flashinfer"
+            # SM < 90 (e.g. A100): SGLang defaults to "triton" for MLA.
+            # flashinfer MLA is not supported on SM80.
+            return "triton"
 
 
 def _get_mla_backend_list() -> list[str]:
@@ -176,7 +179,8 @@ def _get_mla_backend_list() -> list[str]:
                   sglang auto-promotes to trtllm_mla and then fails kv_cache_dtype
                   validation.  Existing B200 perf data contains only trtllm_mla.
       SM >= 90:  ["flashinfer", "fa3"]
-      SM < 90:   ["flashinfer"]
+      SM < 90:   ["triton"]  — SGLang defaults to triton for MLA on SM80 (A100);
+                  flashinfer MLA is not supported on SM80.
     """
     sm = get_sm_version()
     if sm >= 100:
@@ -184,7 +188,7 @@ def _get_mla_backend_list() -> list[str]:
     elif sm >= 90:
         return ["flashinfer", "fa3"]
     else:
-        return ["flashinfer"]
+        return ["triton"]
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -473,8 +477,8 @@ def load_model_runner(
 
     # Disable piecewise CUDA graph — its warmup compile OOMs on large models
     # (e.g. 64 GiB allocation with fp8 + 128 heads on H200).
-    # Not a ServerArgs constructor param; set post-init like collect_attn.py.
-    server_args.enable_piecewise_cuda_graph = False
+    # sglang 0.5.10 uses disable_piecewise_cuda_graph (inverted from old enable_).
+    server_args.disable_piecewise_cuda_graph = True
 
     server_args.attention_backend = attention_backend
     print(f"Using attention backend: {attention_backend}, kv_cache_dtype: {sglang_kv_dtype}, gpu_id: {gpu_id}")

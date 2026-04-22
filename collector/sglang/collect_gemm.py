@@ -231,7 +231,11 @@ def run_gemm(gemm_type, batch_size, N, K, perf_filename, device):  # noqa: N803
     outside_loop_count = 6
     op_list = []
     for _ in range(outside_loop_count):
-        op = create_gemm()
+        try:
+            op = create_gemm()
+        except torch.cuda.OutOfMemoryError:
+            torch.cuda.empty_cache()
+            break
         if op is not None:
             op_list.append(op)
 
@@ -260,7 +264,7 @@ def run_gemm(gemm_type, batch_size, N, K, perf_filename, device):  # noqa: N803
 
     log_perf(
         item_list=[
-            {"gemm_dtype": gemm_type, "m": M, "n": N, "k": K, "latency": results["latency_ms"] / outside_loop_count}
+            {"gemm_dtype": gemm_type, "m": M, "n": N, "k": K, "latency": results["latency_ms"] / len(op_list)}
         ],
         framework="SGLang",
         version=pkg_resources.get_distribution("sglang").version,

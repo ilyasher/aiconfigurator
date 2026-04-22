@@ -8,11 +8,11 @@ from sglang.srt.layers.quantization.fp8_kernel import (
 )
 
 try:
-    from helper import benchmark_with_power, log_perf
+    from helper import benchmark_with_power, get_sm_version, log_perf
 except ImportError:
     import sys, os
     sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    from helper import benchmark_with_power, log_perf
+    from helper import benchmark_with_power, get_sm_version, log_perf
 
 
 def get_mla_gen_pre_test_cases():
@@ -45,7 +45,8 @@ def get_mla_gen_pre_test_cases():
         8192,
     ]
     num_heads = [128, 64, 32, 16, 8, 4, 2, 1]
-    dtype_list = ["float16", "fp8"]
+    sm_version = get_sm_version()
+    dtype_list = ["float16", "fp8"] if sm_version >= 90 else ["float16"]
     for num_tokens in gen_num_tokens:
         for num_head in num_heads:
             for dtype in dtype_list:
@@ -86,7 +87,8 @@ def get_mla_gen_post_test_cases():
         20480,
     ]
     num_heads = [128, 64, 32, 16, 8, 4, 2, 1]
-    dtype_list = ["float16", "fp8"]
+    sm_version = get_sm_version()
+    dtype_list = ["float16", "fp8"] if sm_version >= 90 else ["float16"]
     for num_tokens in ctx_num_tokens:
         for num_head in num_heads:
             for dtype in dtype_list:
@@ -99,6 +101,10 @@ def run_mla_gen_pre(num_tokens, num_heads, dtype, num_warmups, num_runs, perf_fi
     torch.set_default_device(device)
 
     assert dtype == "fp8" or dtype == "float16", "only support fp8 and float16"
+
+    if dtype == "fp8" and get_sm_version() < 90:
+        print(f"Skipping fp8 MLA BMM gen pre on SM{get_sm_version()} (requires SM90+)")
+        return
 
     qk_nope_head_dim = 128
     kv_lora_rank = 512
@@ -161,6 +167,10 @@ def run_mla_gen_post(num_tokens, num_heads, dtype, num_warmups, num_runs, perf_f
     torch.set_default_device(device)
 
     assert dtype == "float16" or dtype == "fp8", "only support fp8 and float16"
+
+    if dtype == "fp8" and get_sm_version() < 90:
+        print(f"Skipping fp8 MLA BMM gen post on SM{get_sm_version()} (requires SM90+)")
+        return
 
     qk_nope_head_dim = 128
     kv_lora_rank = 512
