@@ -51,8 +51,11 @@ DEFAULT_INTERMEDIATE_SIZE = 2048
 # Token counts to sweep — matches README specification
 _NUM_TOKENS = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072]
 
-# Default model path — can be overridden via DEEPSEEK_MODEL_PATH env var
-DEFAULT_MODEL_PATH = os.environ.get("DEEPSEEK_MODEL_PATH", "/deepseek-v3")
+# Default model path — can be overridden via DEEPSEEK_MODEL_PATH env var.
+# Use HuggingFace model ID so _resolve_local_model_path() finds the cached
+# config in src/aiconfigurator/model_configs/ (CI/sample tests have no
+# /deepseek-v3 mount).
+DEFAULT_MODEL_PATH = os.environ.get("DEEPSEEK_MODEL_PATH", "deepseek-ai/DeepSeek-V3")
 
 # AIC's cached HuggingFace model configs — avoids HF downloads in CI.
 _MODEL_CONFIG_DIR = os.path.join(
