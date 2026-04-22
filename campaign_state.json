@@ -2471,9 +2471,9 @@
           "passed": null,
           "failed": 98,
           "ignored": null,
-          "classification": null,
+          "classification": "unclassified",
           "error_summary": "98 errors: 98 AttributeError\nFirst error: 'MockServerArgs' object has no attribute 'disable_piecewise_cuda_graph'",
-          "agent_analysis": null,
+          "agent_analysis": "",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
