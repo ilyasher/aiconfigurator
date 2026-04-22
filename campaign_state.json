@@ -130,8 +130,100 @@
           "ops": {}
         },
         "gb300": {
-          "status": "running",
-          "ops": {}
+          "status": "failed",
+          "ops": {
+            "gemm": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "moe": {
+              "status": "failed",
+              "total": null,
+              "passed": null,
+              "failed": 3,
+              "error_groups": [
+                {
+                  "error_type": "TypeError",
+                  "count": 3,
+                  "message": "MaskedBatchedMatmulCuteDSL: Unsupported with Float4E2M1FN, Float8E4M3FN, 16, BFloat16,  (128, 128), (1, 1), 128, 2688, 464, 2, k, k, n",
+                  "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 523, in run_moe_torch\n    latency, power_stats = benchmark(\n                           ^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 354, in benchmark\n    kernel_time, power_stats = benchmark_config(\n                               ^^^^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 319, in benchmark_config\n    with benchmark_with_power(\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/ci_job/aiconfigurator/collector/helper.py\", line 238, in benchmark_with_power\n    kernel_func()\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 317, in kernel_func\n    run_op(i)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_moe.py\", line 219, in run_op\n    flashinfer_cutedsl_moe_masked(\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/moe/flashinfer_cutedsl_moe.py\", line 163, in flashinfer_cutedsl_moe_masked\n    grouped_gemm_nt_masked(\n  File \"/usr/local/lib/python3.12/dist-packages/flashinfer/gemm/kernels/grouped_gemm_masked_blackwell.py\", line 3029, in grouped_gemm_nt_masked\n    return get_cute_dsl_compiled_masked_gemm_kernel(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/flashinfer/gemm/kernels/grouped_gemm_masked_blackwell.py\", line 2889, in get_cute_dsl_compiled_masked_gemm_kernel\n    MaskedBatchedMatmulCuteDSL(\n  File \"/usr/local/lib/python3.12/dist-packages/flashinfer/gemm/kernels/grouped_gemm_masked_blackwell.py\", line 2621, in __init__\n    raise TypeError(\nTypeError: MaskedBatchedMatmulCuteDSL: Unsupported with Float4E2M1FN, Float8E4M3FN, 16, BFloat16,  (128, 128), (1, 1), 128, 2688, 464, 2, k, k, n\n",
+                  "classification": null,
+                  "agent_analysis": null,
+                  "task_ids": [
+                    "sglang.moe:run_moe_torch:['nvfp4', 128, 2688, 1856, 6, 128, 4, 64, 'nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16', 'moe_perf.txt', 'power_law', 1.2]",
+                    "sglang.moe:run_moe_torch:['nvfp4', 48, 2688, 1856, 6, 128, 4, 8, 'nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16', 'moe_perf.txt', 'balanced', 0.0]",
+                    "sglang.moe:run_moe_torch:['nvfp4', 1536, 4096, 2688, 22, 512, 8, 2, 'nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4', 'moe_perf.txt', 'power_law', 1.01]"
+                  ]
+                }
+              ]
+            },
+            "wideep_mla_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_moe": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "wideep_mla_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_bmm_gen_pre": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_bmm_gen_post": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            }
+          }
         },
         "h100_sxm": {
           "status": "running",
@@ -2740,12 +2832,12 @@
       "pipeline_id": 49232877,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49232877",
       "current_job": {
-        "pipeline_id": 49119287,
-        "job_id": 302507437,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/302507437",
+        "pipeline_id": 49232877,
+        "job_id": 303460204,
+        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/303460204",
         "started_at": null,
-        "completed_at": "2026-04-21T11:35:10.935976",
-        "code_version": "ce1fcbe"
+        "completed_at": "2026-04-22T14:45:22.619832",
+        "code_version": "32dae74"
       },
       "ops": {
         "gemm": {
@@ -2762,27 +2854,27 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 200,
           "ignored": null,
-          "classification": "likely_fixed",
-          "error_summary": "200 errors: 200 AttributeError\nFirst error: 'MockServerArgs' object has no attribute 'disable_piecewise_cuda_graph'",
-          "agent_analysis": "Confirmed. The fix is already applied:\n\n- **Line 92** of `collect_attn.py`: `self.disable_piecewise_cuda_graph = False` ✅\n- **Campaign notes line 19**: Documents this exact fix ✅\n\n## Summary\n\n**Classification: likely_fixed** ✅\n\nThis gb300 `attention_context` error is identical to the same error on b200_sxm, b300_sxm, and gb200 — all already fixed. The `MockServerArgs` previously had `enable_piecewise_cuda_graph` but SGLang 0.5.10's `flashinfer_backend.py` line 252 reads `disable_piecewise_cuda_g",
+          "classification": null,
+          "error_summary": null,
+          "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "running",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 200,
           "ignored": null,
-          "classification": "likely_fixed",
-          "error_summary": "200 errors: 200 AttributeError\nFirst error: 'MockServerArgs' object has no attribute 'disable_piecewise_cuda_graph'",
-          "agent_analysis": "**Classification: likely_fixed** ✅\n\nThis is the exact same error already triaged and fixed for b200_sxm, b300_sxm, and gb200 systems on both `attention_context` and `attention_generation` modules.\n\n### Evidence\n\nThe error says `MockServerArgs` has no attribute `disable_piecewise_cuda_graph` and suggests `enable_piecewise_cuda_graph`. The fix (renaming `enable_piecewise_cuda_graph` to `disable_piecewise_cuda_graph` on line 92 of `collect_attn.py`) is already documented in campaign notes line 19 a",
+          "classification": null,
+          "error_summary": null,
+          "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
@@ -2814,13 +2906,13 @@
           "needs_rerun": false
         },
         "moe": {
-          "status": "running",
+          "status": "failed",
           "total": null,
           "passed": null,
-          "failed": 48,
+          "failed": 3,
           "ignored": null,
           "classification": "ignorable",
-          "error_summary": "48 errors: 36 AcceleratorError, 6 RuntimeError, 6 TypeError\nFirst error: CUDA error: an illegal memory access was encountered\nSearch for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be inco",
+          "error_summary": "3 errors: 3 TypeError\nFirst error: MaskedBatchedMatmulCuteDSL: Unsupported with Float4E2M1FN, Float8E4M3FN, 16, BFloat16,  (128, 128), (1, 1), 128, 2688, 464, 2, k, k, n",
           "agent_analysis": "**Classification: ignorable** ✅\n\nThis is the exact same error pattern already triaged for **b200_sxm/moe TypeError** and **b300_sxm/moe TypeError**, both classified as **ignorable**.\n\n### Root Cause\n\nThis is **not a collector bug**. The error originates inside the flashinfer library's `MaskedBatchedMatmulCuteDSL` CUDA kernel, which doesn't have compiled variants for certain NVFP4 (Float4E2M1FN) parameter combinations. The TypeError is raised by flashinfer itself when the specific combination of ",
           "ignored_reason": null,
           "fix_commit": null,
