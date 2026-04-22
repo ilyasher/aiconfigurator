@@ -295,7 +295,7 @@
           "ops": {}
         },
         "l40s": {
-          "status": "failed",
+          "status": "passed",
           "ops": {
             "gemm": {
               "status": "failed",
@@ -4378,8 +4378,8 @@
       "reason": null
     },
     "l40s": {
-      "status": "running",
-      "round": "sample",
+      "status": "passed",
+      "round": "full",
       "pipeline_id": 49236291,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49236291",
       "current_job": {
