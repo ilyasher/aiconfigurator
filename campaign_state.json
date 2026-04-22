@@ -130,7 +130,7 @@
           "ops": {}
         },
         "gb300": {
-          "status": "failed",
+          "status": "passed",
           "ops": {
             "gemm": {
               "status": "passed",
@@ -2827,7 +2827,7 @@
       "reason": null
     },
     "gb300": {
-      "status": "running",
+      "status": "passed",
       "round": "sample",
       "pipeline_id": 49232877,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49232877",
