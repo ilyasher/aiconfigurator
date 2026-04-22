@@ -1529,7 +1529,7 @@
                   "count": 98,
                   "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_mla.py\", line 377, in run_mla\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
-                  "classification": null,
+                  "classification": "triaging",
                   "agent_analysis": null,
                   "task_ids": [
                     "sglang.mla_generation:run_mla:[32767, 4, 1, torch.float8_e4m3fn, 128, 64, 64, 64, 10, 6, False, 'generation_mla_perf.txt']",
