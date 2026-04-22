@@ -2934,7 +2934,14 @@
       "round": "sample",
       "pipeline_id": 49239377,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49239377",
-      "current_job": null,
+      "current_job": {
+        "pipeline_id": 49239377,
+        "job_id": 303520415,
+        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/303520415",
+        "started_at": null,
+        "completed_at": null,
+        "code_version": null
+      },
       "ops": {
         "gemm": {
           "status": "passed",
