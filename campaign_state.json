@@ -440,8 +440,8 @@
                   "count": 200,
                   "message": "'MockServerArgs' object has no attribute 'disable_piecewise_cuda_graph'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 350, in run_attention_torch\n    attn_backend = TRTLLMHAAttnBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/trtllm_mha_backend.py\", line 85, in __init__\n    super().__init__(\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashinfer_backend.py\", line 252, in __init__\n    if not model_runner.server_args.disable_piecewise_cuda_graph:\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockServerArgs' object has no attribute 'disable_piecewise_cuda_graph'. Did you mean: 'enable_piecewise_cuda_graph'?\n",
-                  "classification": "triaging",
-                  "agent_analysis": null,
+                  "classification": "bug",
+                  "agent_analysis": "## Summary\n\n**Classification: bug** 🐛\n\nThe `MockServerArgs` in `collector/sglang/collect_attn.py` had the attribute named `enable_piecewise_cuda_graph` (line 92), but SGLang 0.5.10's `flashinfer_backend.py` reads `model_runner.server_args.disable_piecewise_cuda_graph` (line 252). The real `ServerArgs` in the framework source uses `disable_piecewise_cuda_graph: bool = False`.\n\nThis is a classic mock attribute name mismatch — the mock used a positive-logic name (`enable_`) while the framework uses negative-logic (`disable_`). Python's \"Did you mean: 'enable_piecewise_cuda_graph'?\" suggestion was misleading — it pointed to the mock's incorrect attribute, not the correct framework name.\n\n**Fix applied:** Renamed `enable_piecewise_cuda_graph` → `disable_piecewise_cuda_graph` in `MockServerArgs.",
                   "task_ids": [
                     "sglang.attention_context:run_attention_torch:[128, 16, 48, 4, 128, True, False, True, 'context_attention_perf.txt']",
                     "sglang.attention_context:run_attention_torch:[64, 1536, 32, 4, 128, True, False, True, 'context_attention_perf.txt']",
@@ -2286,9 +2286,9 @@
           "passed": null,
           "failed": 200,
           "ignored": null,
-          "classification": null,
+          "classification": "bug",
           "error_summary": "200 errors: 200 AttributeError\nFirst error: 'MockServerArgs' object has no attribute 'disable_piecewise_cuda_graph'",
-          "agent_analysis": null,
+          "agent_analysis": "## Summary\n\n**Classification: bug** 🐛\n\nThe `MockServerArgs` in `collector/sglang/collect_attn.py` had the attribute named `enable_piecewise_cuda_graph` (line 92), but SGLang 0.5.10's `flashinfer_backend.py` reads `model_runner.server_args.disable_piecewise_cuda_graph` (line 252). The real `ServerArgs` in the framework source uses `disable_piecewise_cuda_graph: bool = False`.\n\nThis is a classic mock attribute name mismatch — the mock used a positive-logic name (`enable_`) while the framework uses",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
