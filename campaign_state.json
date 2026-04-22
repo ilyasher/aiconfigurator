@@ -110,8 +110,8 @@
       "round_type": "sample",
       "base_commit": "0c0e98f",
       "started_at": "2026-04-22T16:02:12.837181",
-      "completed_at": null,
-      "status": "running",
+      "completed_at": "2026-04-22T16:10:32.632609",
+      "status": "passed",
       "systems": {
         "a100_sxm": {
           "status": "passed",
