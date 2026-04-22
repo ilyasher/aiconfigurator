@@ -14,7 +14,7 @@
     "max_attempts": 3,
     "ops": {
       "gemm": {
-        "local_status": "running",
+        "local_status": "passed",
         "smoke_status": "passed",
         "sample_status": "passed",
         "error_summary": null,
