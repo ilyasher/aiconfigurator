@@ -178,8 +178,8 @@
                   "count": 64,
                   "message": "'MockModelRunner' object has no attribute 'attn_cp_size'",
                   "traceback": "Traceback (most recent call last):\n  File \"/mnt/ci_job/aiconfigurator/collector/collect.py\", line 331, in worker\n    func(*task, device)\n  File \"/mnt/ci_job/aiconfigurator/collector/sglang/collect_attn.py\", line 356, in run_attention_torch\n    attn_backend = FlashAttentionBackend(model_runner)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/sgl-workspace/sglang/python/sglang/srt/layers/attention/flashattention_backend.py\", line 128, in __init__\n    self.attn_cp_size = model_runner.attn_cp_size\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'MockModelRunner' object has no attribute 'attn_cp_size'\n",
-                  "classification": "triaging",
-                  "agent_analysis": null,
+                  "classification": "likely_fixed",
+                  "agent_analysis": "The campaign notes already document this exact fix on line 15. The fix is already applied in the codebase.\n\n## Summary\n\n**Classification: likely_fixed** ✅\n\nThe `MockModelRunner` in `collector/sglang/collect_attn.py` was missing the `attn_cp_size` attribute that SGLang 0.5.10's `FlashAttentionBackend.__init__` requires. The fix (`self.attn_cp_size = 1`) has already been applied at line 137 of `collect_attn.py`, and is documented in `campaign_notes.md`. No further action needed — the 64 errors are from a pipeline run before this fix was applied.",
                   "task_ids": [
                     "sglang.attention_generation:run_attention_torch:[4, 1, 16, 1, 128, False, False, False, 'generation_attention_perf.txt']",
                     "sglang.attention_generation:run_attention_torch:[1, 1023, 8, 8, 128, False, False, False, 'generation_attention_perf.txt']",
@@ -2113,9 +2113,9 @@
           "passed": null,
           "failed": 64,
           "ignored": null,
-          "classification": null,
+          "classification": "likely_fixed",
           "error_summary": "64 errors: 64 AttributeError\nFirst error: 'MockModelRunner' object has no attribute 'attn_cp_size'",
-          "agent_analysis": null,
+          "agent_analysis": "The campaign notes already document this exact fix on line 15. The fix is already applied in the codebase.\n\n## Summary\n\n**Classification: likely_fixed** ✅\n\nThe `MockModelRunner` in `collector/sglang/collect_attn.py` was missing the `attn_cp_size` attribute that SGLang 0.5.10's `FlashAttentionBackend.__init__` requires. The fix (`self.attn_cp_size = 1`) has already been applied at line 137 of `collect_attn.py`, and is documented in `campaign_notes.md`. No further action needed — the 64 errors are",
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
