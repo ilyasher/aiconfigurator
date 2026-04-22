@@ -72,8 +72,8 @@
       "wideep_mlp_context": {
         "local_status": "running",
         "smoke_status": "passed",
-        "sample_status": "running",
-        "error_summary": "[2026-04-22 20:33:34,421] [INFO] [root] Starting collection with 1 GPU processes\n[2026-04-22 20:33:34,422] [INFO] [root] Starting collection with 1 GPU processes\n[2026-04-22 20:33:34,439] [INFO] [root] SGLang version: 0.5.10\n[2026-04-22 20:33:34,443] [INFO] [root] Starting collection: sglang.wideep_mlp_context\n[2026-04-22 20:33:34,443] [INFO] [root] Generated 18 test cases for sglang.wideep_mlp_context\n\n\rsglang.wideep_mlp_context:   0%|          | 0/18 [00:00<?, ?it/s]\rsglang.wideep_mlp_context:",
+        "sample_status": "failed",
+        "error_summary": "[2026-04-22 20:40:37,486] [INFO] [root] Starting collection with 1 GPU processes\n[2026-04-22 20:40:37,486] [INFO] [root] Starting collection with 1 GPU processes\n[2026-04-22 20:40:37,497] [INFO] [root] SGLang version: 0.5.10\n[2026-04-22 20:40:37,500] [INFO] [root] Starting collection: sglang.wideep_mlp_context\n[2026-04-22 20:40:37,500] [INFO] [root] Generated 18 test cases for sglang.wideep_mlp_context\n[2026-04-22 20:40:53,732] [WARNING] [root] Progress stalled at 0/18\n\n\rsglang.wideep_mlp_contex",
         "attempts": 2,
         "skipped_reason": null
       },
