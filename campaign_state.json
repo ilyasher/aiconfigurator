@@ -72,7 +72,7 @@
       "wideep_moe": {
         "local_status": "running",
         "smoke_status": "passed",
-        "sample_status": "running",
+        "sample_status": "passed",
         "error_summary": null,
         "attempts": 1,
         "skipped_reason": null
