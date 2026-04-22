@@ -85,14 +85,6 @@
         "attempts": 1,
         "skipped_reason": null
       },
-      "wideep_mlp_generation": {
-        "local_status": "failed",
-        "smoke_status": "pending",
-        "sample_status": "pending",
-        "error_summary": "Op 'wideep_mlp_generation' not found in collector/sglang/registry.py",
-        "attempts": 5,
-        "skipped_reason": null
-      },
       "mla_bmm_gen_pre": {
         "local_status": "passed",
         "smoke_status": "passed",
@@ -2190,19 +2182,6 @@
           "fix_commit": null,
           "needs_rerun": false
         },
-        "wideep_mlp_generation": {
-          "status": "failed",
-          "total": null,
-          "passed": null,
-          "failed": 18,
-          "ignored": null,
-          "classification": null,
-          "error_summary": "18 errors: 18 RuntimeError\nFirst error: MLP generation subprocess failed (exit code 1)",
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
         "mla_bmm_gen_pre": {
           "status": "failed",
           "total": null,
@@ -2358,19 +2337,6 @@
           "ignored": null,
           "classification": null,
           "error_summary": null,
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
-        "wideep_mlp_generation": {
-          "status": "failed",
-          "total": null,
-          "passed": null,
-          "failed": 18,
-          "ignored": null,
-          "classification": null,
-          "error_summary": "18 errors: 18 RuntimeError\nFirst error: MLP generation subprocess failed (exit code 1)",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
@@ -2536,19 +2502,6 @@
           "fix_commit": null,
           "needs_rerun": false
         },
-        "wideep_mlp_generation": {
-          "status": "failed",
-          "total": null,
-          "passed": null,
-          "failed": 18,
-          "ignored": null,
-          "classification": null,
-          "error_summary": "18 errors: 18 RuntimeError\nFirst error: MLP generation subprocess failed (exit code 1)",
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
         "mla_bmm_gen_pre": {
           "status": "passed",
           "total": null,
@@ -2704,19 +2657,6 @@
           "ignored": null,
           "classification": null,
           "error_summary": null,
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
-        "wideep_mlp_generation": {
-          "status": "failed",
-          "total": null,
-          "passed": null,
-          "failed": 18,
-          "ignored": null,
-          "classification": null,
-          "error_summary": "18 errors: 18 RuntimeError\nFirst error: MLP generation subprocess failed (exit code 1)",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
@@ -2882,19 +2822,6 @@
           "fix_commit": null,
           "needs_rerun": false
         },
-        "wideep_mlp_generation": {
-          "status": "failed",
-          "total": null,
-          "passed": null,
-          "failed": 18,
-          "ignored": null,
-          "classification": null,
-          "error_summary": "18 errors: 18 RuntimeError\nFirst error: MLP generation subprocess failed (exit code 1)",
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
         "mla_bmm_gen_pre": {
           "status": "passed",
           "total": null,
@@ -3055,19 +2982,6 @@
           "fix_commit": null,
           "needs_rerun": false
         },
-        "wideep_mlp_generation": {
-          "status": "failed",
-          "total": null,
-          "passed": null,
-          "failed": 18,
-          "ignored": null,
-          "classification": null,
-          "error_summary": "18 errors: 18 RuntimeError\nFirst error: MLP generation subprocess failed (exit code 1)",
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
         "mla_bmm_gen_pre": {
           "status": "passed",
           "total": null,
@@ -3216,19 +3130,6 @@
           "needs_rerun": false
         },
         "wideep_mla_generation": {
-          "status": "failed",
-          "total": null,
-          "passed": null,
-          "failed": null,
-          "ignored": null,
-          "classification": null,
-          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
-        "wideep_mlp_generation": {
           "status": "failed",
           "total": null,
           "passed": null,
@@ -3396,19 +3297,6 @@
           "ignored": null,
           "classification": null,
           "error_summary": null,
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
-        "wideep_mlp_generation": {
-          "status": "failed",
-          "total": null,
-          "passed": null,
-          "failed": 18,
-          "ignored": null,
-          "classification": null,
-          "error_summary": "18 errors: 18 RuntimeError\nFirst error: MLP generation subprocess failed (exit code 1)",
           "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
