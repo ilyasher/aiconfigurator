@@ -24,6 +24,18 @@
 
 **No fix needed.** The collector imports `per_tensor_quant_mla_fp8` and `bmm_fp8` which are both stable. No mock objects are used. No semantic changes to the benchmarked kernels.
 
+### attention_context - MockServerArgs missing disable_piecewise_cuda_graph
+
+**Root cause:** sglang 0.5.10's `flashinfer_backend.py` accesses `server_args.disable_piecewise_cuda_graph` (negative form), but MockServerArgs only had `enable_piecewise_cuda_graph` (positive form). The attribute was renamed/added upstream.
+
+**Fix:** Added `self.disable_piecewise_cuda_graph = True` to MockServerArgs alongside the existing `enable_piecewise_cuda_graph = False` for backward compatibility. Both attributes are semantically consistent (disabled = True, enabled = False).
+
+### mla_bmm_gen_pre / mla_bmm_gen_post - FP8 not supported on A100 (SM 80)
+
+**Root cause:** The `get_mla_gen_pre_test_cases()` and `get_mla_gen_post_test_cases()` functions unconditionally generate FP8 test cases. On A100 (SM 80), the Triton compiler rejects `fp8e4nv` because native FP8 requires SM ≥ 89 (Ada Lovelace / Hopper). This caused 50 CompilationError failures on a100_sxm.
+
+**Fix:** Added SM version check using `get_sm_version()` from helper — only include `"fp8"` in dtype_list when `sm_version >= 89`. Applied to both test case generator functions.
+
 ## Learnings
 
 ## User preferences
