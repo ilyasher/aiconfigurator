@@ -5,7 +5,90 @@
   "version": "0.19.1",
   "fork": "ilyasher/aiconfigurator",
   "created_at": "2026-04-23T15:59:14.025701",
-  "local_dev": null,
+  "local_dev": {
+    "status": "completed",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell",
+    "review_status": "completed",
+    "review_summary": "### Review scope\nReviewed all 9 ops for vllm 0.19.1 compatibility: gemm, attention_context,\nattention_generation, moe, mla_context_module, mla_generation_module,\ndsa_context_module, dsa_generation_module, gdn.\n\n### Framework source: vllm v0.19.1 (commit b1388b1)\n\n### Op-by-op findings\n\n#### gemm (collect_gemm.py, compat=0.14.0)\n- **Fp8Config** constructor: signature unchanged (is_checkpoint_fp8_serialized, activation_scheme, ignored_layers, weight_block_size). Compatible.\n- **RowParallelLinear** constructor: unchanged. Compatible.\n- **per_block_cast_to_fp8**: signature unchanged (x, block_size, use_ue8m0). Compatible.\n- **maybe_post_process_fp8_weight_block**: now takes only 1 arg (layer). Collector already has try/except for old 2-arg signature. Compatible.\n- **CompressedTensorsConfig.from_config**: unchanged. Compatible.\n- No semantic changes to kernel selection or default paths.\n- **Status: OK, no changes needed.**\n\n#### attention_context / attention_generation (collect_attn.py, compat=0.11.0)\n- **get_attn_backend_cls**: signature is now `(selected_backend, attn_selector_config, num_heads=None)`. Collector's first 3 tries (old positional signatures) will fail with TypeError; 4th try uses AttentionSelectorConfig — works correctly.\n- **AttentionSelectorConfig**: added `use_mm_prefix`, `use_per_head_quant_scales`, `attn_type` fields (all have defaults). Collector creates config without these — compatible.\n- **Backend priorities on SM100+**: FLASHINFER now prioritized over FLASH_ATTN. Collector lets vLLM choose the backend, so it correctly benchmarks production code path.\n- **FLEX_ATTENTION_SLOW**: still handled by collector's special-case code.\n- **set_kv_cache_layout**: still present at same path.\n- **CommonAttentionMetadata**: `seq_lens_cpu` and `num_computed_tokens_cpu` are now deprecated properties wrapping `_seq_lens_cpu` / `_num_computed_tokens_cpu`. utils.py creates the metadata with `_seq_lens_cpu` (first try/except branch). Access via property still works.\n- **Status: OK, no changes needed.** All compatibility guards function correctly.\n\n#### moe (collect_moe_v2.py active for >=0.17.0, compat=0.17.0)\n- **determine_expert_map**: added optional `expert_placement_strategy`, `num_fused_shared_experts`, `return_expert_mask` params — all have defaults. Collector's 3-positional-arg call `(moe_ep_size, 0, num_experts)` still works.\n- **fused_experts**: added `activation`, `apply_router_weight_on_input` params — both have defaults. Collector doesn't pass these; default `SILU` is correct for standard MoE. MXFP4 path uses FusedMoE module which handles activation internally.\n- **fp8_w8a8_moe_quant_config**: added optional `w1_bias`, `w2_bias`, `per_act_token_quant`, `per_out_ch_quant`, `a1_gscale`, `a2_gscale`, `g1_alphas`, `g2_alphas` — all optional. Collector's existing call is compatible.\n- (collect_moe_v1.py only used for vllm < 0.17.0, not active for this campaign)\n- **Status: OK, no changes needed.**\n\n#### mla_context_module / mla_generation_module (collect_mla_module_v2.py active for >=0.17.0, compat=0.17.0)\n- **DeepseekV2MLAAttention**: added optional `input_size: int | None = None` param. Collector doesn't pass it — defaults to None → hidden_size internally. Compatible.\n- **MLAAttention.process_weights_after_loading(act_dtype)**: signature unchanged.\n- **MLAAttentionSpec**: unchanged (`cache_dtype_str` still present).\n- **DeepseekV32IndexerBackend**: still at same import path.\n- **_get_attention_backend**: uses `AttentionSelectorConfig` which is compatible with 0.19.1.\n- **Weight init**: v2 already uses `fill_()` instead of `normal_()` to avoid CUDA graph RNG crash. Correct.\n- **auto_map stripping**: v2 already strips `auto_map` from config.json. Correct.\n- (collect_mla_module_v1.py only used for vllm < 0.17.0, not active)\n- **Status: OK, no changes needed.**\n\n#### dsa_context_module / dsa_generation_module\n- Same collector as MLA (collect_mla_module_v2.py), just filtered by attn_type=\"dsa\".\n- All DSA-specific code paths (fp8_ds_mla cache, indexer, topk_indices_buffer) use APIs unchanged in 0.19.1.\n- **Status: OK, no changes needed.**\n\n#### gdn (collect_gdn.py, compat=0.0.0)\n- Stub implementation, raises NotImplementedError.\n- **Status: Stub, not implemented.**\n\n### Summary\nAll active collector scripts (v2 variants used for vllm >=0.17.0) are fully compatible\nwith vllm 0.19.1 without any changes. The framework's API evolution has been\nbackward-compatible for all functions/classes the collectors use. No semantic changes\ndetected that would affect benchmark accuracy.",
+    "current_op": null,
+    "current_phase": null,
+    "current_attempt": 1,
+    "max_attempts": 3,
+    "ops": {
+      "gemm": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "attention_context": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "attention_generation": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "moe": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "mla_context_module": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "mla_generation_module": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "dsa_context_module": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "dsa_generation_module": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "gdn": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      }
+    }
+  },
   "pipeline_runs": [],
   "systems": {
     "a100_sxm": {
