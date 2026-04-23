@@ -21,6 +21,10 @@ dp_attention.get_local_attention_dp_size = lambda: 1
 dp_attention.get_local_attention_dp_rank = lambda: 0
 dp_attention.is_dp_attention_enabled = lambda: False
 dp_attention._ENABLE_DP_ATTENTION_FLAG = False
+# Context parallelism stubs (added in sglang 0.5.10)
+if hasattr(dp_attention, "get_attention_cp_size"):
+    dp_attention.get_attention_cp_size = lambda: 1
+    dp_attention.get_attention_cp_rank = lambda: 0
 
 # Also set the private variables to be safe
 dp_attention._ATTN_TP_SIZE = 1
@@ -128,6 +132,8 @@ class MockModelRunner:
         self.gpu_id = 0
         self.hybrid_gdn_config = None
         self.kimi_linear_config = None
+        # Required by FlashAttentionBackend since sglang 0.5.10 (context parallelism)
+        self.attn_cp_size = 1
 
 
 def create_req_to_token_pool(batch_size, total_len, page_size, torch_device, device_str):
