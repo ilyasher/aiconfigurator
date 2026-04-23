@@ -5,7 +5,50 @@
   "version": "0.5.10",
   "fork": "ilyasher/aiconfigurator",
   "created_at": "2026-04-23T16:34:35.704571",
-  "local_dev": null,
+  "local_dev": {
+    "status": "completed",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell",
+    "review_status": "completed",
+    "review_summary": "| Op | Version upgrade | Status | Notes |\n|----|----------------|--------|-------|\n| mla_bmm_gen_pre | no compat → 0.5.10 | ok | `per_tensor_quant_mla_fp8` and `bmm_fp8` unchanged |\n| mla_bmm_gen_post | no compat → 0.5.10 | ok | same APIs as gen_pre, no changes needed |\n| attention_context | 0.5.5 → 0.5.10 | fixed | MockModelRunner missing `attn_cp_size`, added CP stubs |\n| attention_generation | 0.5.5 → 0.5.10 | fixed | same fix as context; shares `collect_attn.py` |",
+    "current_op": null,
+    "current_phase": null,
+    "current_attempt": 1,
+    "max_attempts": 3,
+    "ops": {
+      "mla_bmm_gen_pre": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "mla_bmm_gen_post": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "attention_context": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      },
+      "attention_generation": {
+        "local_status": "passed",
+        "smoke_status": "passed",
+        "sample_status": "passed",
+        "error_summary": null,
+        "attempts": 1,
+        "skipped_reason": null
+      }
+    }
+  },
   "pipeline_runs": [],
   "systems": {
     "a100_sxm": {
@@ -29,19 +72,6 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "pending",
-          "total": null,
-          "passed": null,
-          "failed": null,
-          "ignored": null,
-          "classification": null,
-          "error_summary": null,
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
-        "moe": {
           "status": "pending",
           "total": null,
           "passed": null,
@@ -116,19 +146,6 @@
           "fix_commit": null,
           "needs_rerun": false
         },
-        "moe": {
-          "status": "pending",
-          "total": null,
-          "passed": null,
-          "failed": null,
-          "ignored": null,
-          "classification": null,
-          "error_summary": null,
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
         "attention_context": {
           "status": "pending",
           "total": null,
@@ -179,19 +196,6 @@
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "pending",
-          "total": null,
-          "passed": null,
-          "failed": null,
-          "ignored": null,
-          "classification": null,
-          "error_summary": null,
-          "agent_analysis": null,
-          "ignored_reason": null,
-          "fix_commit": null,
-          "needs_rerun": false
-        },
-        "moe": {
           "status": "pending",
           "total": null,
           "passed": null,
