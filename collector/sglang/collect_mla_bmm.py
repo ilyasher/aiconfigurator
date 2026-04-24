@@ -8,9 +8,9 @@ from sglang.srt.layers.quantization.fp8_kernel import (
 )
 
 try:
-    from collector.helper import benchmark_with_power, log_perf
+    from collector.helper import benchmark_with_power, get_sm_version, log_perf
 except ImportError:
-    from helper import benchmark_with_power, log_perf
+    from helper import benchmark_with_power, get_sm_version, log_perf
 
 
 def get_mla_gen_pre_test_cases():
@@ -43,7 +43,10 @@ def get_mla_gen_pre_test_cases():
         8192,
     ]
     num_heads = [128, 64, 32, 16, 8, 4, 2, 1]
-    dtype_list = ["bfloat16", "fp8"]
+    dtype_list = ["bfloat16"]
+    # FP8 (fp8e4nv) requires SM >= 89 (Ada/Hopper); not supported on A100 (SM80)
+    if get_sm_version() >= 89:
+        dtype_list += ["fp8"]
     for num_tokens in gen_num_tokens:
         for num_head in num_heads:
             for dtype in dtype_list:
@@ -84,7 +87,10 @@ def get_mla_gen_post_test_cases():
         20480,
     ]
     num_heads = [128, 64, 32, 16, 8, 4, 2, 1]
-    dtype_list = ["bfloat16", "fp8"]
+    dtype_list = ["bfloat16"]
+    # FP8 (fp8e4nv) requires SM >= 89 (Ada/Hopper); not supported on A100 (SM80)
+    if get_sm_version() >= 89:
+        dtype_list += ["fp8"]
     for num_tokens in ctx_num_tokens:
         for num_head in num_heads:
             for dtype in dtype_list:
