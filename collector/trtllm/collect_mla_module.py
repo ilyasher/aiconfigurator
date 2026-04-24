@@ -236,11 +236,17 @@ def get_mla_generation_module_test_cases():
 
 def get_dsa_context_module_test_cases():
     """collect.py entrypoint for DSA context module collection."""
+    # DSA uses DeepGemm kernels which require Hopper (SM90) or newer.
+    if get_sm_version() < 90:
+        return []
     return _build_module_test_cases(attn_type="dsa", mode="context")
 
 
 def get_dsa_generation_module_test_cases():
     """collect.py entrypoint for DSA generation module collection."""
+    # DSA uses DeepGemm kernels which require Hopper (SM90) or newer.
+    if get_sm_version() < 90:
+        return []
     return _build_module_test_cases(attn_type="dsa", mode="generation")
 
 
@@ -741,9 +747,18 @@ def run_mla_module_worker(
 
 
 def _cleanup(kv_cache_manager):
-    if kv_cache_manager is not None:
-        kv_cache_manager.shutdown()
-    torch.cuda.empty_cache()
+    try:
+        if kv_cache_manager is not None:
+            kv_cache_manager.shutdown()
+    except Exception as e:
+        # CUDA state may be corrupted after a kernel failure — swallow
+        # cleanup errors so they don't mask the original failure or crash
+        # the worker process.
+        print(f"  [WARNING] kv_cache_manager.shutdown() failed: {e}")
+    try:
+        torch.cuda.empty_cache()
+    except Exception:
+        pass
     gc.collect()
 
 
