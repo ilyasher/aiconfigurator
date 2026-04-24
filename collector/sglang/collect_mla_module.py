@@ -184,6 +184,7 @@ def _get_backends(attn_type: str):
     For DSA: returns "nsa" — SGLang auto-detects nsa_prefill_backend /
     nsa_decode_backend based on SM + kv_cache_dtype.
     For MLA: returns the best available backend based on SM version.
+    Aligns with sglang's _get_default_attn_backend() in server_args.py.
     """
     sm = get_sm_version()
     if attn_type == "dsa":
@@ -194,7 +195,9 @@ def _get_backends(attn_type: str):
         elif sm >= 90:
             return "fa3"
         else:
-            return "flashinfer"
+            # sglang defaults MLA to "triton" on SM < 90; flashinfer MLA
+            # (BatchMLAPagedAttentionWrapper) is not validated on these GPUs.
+            return "triton"
 
 
 def _get_mla_backend_list() -> list[str]:
@@ -205,7 +208,11 @@ def _get_mla_backend_list() -> list[str]:
                   sglang auto-promotes to trtllm_mla and then fails kv_cache_dtype
                   validation.  Existing B200 perf data contains only trtllm_mla.
       SM >= 90:  ["flashinfer", "fa3"]
-      SM < 90:   ["flashinfer"]
+      SM < 90:   []  — sglang defaults MLA to "triton" on SM < 90 (A100 etc.);
+                  flashinfer MLA kernels (BatchMLAPagedAttentionWrapper) are not
+                  validated on SM < 90 and crash the subprocess.  Skip wideep MLA
+                  collection on these GPUs; kernel-level collectors (collect_mla.py)
+                  already capture per-kernel latency via mocks.
     """
     sm = get_sm_version()
     if sm >= 100:
@@ -213,7 +220,7 @@ def _get_mla_backend_list() -> list[str]:
     elif sm >= 90:
         return ["flashinfer", "fa3"]
     else:
-        return ["flashinfer"]
+        return []
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -1289,7 +1296,16 @@ def _run_mla_subprocess(
         return  # Skip this config instead of raising
 
     if proc.returncode != 0:
-        raise RuntimeError(f"{attn_type.upper()} module {phase} subprocess failed (exit code {proc.returncode})")
+        # Include last lines of subprocess output in the error so the cause
+        # is visible in the error group (subprocess stderr is merged into stdout).
+        tail = ""
+        if stdout:
+            lines = stdout.decode("utf-8", errors="replace").strip().splitlines()
+            tail = "\n".join(lines[-30:])  # last 30 lines should include traceback
+        raise RuntimeError(
+            f"{attn_type.upper()} module {phase} subprocess failed (exit code {proc.returncode})\n"
+            f"--- subprocess output (last 30 lines) ---\n{tail}"
+        )
 
 
 def run_mla_module_worker(
