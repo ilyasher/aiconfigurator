@@ -40,7 +40,6 @@ def get_mla_gen_pre_test_cases():
         8192,
     ]
     num_heads = [128, 64, 32, 16, 8, 4, 2, 1]
-    # FP8 (fp8e4nv) requires SM >= 89 (Ada Lovelace / Hopper); skip on older GPUs like A100 (SM 80)
     sm_version = get_sm_version()
     dtype_list = ["float16", "fp8"] if sm_version >= 89 else ["float16"]
     for num_tokens in gen_num_tokens:
@@ -83,7 +82,6 @@ def get_mla_gen_post_test_cases():
         20480,
     ]
     num_heads = [128, 64, 32, 16, 8, 4, 2, 1]
-    # FP8 (fp8e4nv) requires SM >= 89 (Ada Lovelace / Hopper); skip on older GPUs like A100 (SM 80)
     sm_version = get_sm_version()
     dtype_list = ["float16", "fp8"] if sm_version >= 89 else ["float16"]
     for num_tokens in ctx_num_tokens:

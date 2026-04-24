@@ -51,6 +51,87 @@
   },
   "pipeline_runs": [
     {
+      "pipeline_id": 49343721,
+      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49343721",
+      "round_type": "sample",
+      "base_commit": "dfaa6bb",
+      "started_at": "2026-04-23T16:58:21.657378",
+      "completed_at": null,
+      "status": "running",
+      "systems": {
+        "a100_sxm": {
+          "status": "passed",
+          "ops": {
+            "mla_bmm_gen_pre": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_bmm_gen_post": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            }
+          }
+        },
+        "gb200": {
+          "status": "failed",
+          "ops": {
+            "mla_bmm_gen_pre": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "mla_bmm_gen_post": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_context": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            },
+            "attention_generation": {
+              "status": "passed",
+              "total": null,
+              "passed": null,
+              "failed": null,
+              "error_groups": []
+            }
+          }
+        },
+        "gb300": {
+          "status": "running",
+          "ops": {}
+        }
+      }
+    },
+    {
       "pipeline_id": 49342969,
       "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49342969",
       "round_type": "sample",
@@ -291,39 +372,39 @@
     "a100_sxm": {
       "status": "passed",
       "round": "sample",
-      "pipeline_id": 49342969,
-      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49342969",
+      "pipeline_id": 49343721,
+      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49343721",
       "current_job": {
-        "pipeline_id": 49342969,
-        "job_id": 304348666,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/304348666",
+        "pipeline_id": 49343721,
+        "job_id": 304355103,
+        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/304355103",
         "started_at": null,
-        "completed_at": "2026-04-23T16:56:01.562245",
-        "code_version": "4f271ee"
+        "completed_at": "2026-04-23T17:03:10.642477",
+        "code_version": "dfaa6bb"
       },
       "ops": {
         "mla_bmm_gen_pre": {
-          "status": "failed",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 50,
           "ignored": null,
-          "classification": "bug",
-          "error_summary": "50 errors: 50 CompilationError\nFirst error: at 1:0:\ndef _per_tensor_quant_mla_fp8_stage2(\n^\nValueError(\"type fp8e4nv not supported in this architecture. The supported fp8 dtypes are ('fp8e4b15', 'fp8e5')\")",
-          "agent_analysis": "Both functions are fixed.\n\n## Summary\n\n**Classification: bug**\n\n**Root cause:** The collector's `collect_mla_bmm.py` unconditionally generates FP8 test cases for all GPU architectures. On A100 (SM 80), the `per_tensor_quant_mla_fp8` function calls a Triton kernel that uses `fp8e4nv`, a data type that requires SM ≥ 89 (Ada Lovelace/Hopper). Triton correctly rejects compilation on A100 with `\"type fp8e4nv not supported in this architecture\"`.\n\n**Fix applied:** Added `get_sm_version()` checks in both `get_mla_gen_pre_test_cases()` and `get_mla_gen_post_test_cases()` to only include `\"fp8\"` in the dtype list when `sm_version >= 89`. On older GPUs like A100, only `\"float16\"` test cases are generated. This eliminates all 50 failing tasks while preserving FP8 benchmarking on capable hardware (H100, GB200, GB300, etc.).",
+          "classification": null,
+          "error_summary": null,
+          "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
         },
         "mla_bmm_gen_post": {
-          "status": "failed",
+          "status": "passed",
           "total": null,
           "passed": null,
           "failed": 49,
           "ignored": null,
-          "classification": "likely_fixed",
-          "error_summary": "49 errors: 49 CompilationError\nFirst error: at 1:0:\ndef _per_tensor_quant_mla_fp8_stage2(\n^\nValueError(\"type fp8e4nv not supported in this architecture. The supported fp8 dtypes are ('fp8e4b15', 'fp8e5')\")",
-          "agent_analysis": "## Classification: **likely_fixed**\n\n### Summary\n\nThe error is `fp8e4nv not supported in this architecture` on A100 (SM 80). The A100 only supports `fp8e4b15` and `fp8e5` Triton dtypes, not `fp8e4nv` which requires SM ≥ 89 (Ada Lovelace / Hopper).\n\nThe prior fix in commit `67c5985` (\"triage fix: sglang.mla_bmm_gen_pre CompilationError on a100_sxm\") already addresses exactly this issue. Looking at the diff:\n\n```python\n# In get_mla_gen_post_test_cases():\n-    dtype_list = [\"float16\", \"fp8\"]\n+    # FP8 (fp8e4nv) requires SM >= 89 (Ada Lovelace / Hopper); skip on older GPUs like A100 (SM 80)\n+    sm_version = get_sm_version()\n+    dtype_list = [\"float16\", \"fp8\"] if sm_version >= 89 else [\"float16\"]\n```\n\nThis fix was applied to **both** `get_mla_gen_pre_test_cases()` and `get_mla_gen_post_test_cases()` in the same commit. The current error group is `mla_bmm_gen_post`, and all 49 failing tasks have `'fp8'` in their parameters (e.g., `[4, 32, 'fp8', 2, 10, 'mla_bmm_perf.txt']`), confirming they would be filtered out by the SM version check.\n\nSince the pipeline was launched before commit `67c5985` landed, these failures are expected to be resolved on the next run.",
+          "classification": null,
+          "error_summary": null,
+          "agent_analysis": null,
           "ignored_reason": null,
           "fix_commit": null,
           "needs_rerun": false
@@ -358,17 +439,17 @@
       "reason": null
     },
     "gb200": {
-      "status": "passed",
+      "status": "failed",
       "round": "sample",
-      "pipeline_id": 49342969,
-      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49342969",
+      "pipeline_id": 49343721,
+      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49343721",
       "current_job": {
-        "pipeline_id": 49342969,
-        "job_id": 304348667,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/304348667",
+        "pipeline_id": 49343721,
+        "job_id": 304355104,
+        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/304355104",
         "started_at": null,
-        "completed_at": "2026-04-23T16:51:55.996068",
-        "code_version": "4f271ee"
+        "completed_at": "2026-04-23T17:04:12.679526",
+        "code_version": "dfaa6bb"
       },
       "ops": {
         "mla_bmm_gen_pre": {
@@ -404,7 +485,7 @@
           "failed": 100,
           "ignored": null,
           "classification": "likely_fixed",
-          "error_summary": "100 errors: 100 AttributeError\nFirst error: 'MockServerArgs' object has no attribute 'disable_piecewise_cuda_graph'",
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": "## Classification: **likely_fixed**\n\nThe prior fix in commit `4f271ee` already adds `self.disable_piecewise_cuda_graph = True` to `MockServerArgs` in `collector/sglang/collect_attn.py`, which is exactly the missing attribute causing all 100 failures.\n\nThis pipeline was launched before that commit landed, so these failures are expected to be resolved on the next run. The gb300 triage already identified and fixed the same root cause.",
           "ignored_reason": null,
           "fix_commit": null,
@@ -417,7 +498,7 @@
           "failed": 100,
           "ignored": null,
           "classification": "likely_fixed",
-          "error_summary": "100 errors: 100 AttributeError\nFirst error: 'MockServerArgs' object has no attribute 'disable_piecewise_cuda_graph'",
+          "error_summary": "Job failed (no artifacts). Log tail:\n/site-packages/paramiko/sftp_client.py\", line 857, in _request\n    return self._read_response(num)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 909, in _read_response\n    self._convert_status(msg)\n  File \"/root/.cache/uv/environments-v2/ci-job-e421bb5a96c4b90c/lib/python3.12/site-packages/paramiko/sftp_client.py\", line 938, in _convert_status\n    raise IOError(errno.ENOENT, text)\nFi",
           "agent_analysis": "## Classification: **likely_fixed**\n\nThe prior fix in commit `4f271ee` already adds `self.disable_piecewise_cuda_graph = True` to `MockServerArgs` in `collector/sglang/collect_attn.py`, which is exactly the missing attribute causing all 100 failures.\n\nThis `attention_generation` error is identical to the `attention_generation` error on gb300 that was already triaged as `likely_fixed` for the same reason. The pipeline was launched before the fix was committed, so these failures are expected to resolve on the next run.",
           "ignored_reason": null,
           "fix_commit": null,
@@ -427,17 +508,17 @@
       "reason": null
     },
     "gb300": {
-      "status": "passed",
+      "status": "running",
       "round": "sample",
-      "pipeline_id": 49342969,
-      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49342969",
+      "pipeline_id": 49343721,
+      "pipeline_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/pipelines/49343721",
       "current_job": {
-        "pipeline_id": 49342969,
-        "job_id": 304348668,
-        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/304348668",
+        "pipeline_id": 49343721,
+        "job_id": 304355105,
+        "job_url": "https://gitlab-master.nvidia.com/dl/ai-dynamo/aic-auto-collector/-/jobs/304355105",
         "started_at": null,
-        "completed_at": "2026-04-23T16:48:52.369906",
-        "code_version": "a6f2eb6"
+        "completed_at": null,
+        "code_version": null
       },
       "ops": {
         "mla_bmm_gen_pre": {
@@ -467,7 +548,7 @@
           "needs_rerun": false
         },
         "attention_context": {
-          "status": "failed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 100,
@@ -480,7 +561,7 @@
           "needs_rerun": false
         },
         "attention_generation": {
-          "status": "failed",
+          "status": "running",
           "total": null,
           "passed": null,
           "failed": 100,
