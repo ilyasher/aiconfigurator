@@ -29,6 +29,22 @@ from sglang.srt.layers.moe.fused_moe_triton.fused_moe_triton_config import (
 from sglang.srt.layers.moe.topk import StandardTopKOutput, TopKConfig, select_experts
 from sglang.srt.utils import is_hip
 
+# sglang >=0.5.10: fused_experts_impl uses @torch.compile on moe_sum_reduce_torch_compile
+# for tokens_in_chunk <= 32 and topk > 2.  torch.compile's JIT compilation can hang
+# during CUDA graph capture or in headless benchmark contexts.  Replace the compiled
+# function with an eager equivalent so benchmarks don't stall.
+try:
+    import sglang.srt.layers.moe.fused_moe_triton.fused_moe as _fmoe_mod
+
+    def _eager_moe_sum_reduce(x, out, routed_scaling_factor):
+        torch.sum(x, dim=1, out=out)
+        out.mul_(routed_scaling_factor)
+
+    if hasattr(_fmoe_mod, "moe_sum_reduce_torch_compile"):
+        _fmoe_mod.moe_sum_reduce_torch_compile = _eager_moe_sum_reduce
+except Exception:
+    pass
+
 try:
     from flashinfer import fp4_quantize
     from sglang.srt.layers.moe.flashinfer_cutedsl_moe import (
@@ -464,6 +480,10 @@ def benchmark_config(
         num_warmups=5,
         num_runs=num_iters,
         repeat_n=1,
+        # sglang >=0.5.10 adds @torch.compile paths inside fused_experts_impl
+        # (moe_sum_reduce_torch_compile) that can hang during CUDA graph capture.
+        # allow_graph_fail gracefully falls back to eager execution.
+        allow_graph_fail=True,
     ) as results:
         pass
 
