@@ -267,35 +267,58 @@ def benchmark_config(
         w1_scale = marlin_moe_permute_scales(w1_scale, hidden_size, shard_intermediate_size, group_size)
         w2_scale = marlin_moe_permute_scales(w2_scale, shard_intermediate_size // 2, hidden_size, group_size)
 
-        x = torch.randn(num_tokens, hidden_size, dtype=dtype, device=device)
+        x = None if workloads is not None else torch.randn(num_tokens, hidden_size, dtype=dtype, device=device)
 
-        if distributed == "power_law":
-            gating_list = [
-                power_law_logits_v3(num_tokens, num_experts, topk, 1, power_law_alpha).to(device)
-                for _ in range(num_iters)
-            ]
-        elif distributed == "balanced":
-            gating_list = [balanced_logits(num_tokens, num_experts, topk).to(device) for _ in range(num_iters)]
-        else:
-            gating_list = [
-                torch.randn(num_tokens, num_experts, dtype=torch.float32, device=device) for _ in range(num_iters)
-            ]
+        if workloads is None:
+            if distributed == "power_law":
+                gating_list = [
+                    power_law_logits_v3(num_tokens, num_experts, topk, 1, power_law_alpha).to(device)
+                    for _ in range(num_iters)
+                ]
+            elif distributed == "balanced":
+                gating_list = [balanced_logits(num_tokens, num_experts, topk).to(device) for _ in range(num_iters)]
+            else:
+                gating_list = [
+                    torch.randn(num_tokens, num_experts, dtype=torch.float32, device=device) for _ in range(num_iters)
+                ]
 
         def run_op(i):
-            gating = gating_list[i % num_iters]
-            new_topk = select_experts(x, gating, TopKConfig(top_k=topk))
-            fused_marlin_moe(
-                x,
-                w1_marlin,
-                w2_marlin,
-                w1_scale,
-                w2_scale,
-                gating,
-                new_topk.topk_weights,
-                new_topk.topk_ids,
-                num_bits=num_bits,
-                is_k_full=True,
-            )
+            if workloads is not None:
+                current_hidden_states = workloads[i % num_iters]["hidden_states"]
+                current_topk = workloads[i % num_iters]["topk_output"]
+                # fused_marlin_moe asserts gating_output.shape[0] == hidden_states.shape[0],
+                # but only uses topk_weights/topk_ids for routing. Provide a dummy.
+                dummy_gating = torch.zeros(
+                    current_hidden_states.shape[0], num_experts,
+                    device=current_hidden_states.device, dtype=torch.float32,
+                )
+                fused_marlin_moe(
+                    current_hidden_states,
+                    w1_marlin,
+                    w2_marlin,
+                    w1_scale,
+                    w2_scale,
+                    dummy_gating,
+                    current_topk.topk_weights,
+                    current_topk.topk_ids,
+                    num_bits=num_bits,
+                    is_k_full=True,
+                )
+            else:
+                gating = gating_list[i % num_iters]
+                new_topk = select_experts(x, gating, TopKConfig(top_k=topk))
+                fused_marlin_moe(
+                    x,
+                    w1_marlin,
+                    w2_marlin,
+                    w1_scale,
+                    w2_scale,
+                    gating,
+                    new_topk.topk_weights,
+                    new_topk.topk_ids,
+                    num_bits=num_bits,
+                    is_k_full=True,
+                )
 
     elif use_nvfp4:
         if not HAS_FLASHINFER_CUTE:
