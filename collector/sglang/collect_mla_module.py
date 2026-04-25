@@ -394,11 +394,20 @@ def get_wideep_mla_generation_test_cases():
 
 def get_dsa_context_module_test_cases():
     """collect.py entrypoint for DSA context module collection."""
+    # DSA (NSA) requires SM >= 90 (Hopper/Blackwell).  sglang's
+    # _set_default_nsa_backends() only handles SM 9 and SM 10+; on Ada
+    # (SM 89) / Ampere (SM 80) no valid NSA sub-backends exist and the
+    # subprocess crashes.  Return empty to skip collection on these GPUs.
+    if get_sm_version() < 90:
+        return []
     return _build_module_test_cases(attn_type="dsa", mode="context")
 
 
 def get_dsa_generation_module_test_cases():
     """collect.py entrypoint for DSA generation module collection."""
+    # DSA (NSA) requires SM >= 90; see get_dsa_context_module_test_cases.
+    if get_sm_version() < 90:
+        return []
     return _build_module_test_cases(attn_type="dsa", mode="generation")
 
 
