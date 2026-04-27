@@ -292,6 +292,12 @@ def benchmark_config(
                     current_hidden_states.shape[0], num_experts,
                     device=current_hidden_states.device, dtype=torch.float32,
                 )
+                # build_rank0_local_workload sets remote expert IDs to -1
+                # and their weights to 0.  The Marlin CUDA kernel
+                # (moe_wna16_marlin_gemm) indexes weight tensors by expert
+                # ID without masking, so -1 causes illegal memory access.
+                # Clamp to 0; the zero weight ensures no contribution.
+                safe_topk_ids = current_topk.topk_ids.clamp(min=0)
                 fused_marlin_moe(
                     current_hidden_states,
                     w1_marlin,
@@ -300,7 +306,7 @@ def benchmark_config(
                     w2_scale,
                     dummy_gating,
                     current_topk.topk_weights,
-                    current_topk.topk_ids,
+                    safe_topk_ids,
                     num_bits=num_bits,
                     is_k_full=True,
                 )
