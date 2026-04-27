@@ -158,7 +158,7 @@ def _get_precision_combos(phase: str):
                       on B200 decode with fp8 KV the trtllm path runs fp8
                       FMHA internally, but the latency is captured under the
                       fp8 KV row).
-      kv_cache_dtype: "bfloat16" always; "fp8" on SM >= 90.
+      kv_cache_dtype: "bfloat16" always; "fp8" on SM >= 90 (Hopper+).
       gemm_type:      "bfloat16" for bf16 weights; "fp8_block" on SM >= 89,
                       in which case load_model_runner launches sglang with
                       quantization="fp8" so the inner attention projections

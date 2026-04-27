@@ -54,6 +54,7 @@ class MockModelConfig:
         self.num_attention_heads = num_attention_heads
         self.num_key_value_heads = num_key_value_heads
         self.head_dim = head_dim
+        # Align with newer sglang ModelConfig while remaining harmless on older versions
         self.is_hybrid_swa = False
         self.swa_attention_layer_ids = []
         self.full_attention_layer_ids = []
@@ -84,8 +85,8 @@ class MockServerArgs:
         self.multi_item_scoring_delimiter = None
         self.dllm_algorithm = None
         self.dllm_algorithm_config = None
-        self.enable_piecewise_cuda_graph = False
-        self.disable_piecewise_cuda_graph = True
+        self.enable_piecewise_cuda_graph = False  # sglang <=0.5.9
+        self.disable_piecewise_cuda_graph = True  # sglang >=0.5.10
         self.model_path = None
         self.revision = None
         # Required by TritonAttnBackend
@@ -110,7 +111,7 @@ class MockModelRunner:
         self.token_to_kv_pool = None
         self.attn_backend = None
         self.server_args = MockServerArgs(page_size=page_size)
-        self.attn_cp_size = 1
+        self.attn_cp_size = 1  # Context parallelism size; required by FlashAttentionBackend in sglang >=0.5.10
         self.is_draft_worker = False
         self.model_is_mrope = False
         self.sliding_window_size = None
@@ -155,6 +156,7 @@ def get_context_attention_test_cases():
     n_list = [1, 2, 4, 8, 12, 16, 24, 32, 40, 48, 64, 96]
     n_kv_list = [0, 1, 2, 4, 8]
 
+    # FP8 attention requires SM90+ (Hopper)
     sm_version = get_sm_version()
     skip_fp8 = sm_version < 90
 
@@ -175,8 +177,10 @@ def get_context_attention_test_cases():
                     if b * s * num_kv_heads * 128 * 2 >= 2147483647:
                         continue
 
+                    # BF16 attention - works on all GPUs
                     test_cases.append([b, s, n, num_kv_heads, 128, False, False, True])
 
+                    # FP8 attention - requires SM90+ (Hopper)
                     if not skip_fp8:
                         test_cases.append([b, s, n, num_kv_heads, 128, True, False, True])
                         test_cases.append([b, s, n, num_kv_heads, 128, True, True, True])
@@ -187,6 +191,7 @@ def get_context_attention_test_cases():
 def get_generation_attention_test_cases():
     test_cases = []
 
+    # FP8 attention requires SM90+ (Hopper)
     sm_version = get_sm_version()
     skip_fp8 = sm_version < 90
 
@@ -224,7 +229,9 @@ def get_generation_attention_test_cases():
             if b >= 256:
                 target_s_list = target_s_list[:-1]
             for s in target_s_list:
+                # BF16 attention - works on all GPUs
                 test_cases.append([b, s, n, n, 128, False, False, False])
+                # FP8 attention - requires SM90+ (Hopper)
                 if not skip_fp8:
                     test_cases.append([b, s, n, n, 128, True, False, False])
 
@@ -258,7 +265,9 @@ def get_generation_attention_test_cases():
                 if n_kv >= n:
                     continue
                 for s in target_s_list:
+                    # BF16 attention - works on all GPUs
                     test_cases.append([b, s, n, n_kv, 128, False, False, False])
+                    # FP8 attention - requires SM90+ (Hopper)
                     if not skip_fp8:
                         test_cases.append([b, s, n, n_kv, 128, True, False, False])
     return test_cases
@@ -324,7 +333,8 @@ def run_attention_torch(
 
     sm_version = get_sm_version()
     if sm_version >= 110:
-        # SM120+: use Triton backend (trtllm/FA3 unavailable)
+        # SM120+ (workstation Blackwell): TRTLLM prefill (TllmGenFmhaRunner) is unsupported;
+        # FA3 is not compiled for SM120. Use Triton JIT-compiled backend instead.
         from sglang.srt.layers.attention.triton_backend import TritonAttnBackend
 
         attn_backend = TritonAttnBackend(model_runner)

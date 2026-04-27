@@ -44,13 +44,17 @@ def get_gemm_test_cases():
     if sm_version < 89:
         gemm_list = ["bfloat16"]
     elif sm_version < 90:
+        # SM89 (L40S) and earlier don't have TMA - skip fp8_block
         gemm_list = ["bfloat16", "fp8"]
     elif sm_version < 100:
+        # Hopper supports fp8_block
+        # fp8_block (DeepGEMM) requires SM90+ for TMA support
         gemm_list = ["fp8_block", "bfloat16", "fp8"]
     elif sm_version < 110:
+        # SM100/SM103 (B100/B200 datacenter Blackwell): fp8_block + nvfp4
         gemm_list = ["fp8_block", "bfloat16", "fp8", "nvfp4"]
     else:
-        # SM120+: no DeepGEMM recipe for fp8_block
+        # SM120+ (RTX PRO 6000 Blackwell workstation): no DeepGEMM recipe for fp8_block
         gemm_list = ["bfloat16", "fp8", "nvfp4"]
 
     for gemm_common_testcase in get_gemm_common_test_cases():
