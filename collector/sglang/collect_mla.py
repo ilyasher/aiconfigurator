@@ -180,8 +180,6 @@ def benchmark_layer(layer, forward_batch, q, k, v, q_rope, k_rope, **kwargs):
 
 
 def get_context_mla_test_cases():
-    # MLA requires SM90+ (Hopper) due to asymmetric head dimensions
-    # (Q/K headdim != V headdim requires Hopper-specific FlashAttention kernels)
     sm_version = get_sm_version()
     if sm_version < 90:
         return []
@@ -217,14 +215,12 @@ def get_context_mla_test_cases():
 
 
 def get_generation_mla_test_cases():
-    # MLA requires SM90+ (Hopper) due to asymmetric head dimensions
-    # (Q/K headdim != V headdim requires Hopper-specific FlashAttention kernels)
     sm_version = get_sm_version()
     if sm_version < 90:
         return []
 
     if sm_version == 120:
-        # flashinfer 0.6.3+ (sglang 0.5.9+): XQA MLA only supports fp8 on SM120 GPUs
+        # flashinfer 0.6.3+: XQA MLA only supports fp8 on SM120
         dtype_list = [torch.float8_e4m3fn]
     else:
         dtype_list = [torch.bfloat16, torch.float8_e4m3fn]

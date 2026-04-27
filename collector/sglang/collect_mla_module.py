@@ -158,7 +158,7 @@ def _get_precision_combos(phase: str):
                       on B200 decode with fp8 KV the trtllm path runs fp8
                       FMHA internally, but the latency is captured under the
                       fp8 KV row).
-      kv_cache_dtype: "bfloat16" always; "fp8" on SM >= 90 (Hopper+).
+      kv_cache_dtype: "bfloat16" always; "fp8" on SM >= 90.
       gemm_type:      "bfloat16" for bf16 weights; "fp8_block" on SM >= 89,
                       in which case load_model_runner launches sglang with
                       quantization="fp8" so the inner attention projections
@@ -394,10 +394,7 @@ def get_wideep_mla_generation_test_cases():
 
 def get_dsa_context_module_test_cases():
     """collect.py entrypoint for DSA context module collection."""
-    # DSA (NSA) requires SM >= 90 (Hopper/Blackwell).  sglang's
-    # _set_default_nsa_backends() only handles SM 9 and SM 10+; on Ada
-    # (SM 89) / Ampere (SM 80) no valid NSA sub-backends exist and the
-    # subprocess crashes.  Return empty to skip collection on these GPUs.
+    # DSA (NSA) requires SM >= 90.
     if get_sm_version() < 90:
         return []
     return _build_module_test_cases(attn_type="dsa", mode="context")
@@ -405,7 +402,7 @@ def get_dsa_context_module_test_cases():
 
 def get_dsa_generation_module_test_cases():
     """collect.py entrypoint for DSA generation module collection."""
-    # DSA (NSA) requires SM >= 90; see get_dsa_context_module_test_cases.
+    # DSA (NSA) requires SM >= 90.
     if get_sm_version() < 90:
         return []
     return _build_module_test_cases(attn_type="dsa", mode="generation")

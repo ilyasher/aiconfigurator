@@ -98,8 +98,6 @@ _is_hip = is_hip()
 
 
 def get_moe_test_cases():
-    # fp8_block MOE requires SM90+ due to shared memory requirements
-    # L40S (SM89) has 100KB shared memory, fp8_block kernel needs ~144KB
     sm_version = get_sm_version()
     if sm_version < 90:
         moe_list = ["bfloat16", "int4_wo"]

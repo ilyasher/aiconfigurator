@@ -9,10 +9,7 @@ import random
 import pkg_resources
 import torch
 import torch.nn.functional as F
-try:
-    from collector.common_test_cases import get_gemm_common_test_cases
-except ImportError:
-    from common_test_cases import get_gemm_common_test_cases
+from collector.common_test_cases import get_gemm_common_test_cases
 from sgl_kernel import (
     fp8_scaled_mm,
     sgl_per_token_quant_fp8,
@@ -33,10 +30,7 @@ from sglang.srt.layers.deep_gemm_wrapper import (
 )
 from sglang.srt.layers.quantization.fp8_kernel import sglang_per_token_group_quant_fp8
 
-try:
-    from collector.helper import benchmark_with_power, get_sm_version, log_perf
-except ImportError:
-    from helper import benchmark_with_power, get_sm_version, log_perf
+from collector.helper import benchmark_with_power, get_sm_version, log_perf
 
 # Disable DeepGEMM JIT precompilation (compiles ALL M values per unique N,K pair).
 # The collector only needs the specific M being tested.
@@ -50,17 +44,13 @@ def get_gemm_test_cases():
     if sm_version < 89:
         gemm_list = ["bfloat16"]
     elif sm_version < 90:
-        # SM89 (L40S) and earlier don't have TMA - skip fp8_block
         gemm_list = ["bfloat16", "fp8"]
     elif sm_version < 100:
-        # Hopper supports fp8_block
-        # fp8_block (DeepGEMM) requires SM90+ for TMA support
         gemm_list = ["fp8_block", "bfloat16", "fp8"]
     elif sm_version < 110:
-        # SM100/SM103 (B100/B200 datacenter Blackwell): fp8_block + nvfp4
         gemm_list = ["fp8_block", "bfloat16", "fp8", "nvfp4"]
     else:
-        # SM120+ (RTX PRO 6000 Blackwell workstation): no DeepGEMM recipe for fp8_block
+        # SM120+: no DeepGEMM recipe for fp8_block
         gemm_list = ["bfloat16", "fp8", "nvfp4"]
 
     for gemm_common_testcase in get_gemm_common_test_cases():

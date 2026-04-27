@@ -7,10 +7,7 @@ from sglang.srt.layers.quantization.fp8_kernel import (
     per_tensor_quant_mla_fp8,
 )
 
-try:
-    from collector.helper import benchmark_with_power, get_sm_version, log_perf
-except ImportError:
-    from helper import benchmark_with_power, get_sm_version, log_perf
+from collector.helper import benchmark_with_power, get_sm_version, log_perf
 
 
 def get_mla_gen_pre_test_cases():
@@ -44,7 +41,6 @@ def get_mla_gen_pre_test_cases():
     ]
     num_heads = [128, 64, 32, 16, 8, 4, 2, 1]
     dtype_list = ["bfloat16"]
-    # FP8 (fp8e4nv) requires SM >= 89 (Ada/Hopper); not supported on A100 (SM80)
     if get_sm_version() >= 89:
         dtype_list += ["fp8"]
     for num_tokens in gen_num_tokens:
@@ -88,7 +84,6 @@ def get_mla_gen_post_test_cases():
     ]
     num_heads = [128, 64, 32, 16, 8, 4, 2, 1]
     dtype_list = ["bfloat16"]
-    # FP8 (fp8e4nv) requires SM >= 89 (Ada/Hopper); not supported on A100 (SM80)
     if get_sm_version() >= 89:
         dtype_list += ["fp8"]
     for num_tokens in ctx_num_tokens:
