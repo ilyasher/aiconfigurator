@@ -475,6 +475,16 @@ def benchmark_config(
             else:
                 current_hidden_states = workloads[i % num_iters]["hidden_states"]
                 current_topk_output = workloads[i % num_iters]["topk_output"]
+                # build_rank0_local_workload sets remote expert IDs to -1
+                # and their weights to 0.  The Triton fused_moe kernel
+                # indexes weight tensors by expert ID without masking,
+                # so -1 causes illegal memory access.
+                # Clamp to 0; the zero weight ensures no contribution.
+                current_topk_output = StandardTopKOutput(
+                    topk_weights=current_topk_output.topk_weights,
+                    topk_ids=current_topk_output.topk_ids.clamp(min=0),
+                    router_logits=current_topk_output.router_logits,
+                )
 
             with override_config(config):
                 fused_moe(
