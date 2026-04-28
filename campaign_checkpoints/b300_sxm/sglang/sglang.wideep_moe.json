@@ -1,0 +1,17 @@
+{
+  "schema": "collector-resume-v1",
+  "backend": "sglang",
+  "module": "sglang.wideep_moe",
+  "run_func": "run_wideep_moe",
+  "updated_at": "2026-04-28T03:25:46.991507",
+  "done": [
+    "sglang.wideep_moe:run_wideep_moe:[128]",
+    "sglang.wideep_moe:run_wideep_moe:[16]",
+    "sglang.wideep_moe:run_wideep_moe:[1]",
+    "sglang.wideep_moe:run_wideep_moe:[2]",
+    "sglang.wideep_moe:run_wideep_moe:[32]",
+    "sglang.wideep_moe:run_wideep_moe:[4]",
+    "sglang.wideep_moe:run_wideep_moe:[64]",
+    "sglang.wideep_moe:run_wideep_moe:[8]"
+  ]
+}
