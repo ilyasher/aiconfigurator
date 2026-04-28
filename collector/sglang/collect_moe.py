@@ -46,7 +46,7 @@ except Exception:
     pass
 
 try:
-    from flashinfer import fp4_quantize
+    from flashinfer import fp4_quantize, scaled_fp4_grouped_quantize
     from sglang.srt.layers.moe.flashinfer_cutedsl_moe import (
         flashinfer_cutedsl_moe_masked,
     )
@@ -342,18 +342,15 @@ def benchmark_config(
         w1_bf16 = torch.randn(num_experts, shard_intermediate_size, hidden_size, device=device, dtype=dtype)
         w2_bf16 = torch.randn(num_experts, hidden_size, shard_intermediate_size // 2, device=device, dtype=dtype)
 
-        w1_gs_exp = w1_gs.repeat_interleave(shard_intermediate_size).view(-1, 1)
-        w2_gs_exp = w2_gs.repeat_interleave(hidden_size).view(-1, 1)
+        # Use scaled_fp4_grouped_quantize to produce blockscales in the swizzled
+        # layout that flashinfer_cutedsl_moe_masked / grouped_gemm_nt_masked expects.
+        # fp4_quantize with is_sf_swizzled_layout=False produces linear-layout
+        # blockscales which cause illegal memory access in the kernel.
+        w1_masked_m = torch.ones(num_experts, dtype=torch.int32, device=device) * shard_intermediate_size
+        w1, w1_bs = scaled_fp4_grouped_quantize(w1_bf16, w1_masked_m, w1_gs)
 
-        w1_fp4, w1_sf = fp4_quantize(w1_bf16.reshape(-1, hidden_size), w1_gs_exp, is_sf_swizzled_layout=False)
-        w2_fp4, w2_sf = fp4_quantize(
-            w2_bf16.reshape(-1, shard_intermediate_size // 2), w2_gs_exp, is_sf_swizzled_layout=False
-        )
-
-        w1 = w1_fp4.reshape(num_experts, shard_intermediate_size, hidden_size // 2)
-        w1_bs = w1_sf.view(torch.float8_e4m3fn).reshape(num_experts, shard_intermediate_size, -1).contiguous()
-        w2 = w2_fp4.reshape(num_experts, hidden_size, shard_intermediate_size // 4)
-        w2_bs = w2_sf.view(torch.float8_e4m3fn).reshape(num_experts, hidden_size, -1).contiguous()
+        w2_masked_m = torch.ones(num_experts, dtype=torch.int32, device=device) * hidden_size
+        w2, w2_bs = scaled_fp4_grouped_quantize(w2_bf16, w2_masked_m, w2_gs)
 
         def get_masked_m(logits):
             _, topk_idx = torch.topk(torch.softmax(logits, dim=1), topk, dim=-1)
