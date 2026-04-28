@@ -1,0 +1,14 @@
+{
+  "schema": "collector-resume-v1",
+  "backend": "sglang",
+  "module": "sglang.wideep_mla_context",
+  "run_func": "run_mla_module_worker",
+  "updated_at": "2026-04-28T05:42:40.887856",
+  "done": [
+    "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 128, 'bfloat16', 'bfloat16', 'bfloat16', 'deepseek-ai/DeepSeek-V3', 'mla', 'trtllm_mla']",
+    "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 16, 'bfloat16', 'bfloat16', 'bfloat16', 'deepseek-ai/DeepSeek-V3', 'mla', 'trtllm_mla']",
+    "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 32, 'bfloat16', 'bfloat16', 'bfloat16', 'deepseek-ai/DeepSeek-V3', 'mla', 'trtllm_mla']",
+    "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 64, 'bfloat16', 'bfloat16', 'bfloat16', 'deepseek-ai/DeepSeek-V3', 'mla', 'trtllm_mla']",
+    "sglang.wideep_mla_context:run_mla_module_worker:[0, 0, 8, 'bfloat16', 'bfloat16', 'bfloat16', 'deepseek-ai/DeepSeek-V3', 'mla', 'trtllm_mla']"
+  ]
+}
