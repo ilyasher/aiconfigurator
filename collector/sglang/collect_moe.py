@@ -55,6 +55,13 @@ try:
 except ImportError:
     HAS_FLASHINFER_CUTE = False
 
+try:
+    from sglang.jit_kernel.nvfp4 import scaled_fp4_quant as _scaled_fp4_quant
+
+    _HAS_SCALED_FP4_QUANT = True
+except ImportError:
+    _HAS_SCALED_FP4_QUANT = False
+
 # Marlin int4 MoE kernel (W4A16) — much faster than the Triton GPTQ/AWQ path.
 _HAS_MARLIN_MOE = False
 try:
@@ -342,15 +349,34 @@ def benchmark_config(
         w1_bf16 = torch.randn(num_experts, shard_intermediate_size, hidden_size, device=device, dtype=dtype)
         w2_bf16 = torch.randn(num_experts, hidden_size, shard_intermediate_size // 2, device=device, dtype=dtype)
 
-        # Use scaled_fp4_grouped_quantize to produce blockscales in the swizzled
-        # layout that flashinfer_cutedsl_moe_masked / grouped_gemm_nt_masked expects.
-        # fp4_quantize with is_sf_swizzled_layout=False produces linear-layout
-        # blockscales which cause illegal memory access in the kernel.
-        w1_masked_m = torch.ones(num_experts, dtype=torch.int32, device=device) * shard_intermediate_size
-        w1, w1_bs = scaled_fp4_grouped_quantize(w1_bf16, w1_masked_m, w1_gs)
+        # Quantize weights per-expert using scaled_fp4_quant which produces
+        # swizzled blockscales and maintains (num_experts, N, K//2) layout.
+        # scaled_fp4_grouped_quantize is for activations and permutes to
+        # (N, K//2, num_experts), which breaks flashinfer_cutedsl_moe_masked
+        # weight shape assertions.
+        if _HAS_SCALED_FP4_QUANT:
+            w1_list_q, w1_list_bs = [], []
+            for e in range(num_experts):
+                q, bs = _scaled_fp4_quant(w1_bf16[e], w1_gs[e])
+                w1_list_q.append(q)
+                w1_list_bs.append(bs)
+            w1 = torch.stack(w1_list_q)
+            w1_bs = torch.stack(w1_list_bs)
 
-        w2_masked_m = torch.ones(num_experts, dtype=torch.int32, device=device) * hidden_size
-        w2, w2_bs = scaled_fp4_grouped_quantize(w2_bf16, w2_masked_m, w2_gs)
+            w2_list_q, w2_list_bs = [], []
+            for e in range(num_experts):
+                q, bs = _scaled_fp4_quant(w2_bf16[e], w2_gs[e])
+                w2_list_q.append(q)
+                w2_list_bs.append(bs)
+            w2 = torch.stack(w2_list_q)
+            w2_bs = torch.stack(w2_list_bs)
+        else:
+            # Fallback: use scaled_fp4_grouped_quantize (may fail with shape
+            # assertion on newer sglang versions)
+            w1_masked_m = torch.ones(num_experts, dtype=torch.int32, device=device) * shard_intermediate_size
+            w1, w1_bs = scaled_fp4_grouped_quantize(w1_bf16, w1_masked_m, w1_gs)
+            w2_masked_m = torch.ones(num_experts, dtype=torch.int32, device=device) * hidden_size
+            w2, w2_bs = scaled_fp4_grouped_quantize(w2_bf16, w2_masked_m, w2_gs)
 
         def get_masked_m(logits):
             _, topk_idx = torch.topk(torch.softmax(logits, dim=1), topk, dim=-1)
