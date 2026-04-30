@@ -3,6 +3,7 @@
 
 __compat__ = "sglang>=0.5.10"
 
+import math
 import os
 import random
 
@@ -159,12 +160,17 @@ def run_gemm(gemm_type, batch_size, N, K, *, perf_filename, device="cuda:0"):  #
             from flashinfer import shuffle_matrix_a as flashinfer_shuffle_a
 
             epilogue_tile_m = 128
+            del b_bf16_dummy
             b_fp4_shuffled = flashinfer_shuffle_a(b_fp4_linear, epilogue_tile_m)
+            del b_fp4_linear
             b_sf_shuffled = flashinfer_shuffle_sf_a(b_sf_linear.view(torch.uint8), epilogue_tile_m).view(
                 torch.float8_e4m3fn
             )
+            del b_sf_linear
             b_fp4_final = b_fp4_shuffled.t()
+            del b_fp4_shuffled
             b_sf_final = b_sf_shuffled.t()
+            del b_sf_shuffled
 
             out = torch.empty((M, round_up(N, 128)), device=device, dtype=dtype)
 
@@ -184,6 +190,7 @@ def run_gemm(gemm_type, batch_size, N, K, *, perf_filename, device="cuda:0"):  #
             a_bf16 = torch.randn(M, K, dtype=dtype, device=device)
             b_fp32 = (torch.rand(N, K, device=device) - 0.5) * 2 * fp8_info.max
             b_fp8 = b_fp32.clamp(min=fp8_info.min, max=fp8_info.max).to(torch.float8_e4m3fn)
+            del b_fp32
             scale_b = torch.randn(scale_shape(b_fp8.shape, (128, 128)), device=device, dtype=torch.float32)
             out = torch.empty((M, N), device=device, dtype=dtype)
 
@@ -204,6 +211,7 @@ def run_gemm(gemm_type, batch_size, N, K, *, perf_filename, device="cuda:0"):  #
             a_bf16 = torch.randn(M, K, dtype=dtype, device=device)
             b_fp32 = (torch.rand(N, K, device=device) - 0.5) * 2 * fp8_info.max
             b_fp8 = b_fp32.clamp(min=fp8_info.min, max=fp8_info.max).to(torch.float8_e4m3fn).t()
+            del b_fp32
             scale_b = torch.randn((N,), device=device, dtype=torch.float32)
             output_fp8 = torch.empty_like(a_bf16, dtype=torch.float8_e4m3fn)
             scale_a = torch.empty((M, 1), device=device, dtype=torch.float32)
@@ -223,7 +231,15 @@ def run_gemm(gemm_type, batch_size, N, K, *, perf_filename, device="cuda:0"):  #
 
             return gemm_op
 
-    outside_loop_count = 6
+    # Scale loop count down for large matrices to avoid OOM.
+    # Each iteration holds persistent tensors (~M*K*2 + N*K + M*N*2 bytes for fp8).
+    # Cap at 6 for small shapes (L2 thrashing mitigation), reduce for large ones.
+    _bytes_per_elem = {"bfloat16": 2, "fp8": 1, "fp8_block": 1, "nvfp4": 0.5}
+    _weight_bytes = int(N * K * _bytes_per_elem.get(gemm_type, 2))
+    _gpu_mem = torch.cuda.get_device_properties(device).total_memory
+    # Estimate per-iteration footprint: weight + activation + output
+    _iter_bytes = _weight_bytes + M * K * 2 + M * N * 2
+    outside_loop_count = max(1, min(6, int(_gpu_mem * 0.7 / _iter_bytes)))
     op_list = []
     for _ in range(outside_loop_count):
         op = create_gemm()
@@ -255,7 +271,7 @@ def run_gemm(gemm_type, batch_size, N, K, *, perf_filename, device="cuda:0"):  #
 
     log_perf(
         item_list=[
-            {"gemm_dtype": gemm_type, "m": M, "n": N, "k": K, "latency": results["latency_ms"] / outside_loop_count}
+            {"gemm_dtype": gemm_type, "m": M, "n": N, "k": K, "latency": results["latency_ms"] / len(op_list)}
         ],
         framework="SGLang",
         version=pkg_resources.get_distribution("sglang").version,
