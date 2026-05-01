@@ -1,0 +1,12 @@
+{
+  "schema": "collector-resume-v1",
+  "backend": "sglang",
+  "module": "sglang.dsa_context_module",
+  "run_func": "run_mla_module_worker",
+  "updated_at": "2026-04-30T08:38:06.736898",
+  "done": [
+    "sglang.dsa_context_module:run_mla_module_worker:[0, 0, 128, 'bfloat16', 'bfloat16', 'bfloat16', 'deepseek-ai/DeepSeek-V3.2', 'dsa', None]",
+    "sglang.dsa_context_module:run_mla_module_worker:[0, 0, 64, 'bfloat16', 'bfloat16', 'bfloat16', 'deepseek-ai/DeepSeek-V3.2', 'dsa', None]",
+    "sglang.dsa_context_module:run_mla_module_worker:[0, 0, 64, 'bfloat16', 'bfloat16', 'bfloat16', 'zai-org/GLM-5', 'dsa', None]"
+  ]
+}
