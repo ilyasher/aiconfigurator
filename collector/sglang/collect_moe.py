@@ -356,35 +356,21 @@ def benchmark_config(
 
         # Quantize weights per-expert using scaled_fp4_quant which produces
         # swizzled blockscales and maintains (num_experts, N, K//2) layout.
-        # scaled_fp4_grouped_quantize is for activations and permutes to
-        # (N, K//2, num_experts), which breaks flashinfer_cutedsl_moe_masked
-        # weight shape assertions.
-        if _HAS_SCALED_FP4_QUANT:
-            w1_list_q, w1_list_bs = [], []
-            for e in range(num_experts):
-                q, bs = _scaled_fp4_quant(w1_bf16[e], w1_gs[e])
-                w1_list_q.append(q)
-                w1_list_bs.append(bs)
-            w1 = torch.stack(w1_list_q)
-            w1_bs = torch.stack(w1_list_bs)
+        w1_list_q, w1_list_bs = [], []
+        for e in range(num_experts):
+            q, bs = _scaled_fp4_quant(w1_bf16[e], w1_gs[e])
+            w1_list_q.append(q)
+            w1_list_bs.append(bs)
+        w1 = torch.stack(w1_list_q)
+        w1_bs = torch.stack(w1_list_bs)
 
-            w2_list_q, w2_list_bs = [], []
-            for e in range(num_experts):
-                q, bs = _scaled_fp4_quant(w2_bf16[e], w2_gs[e])
-                w2_list_q.append(q)
-                w2_list_bs.append(bs)
-            w2 = torch.stack(w2_list_q)
-            w2_bs = torch.stack(w2_list_bs)
-        else:
-            # scaled_fp4_grouped_quantize permutes weights to (N, K//2, num_experts)
-            # which breaks flashinfer_cutedsl_moe_masked shape assertions.
-            # The entry-point guard (above) should prevent reaching here, but
-            # raise explicitly in case of unexpected control flow.
-            raise ImportError(
-                "NVFP4 weight quantization requires scaled_fp4_quant from "
-                "sglang.jit_kernel.nvfp4 — cannot fall back to "
-                "scaled_fp4_grouped_quantize (produces incompatible weight layout)"
-            )
+        w2_list_q, w2_list_bs = [], []
+        for e in range(num_experts):
+            q, bs = _scaled_fp4_quant(w2_bf16[e], w2_gs[e])
+            w2_list_q.append(q)
+            w2_list_bs.append(bs)
+        w2 = torch.stack(w2_list_q)
+        w2_bs = torch.stack(w2_list_bs)
 
         def get_masked_m(logits):
             _, topk_idx = torch.topk(torch.softmax(logits, dim=1), topk, dim=-1)
