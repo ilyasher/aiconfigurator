@@ -336,6 +336,11 @@ def benchmark_config(
     elif use_nvfp4:
         if not HAS_FLASHINFER_CUTE:
             raise ImportError("FlashInfer CuteDSL not available")
+        if not _HAS_SCALED_FP4_QUANT:
+            raise ImportError(
+                "scaled_fp4_quant not available (sglang.jit_kernel.nvfp4); "
+                "NVFP4 MoE benchmarking requires this for correct weight layout"
+            )
 
         # Global scales and Alpha
         input_gs = torch.ones(num_experts, device=device, dtype=torch.float32)
@@ -371,12 +376,15 @@ def benchmark_config(
             w2 = torch.stack(w2_list_q)
             w2_bs = torch.stack(w2_list_bs)
         else:
-            # Fallback: use scaled_fp4_grouped_quantize (may fail with shape
-            # assertion on newer sglang versions)
-            w1_masked_m = torch.ones(num_experts, dtype=torch.int32, device=device) * shard_intermediate_size
-            w1, w1_bs = scaled_fp4_grouped_quantize(w1_bf16, w1_masked_m, w1_gs)
-            w2_masked_m = torch.ones(num_experts, dtype=torch.int32, device=device) * hidden_size
-            w2, w2_bs = scaled_fp4_grouped_quantize(w2_bf16, w2_masked_m, w2_gs)
+            # scaled_fp4_grouped_quantize permutes weights to (N, K//2, num_experts)
+            # which breaks flashinfer_cutedsl_moe_masked shape assertions.
+            # The entry-point guard (above) should prevent reaching here, but
+            # raise explicitly in case of unexpected control flow.
+            raise ImportError(
+                "NVFP4 weight quantization requires scaled_fp4_quant from "
+                "sglang.jit_kernel.nvfp4 — cannot fall back to "
+                "scaled_fp4_grouped_quantize (produces incompatible weight layout)"
+            )
 
         def get_masked_m(logits):
             _, topk_idx = torch.topk(torch.softmax(logits, dim=1), topk, dim=-1)
